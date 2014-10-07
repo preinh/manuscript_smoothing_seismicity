@@ -191,9 +191,42 @@ calculations was performed on OpenQuake open source software.
 
 \section{Introduction}
 
-Nam fermentum sapien at enim varius consectetur. Quisque lobortis imperdiet mauris, et accumsan libero vulputate vitae. Integer lacinia purus vel metus tempus suscipit. Curabitur ac sapien quis mauris euismod commodo. Sed pharetra sem elit. Fusce ultrices, mauris eu fermentum tempor, tellus sem ornare lectus, in convallis nunc urna id dolor. Donec convallis ligula vitae sem viverra fermentum. Mauris in ullamcorper erat. Donec ultrices tempus nibh quis vestibulum. This statement requires citation \citep{AtkinsonSloan}. This one is an in-text citation because the authors of \citet{ColtonKress1} are specifically mentioned.
+Brazil have no recent seismic hazard study at national scale despite some important and localized recent studies
+focused mainly on specific buildings.
 
-Praesent volutpat, nibh in dignissim commodo, tellus justo consequat erat, vel consequat mi arcu vel lectus. Aliquam a tellus nec felis sagittis consequat. Quisque convallis imperdiet neque a tempor. Nulla non erat urna. Mauris vel lorem magna, tristique auctor ipsum. Aliquam pharetra eleifend massa. Donec porttitor sagittis luctus. Aliquam pretium luctus leo quis congue. Morbi vel felis mi. Suspendisse viverra tortor pretium orci lacinia eleifend. Phasellus aliquam, nunc eu cursus feugiat, erat odio porttitor libero, quis accumsan orci ipsum ut lorem. Vestibulum pharetra malesuada egestas. Sed non orci sit amet erat suscipit fringilla in et diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc ut rhoncus nulla. Aenean porta rhoncus suscipit.
+The Brazilain seismic hazard building code was made based on GSHAP model which is the well accepted state of art model
+for the whole region.
+
+A significant number of earthquakes has been recorded in the last years, mainly after the national seismic network
+(RSBR) operation, and an actualized hazard map whould be computed.
+
+Although the standard Cornell Mcguire zoning methodolgy for the classical hazard seismic assesment, the goal is
+review a few smoothing seismicity methods based on kernel density estimation. This estimation allow a seismic point
+sources grid definition. The seismic rate (a-value) associated to each source is definided by the smoothed seismicity
+methods, but the more parameters like b-values, minimum and maximum magnitudes, rupture and depth
+distributions must to be assigned in other ways.
+
+In the kernel density estimation theory two things there always be handled. The kernel shape and bandwidth.
+Almost kernels used are gaussian or power-laws in one of their variants. The mainly distinction between methods decribed
+is the proposed bandwidth selection process. 
+
+Frankel smoothing method applies a gaussian Nadaraya-Watson smoothing method with a \emph{fixed}
+smoothing-distance bandwidth to estimate seismicity rate. Gordon Woo proposes an \emph{magnitude-dependent} kernel
+bandwidth based on the nearest neighbour mean distance in magnitude bins. Helmstetter proposes a \emph{local-adaptive}
+bandwidth, based on kernel estimations on both space and time dimentions, estimation of the background seismicity rate
+for long-term forecasts. Using one-year forecast and assume time-independence, the same assumption of PSHA, of
+seismicity rate is possible to use these values on seismic sources characterization.
+
+To perform the hazard calculation, the OpenQuake suite was choosed. The modeller environment used was the HMTK also
+available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was
+implemented in the context of this paper and they are free available on a public repository.
+
+The earthquake catalog data comes from the Brazilian seismological research authorities.
+
+The Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow
+by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and
+further considerations are discussed.
+
 
 %------------------------------------------------
 
