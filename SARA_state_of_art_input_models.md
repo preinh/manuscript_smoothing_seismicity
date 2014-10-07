@@ -58,6 +58,7 @@ gives the optimized parameters for the coupled nearest neighbour method and the 
 
 Since the seismicity rate at the cell is computed by the median of the seismicity rate temporal model located at its center point, the decluster process was not necessary.
 
+The initial grid spacing was definied by 1 degree, but taking sense of area source discretization tests, wich shows high fluctuation on hazard values using discretization distances equal to 20km, the grid was densificated to aproximate 15km. 
 
 ### 4. GMPE’s selection
 
@@ -77,10 +78,7 @@ For the earthquake rupture forecast the rupture mesh spacing was setted up to 2k
 
 The site parameters used on the calculation was 600 km/s to Vs30. The depth with 2.5 km/s and 1.0 km/s was definet in 5 and 100km.
 
-reference_vs30_type = measured
-reference_vs30_value = 600.0
-reference_depth_to_2pt5km_per_sec = 5.0
-reference_depth_to_1pt0km_per_sec = 100.0
+The grid of sites was defined from -80,-37 to -30,+14 divided in slots of 50km.
 
 
 
