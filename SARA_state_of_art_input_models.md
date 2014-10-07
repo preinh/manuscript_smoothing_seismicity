@@ -53,17 +53,36 @@ kernel to the space dimension. The local adaptive bandwith of booth kernels for 
 
 Even this smoothing method allow a weigth for completeness space-time variation, this parameter was not used in this case and the magnitude completeness used was the same for all grid. Since the NE and SE seismicity is very increased by low magnitude events in comparision with all the country, the minimum magnitude used for the learning catalog was 3.8.
 
-Since the seismicity rate at the cell is computed by the median of the seismicity rate temporal model located at its center point, the decluster process was not necessary.
-
 Using these parameters the optimization of the lakelihood between the model learned prediction and the target observed seismicity,
 gives the optimized parameters for the coupled nearest neighbour method and the minimum seismicity rate applied to all the sources in the sense to allow earthquakes occurring at locations that never occurred before.
+
+Since the seismicity rate at the cell is computed by the median of the seismicity rate temporal model located at its center point, the decluster process was not necessary.
 
 
 ### 4. GMPE’s selection
 
-5 Dealing with uncertainties [logic tree]
+This work was focused on proove the concept of smoothing seismicity and did not much attention to GMPE selection criterias.
+For convenience and easy comparision Toro1997 was used as default GMPE.
 
-6 Calculation setting and PSHA code used
+
+### 5. Dealing with uncertainties.
+
+For the same reason mentioned above, also uncertainties was not handled as possible and just one source model branch and level was used to perform hazard calculation.
+
+### 6. Calculation setting and PSHA code used
+
+The hazard calculation was computed by openquake-engine, using almost _default_ parameters.
+
+For the earthquake rupture forecast the rupture mesh spacing was setted up to 2km and the bin of MFD was setted up on 0.2 magnitude unit.
+
+The site parameters used on the calculation was 600 km/s to Vs30. The depth with 2.5 km/s and 1.0 km/s was definet in 5 and 100km.
+
+reference_vs30_type = measured
+reference_vs30_value = 600.0
+reference_depth_to_2pt5km_per_sec = 5.0
+reference_depth_to_1pt0km_per_sec = 100.0
+
+
 
 
 
