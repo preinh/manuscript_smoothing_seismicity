@@ -13,7 +13,25 @@ Con esto damos una buena vision del state-of-the-art, pienso...
 2- En A.5 (en el Appendix A en general) estamos tratando de describir modelos de PSHA, lo que has escrito esta bien, pero debemos ser mas especificos. Te propongo que tomes un modelo "particular" (preferentemente el tuyo ) y lo describas adecuadamente. Esto seria bien interesante porque GSHAP uso un algoritmo "parecido" (Veneziano et al.) para obtener los resultados en tu pais. Y como me has ya mostrado tus resultados son similares (mas buenos!).
 
 
-#### Smoothing seismicity to Brazilian PSHA (Pirchiner, 2014) 
+# State-of-art Brazilian PSHA
+
+Brazil covers most of intraplate Brazilian territory and thus has the lowest South American seismicity, typical of this kind of intra-plate tectonic regime. However, at least two regions present a non-negligible seismicity: the Northeast region, near the South Atlantic Ridge and the Southeast, due its proximity to the most populated region.
+A seismic hazard and risk study at a national scale has not been carried out (published?) and the GSHAP results were used to support the seismic zonation considered in the Brazilian standard for seismic design (NBR-15421, see Santos and Lima, 2008). However, local studies to evaluate seismic hazard for important engineering structures like hydroelectric dams and nuclear power plants (i.e. Angra dos Reis) had been performed in the past (Berrocal et al. 1996). 
+Recently, Brazilian seismologists and engineers from different Universities and private companies have begun to cooperate and are working together (PSHAB: Study group in Probabilistic Seismic Hazard Analysis in Brazil, see details in http://www.pshab.org/web/, last access on 01/10/2014) to obtain the first, even preliminary, national PSHA model/map, before April 2015. At present time this group is very “active” and some results of his work have been presented in International Conferences in Brazil (Romero et al., 2013; Dourado, 2013; Ferreira et al., 2013) and Colombia (Pirchinier, 2014; Assumpcao et al., 2014, Drouet et al., 2014).  In Appendix A.5 we describe one of the model cited above, the proposed by Pirchinier (2014). 
+
+References: 
+ Associação Brasileira de Normas Técnicas (2006). Projeto de Estruturas Resistentes a Sismos – Procedimento (NBR 15421). ABNT, Rio de Janeiro, Brazil (in Portuguese).
+Berrocal, J., Fernandes, C., Bassini, A. and Barbosa, J. R. (1996). Earthquake hazard assessment in Southeastern Brazil, Geofísica Internacional 35, 257-72.
+ Romero T., Rondan E. R., Berrocal, J. (2013). Probabilisitic Assessment of Seismic Hazard in Southeastern region of Brazil, Proc. 13th International Congress of the Brazilian Geophysical Society, Rio de Janeiro, Brazil, August 26-29, 2013. SBGf-Sociedade Brasileira de Geofisica.
+ Dourado J. C. (2013). Mapa de Ameaça Sísmica na Plataforma Continental do Sul/Sudeste, Proc. 13th International Congress of the Brazilian Geophysical Society, Rio de Janeiro, Brazil, August 26-29, 2013. SBGf - Sociedade Brasileira de Geofisica (in Portuguese).
+ Ferreira J., Julia J., do Nascimento A., and Rego-Bezerra F. H. (2013). Ameaça Sísmica no Nordeste do Brasil Plataforma Continental do Sul/Sudeste, Proc. 13th International Congress of the Brazilian Geophysical Society, Rio de Janeiro, Brazil, August 26-29, 2013. SBGf - Sociedade Brasileira de Geofisica (in Portuguese).
+ Pirchinier M. (2014) Smoothing techniques applied to Brazilian seismic sources characterization, Proc. First Assembly of the Latin-America and Caribbean Seismological Commission – LACSC, Third Latin-American Congress of Seismology, Bogota, Colombia, July 23-25, 2014.
+ Assumpção M., Bezerra H., Barros L. and Hans Agurto (2014). Intraplate seismicity and seismic zoning in Brazil, Earth Sci. Res. J. Vol I8 Special Issue. Proc. First Assembly of the Latin-America and Caribbean Seismological Commission – LACSC, Third Latin-American Congress of Seismology, Bogota, Colombia, July 23-25, 2014.
+
+
+
+
+# Smoothing seismicity to Brazilian PSHA (Pirchiner, 2014) 
 
 ### 1. Earthquake catalogue and seismicity processing
 

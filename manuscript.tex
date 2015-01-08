@@ -66,7 +66,7 @@
 % (If you are submitting to a journal other than jgrga,
 % substitute the initials of the journal for "jgrga" below.)
 
-\documentclass[draft,grl]{AGUTeX}
+\documentclass[draft,grl]{agutex}
 
 % To create numbered lines:
 
@@ -158,25 +158,39 @@ University of São Paulo, São Paulo, Brazil.}
 
 \begin{abstract}
 
-Intraplate seismicity is a hard problem to solve in tectonics, main during the lack of observed seismicity in
-many areas where seismic hazard assesment are also difficult and the methods applied
-are often close correlated to the geometries defined by the experts, of course, with valuable criteria.
+Intraplate seismicity is a hard problem to solve in tectonics, 
+main during the lack of observed seismicity in many areas where seismic 
+hazard assesment are also difficult and the methods applied are often 
+close correlated to the geometries defined by the experts with valuable 
+criteria.
 
-Three smoothing seismicity techniques are reviewed in order to investigate their appliability to the 
-Brazilian seismicity and seismic hazard assesment case. 
-All these methods are \emph{catalog-based} in contrast to standard zoning \emph{expert-based} methods from Cornell and
-McGuire. Of course it does not mean that the expert there is no value and many parameters needs to be configured.
+Three smoothing seismicity techniques are reviewed in order 
+to investigate their results when applied over the Brazilian seismicity 
+and suggesting a seismic hazard assesment.
 
-All the methods are based on a kernel density estimation, but the main diffence between them is the
-\emph{bandwidth selection} process. The Frankel method use a \emph{fixed} bandwidth in space, Woo method is based on
-\emph{magnitude} also and the Helmstetter is a \emph{local-adaptive} in space and time bandwidth selection. This last
-mathod was proposed originally to care the background seismicity rate on long-term earthquake forecast but the one year
-forecast is exactly the annual seismic rate used to define a seismic source under a time-independent assumption.
+All the methods are based on a kernel density estimation. The main 
+difference between them is the \emph{bandwidth selection} process. 
 
-In the conclusions the results shown that all methods gives good results and could be used in the Brazilian
-seismicity case, all of them, improoving the spatial resolution of the actual state-of-art GSHAP model. 
-The Last two methods was implemented and are available as a free software on HMTK from GEM Foundation. All the hazard
-calculations was performed on OpenQuake open source software.
+The Frankel method use a \emph{fixed} bandwidth in space. Woo method
+suggest a bandwidth as function of the \emph{magnitude}.
+Helmstetter and Werner proposes a \emph{local-adaptive} 
+in space and time bandwidth, chosen for each event. 
+It was proposed initialy to take care of the background seismicity rate 
+on long-term earthquake forecast context, but the one year forecasted 
+seismic rate could be a grid of points seismic sources under a 
+time-independent assumption.
+
+In the conclusions the results shown that 
+
+all methods gives good results and 
+could be used in the Brazilian seismicity case, 
+
+all of them, 
+% ###### improoving #########
+the spatial resolution of the actual state-of-art GSHAP model.
+
+The Last two methods was implemented and are available as a free software on HMTK from GEM Foundation. 
+All the hazard calculations was performed on OpenQuake open source software.
 
 \end{abstract}
 
@@ -190,6 +204,11 @@ calculations was performed on OpenQuake open source software.
 \begin{article}
 
 \section{Introduction}
+
+\subsection{Intraplate Seismicity}
+\subsection{Previous Brazilian Studies}
+\subsection{Previous Smoothing Seismicity (Frankel,Woo,Helmstetter\ldots)}
+\subsection{Specifical Purpose}
 
 Brazil have no recent seismic hazard study at national scale despite some important and localized recent studies
 focused mainly on specific buildings.
@@ -231,6 +250,18 @@ further considerations are discussed.
 %------------------------------------------------
 
 \section{Materials and Methods}
+
+\subsection{Brazilian Seismic Catalog}
+Boletim sismico brasileiro.
+
+História e versão com Mw.
+\subsection{Brazilian Seismic Catalog}
+
+
+
+
+
+
 
 Suspendisse viverra eleifend nulla at facilisis. Nullam eget tellus orci. Cras sit amet lorem velit. Maecenas rhoncus pellentesque orci eget vulputate. Phasellus massa nisi, mattis nec elementum accumsan, blandit non neque. In ac enim elit, sit amet luctus ante. Cras feugiat commodo lectus, vitae convallis dui sagittis id. In in tellus lacus, sed lobortis eros. Phasellus sit amet eleifend velit. Duis ornare dapibus porttitor. Maecenas eros velit, dignissim at egestas in, tincidunt lacinia erat. Proin elementum mi vel lectus suscipit fringilla. Mauris justo est, ullamcorper in rutrum interdum, accumsan eget mi. Maecenas ut massa aliquet purus eleifend vehicula in a nisi. Fusce molestie cursus lacinia.
 
