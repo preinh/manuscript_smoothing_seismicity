@@ -1,0 +1,585 @@
+\documentclass[final]{beamer}
+\mode<presentation>
+
+% STEP 1: Change the next line according to your language
+\usepackage[english]{babel}
+
+% STEP 2: Make sure this character encoding matches the one you save this file as
+% (this template is utf8 by default but your editor may change it, causing problems)
+\usepackage[utf8]{inputenc}
+
+% You probably don't need to touch the following four lines
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amsthm, amssymb, latexsym}
+\usepackage{exscale} % required to scale math fonts properly
+
+% PAUSE: my own packages
+% figure numbers, captions and subcaptions
+\usepackage[font=scriptsize,format=plain,labelfont=bf,up,textfont=it,up,compatibility=false]{caption}
+\usepackage[font=scriptsize,compatibility=false]{subcaption}
+\usepackage[caption=true]{subfig}
+
+\setbeamertemplate{caption}[numbered]
+
+% bibliografia
+%\usepackage[fixlanguage]{babelbib}
+\usepackage[round,sort,nonamebreak]{natbib} % citação bibliográfica textual(plainnat-ime.bst)
+%\bibpunct{(}{)}{;}{a}{\hspace{-0.7ex},}{,} % estilo de citação. Veja alguns
+% exemplos em http://merkel.zoneo.net/Latex/natbib.php
+\bibliographystyle{styles/plainnat-ime} 	% citação bibliográfica textual
+
+
+% Glossaries
+\usepackage[sanitize=none,acronym,toc]{glossaries}
+%\usepackage[acronym,toc]{glossaries}
+% Define a new glossary type
+\newglossary[slg,toc]{symbols}{sym}{sbl}{Lista de Símbolos}
+\newglossary[elg]{equations}{eqn}{eql}{Equations}
+\makeglossaries
+
+
+% ---------------------------------------------------------------------------- %
+% Dicionario de Termos:
+\input{d01-terms}       
+\input{d02-symbols}       
+\input{d03-acronyms}       
+\input{d04-equations}       
+% ---------------------------------------------------------------------------- %
+
+
+\graphicspath{{./images/}}             % caminho das figuras (recomendável)
+\include{template}  % THIS is the line that includes the template!
+
+
+% ---------------------------------------------------------------------------- %
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\erf}{erf}
+% ---------------------------------------------------------------------------- %
+
+
+% Orientation is set here
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+
+% STEP 3:
+% Change colours by setting \usetheme[<id>, twocolumn]{HYposter}.
+\usetheme[iag, threecolumn]{HYposter}
+% The different ids are:
+%  maa: Faculty of Agriculture and Forestry 
+%  hum: Faculty of Arts 
+%  kay: Faculty of Behavioural Sciences 
+%  bio: Faculty of Biological and Environmental Sciences 
+%  oik: Faculty of Law 
+%  med: Faculty of Medicine 
+%  far: Faculty of Pharmacy 
+%  mat: Faculty of Science 
+%  val: Faculty of Social Sciences 
+%  teo: Faculty of Theology 
+%  ell: Faculty of Veterinary Medicine 
+%  soc: Swedish School of Social Science 
+%  kir: University of Helsinki Library
+%  avo: Open University
+%  ale: Aleksanteri Institute
+%  neu: Neuroscience Institute
+%  biot: Bioscience Institute
+%  atk: Computer centre
+%  rur: Ruralia Institute
+%  koe: Laboratory animal centre
+%  kol: Collegium for Advanced Studies
+%  til: Center for Properties and Facilities
+%  pal: Palmenia
+%  kie: Language centre
+% Without options a black theme without faculty name will be used.
+
+
+% STEP 4: Set up the title and author info
+\titlestart{Smoothing techniques applied to} % first line of title
+\titleend{Brazilian seismic sources characterization} % second line of title
+\titlesize{\LARGE} % Use this to change title size if necessary. See README
+% for details.
+
+\author{Marlon Pirchiner$^{1,2}$\\
+\vspace{0.2cm} \scriptsize \alert{\url{marlon@iag.usp.br}} } 
+
+\institute{
+$^1$Seismological Centre, IAG-USP,\\
+$^2$Applied Math School, EMAp-FGV-RJ
+}
+
+% Stuff such as logos of contributing institutes can be put in the lower left corner using this
+\leftcorner{
+\includegraphics[width=5cm]{images/qr_code}}
+
+
+\begin{document}
+\begin{poster}
+
+
+%===========================================
+\newcolumn
+%===========================================
+
+
+% STEP 5: Add the contents of your poster between \begin{poster} and \end{poster}
+%-------------------------------------------
+\section{Introduction}
+%-------------------------------------------
+\footnotesize
+In some cases the lack of geological information makes difficult to define and
+characterize all potential ground motion seismic sources. On this context, 
+this work review and evaluate three seismic rate smoothing techniques,
+which will used to define the brazilian smoothed rates as a punctual seismic
+sources grid. This input model will used to perform hazard calculation on
+\emph{\alert{openquake-engine}}
+(\scriptsize
+ \url{http://www.globalquakemodel.org/openquake}
+ \footnotesize) 
+in order to compare them with the previous results for the region. 
+For comparission effects an unity \emph{b-value} and the Toro (1997) GMPE was
+used.
+
+%-------------------------------------------
+\section{Seismicity}
+%-------------------------------------------
+\footnotesize
+The following figure \ref{fig:br_seis} shows the brazilian seismicity.
+\begin{figure}[H]
+	\scriptsize
+	\centering
+	\includegraphics[width=1.0\textwidth]{seismicity_br} 
+	\caption{Brazilian seismicity. \gls{bsb2013} catalogue.}
+	\label{fig:br_seis} 
+\end{figure}
+
+\begin{columns}
+	\begin{column}[T]{0.50\textwidth}
+		\centering
+		\begin{figure}[H]
+		  	\centering
+			\includegraphics[width=1.15\textwidth]{hmtk_bsb2013_rate}
+			\caption{Annual Seismic Rate}
+			\label{fig:sa_eq_record}
+		\end{figure}
+	\end{column}
+
+	\begin{column}[T]{0.48\textwidth}
+		\centering
+		\begin{figure}[H]
+		  	\centering
+			\includegraphics[width=1.0\textwidth]{occurrence}
+			\caption{Recurrence}
+			\label{fig:br_eq_record}
+	    \end{figure}
+	\end{column}
+\end{columns}
+
+%-------------------------------------------
+\section{Declustering and Completeness}
+%-------------------------------------------
+
+\begin{columns}
+	\begin{column}[T]{0.49\textwidth}
+	\centering
+		\begin{figure}[H]
+		  	\centering
+			\includegraphics[width=1.10\textwidth]{decluster_br}
+			\caption{Cumulative EQ records and declustering methods}
+			\label{fig:br_eq_record}
+		\end{figure}
+	\end{column}
+
+	\begin{column}[T]{0.51\textwidth}
+		\begin{figure}[H]
+		  	\centering
+			\includegraphics[width=1.00\textwidth]{stepp_br}
+			\caption{Stepp diagram: magnitude completeness evaluation}
+			\label{fig:br_stepp}
+	    \end{figure}
+	\end{column}
+\end{columns}
+
+
+
+%-------------------------------------------
+\section{Previous works}
+%-------------------------------------------
+
+\begin{columns}
+	\begin{column}[T]{0.49\textwidth}
+	\centering
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=1\textwidth]{pga_gshap} 
+		  \caption{GSHAP (Giardini \emph{et al}, 1999): PGA(poe 0.1/50y) [$g$]}
+		  \label{fig:gshap} 
+		\end{figure}
+	\end{column}
+
+	\begin{column}[T]{0.49\textwidth}
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=1\textwidth]{pga_dourado_oq} 
+		  \caption{\citet{dourado_2014}: PGA(poe 0.1/50y)}
+		  \label{fig:pga_dourado_oq} 
+		\end{figure}
+	\end{column}
+\end{columns}
+
+
+%===========================================
+\newcolumn
+%===========================================
+
+%-------------------------------------------
+\section{Frankel, 1995}
+%-------------------------------------------
+\footnotesize
+\citet{frankel_1995} proposed a gaussian smoothing (\ref{eq:ni}) for the
+earthquake grid count.
+\small
+\begin{equation}
+	\ensuremath{
+		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
+						   { \sum_{i}     e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}},
+	}
+	\label{eq:ni}
+\end{equation}
+\footnotesize
+where $d_F$ is the \alert{fixed bandwidth}, called correlation distance,
+$\tilde{n}_j$ is the cumulative seismic rate smoothed on cell $j$,
+$n_i$ is the number of earthquakes on cell $i$ and \gls{sym:dij} is
+the \glsdesc{sym:dij}.
+
+%-------------------------------------------
+\section{Woo, 1996}
+%-------------------------------------------
+\footnotesize
+\citet{woo_1996} proposed a magnitude dependent smoothed seismic rate
+as shown on equation (\ref{eq:Rrm}).
+\footnotesize
+		\begin{equation}
+			\ensuremath{
+				\gls{sym:Rrm} = \sum_{i=1}^{N} \frac{ K(\gls{sym:r} - \gls{sym:ri}, m)}
+													{T({\gls{sym:ri})}},
+			}
+			\label{eq:Rrm}
+		\end{equation}
+\footnotesize
+	where $N$ is number of earthquakes $i$ on the catalogue 
+	and $T(\gls{sym:ri})$ is the complete observation time frame for magnitudes
+	greather than $m$ on \gls{sym:ri}.
+
+The kernel shape used on this work was
+\footnotesize
+		\begin{equation}
+			\ensuremath{
+				K_{KJ}(\gls{sym:r}, m \arrowvert \gls{sym:aW}) =  \frac{  \gls{sym:aW}  -1}{\pi\gls{sym:hm}^2}
+									\left( 1 + \frac{\gls{sym:r}^2}{\gls{sym:hm}^2} \right)^{-\gls{sym:aW}},
+			}
+			\label{eq:k_kj}
+		\end{equation}
+\footnotesize
+	where \gls{sym:aW} is \glsdesc{sym:aW}.
+
+Woo suggested a \alert{magnitude dependent bandwidth} for the kernel function:  
+\small
+	\begin{equation}
+		\ensuremath{
+			h(m\arrowvert \gls{sym:a0}, \gls{sym:a1}) = \gls{sym:a0}e^{\gls{sym:a1}m},
+		}
+		\label{eq:hm}
+	\end{equation}
+\footnotesize
+where $a_0$ and $a_1$ are defined by regression on average nearest neighbour
+distance $h$ on the magnitude bin $m \pm \mathrm{d}m$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\textwidth]{woo_bandwidth} 
+  \caption{Regression of magnitude dependent bandwidth}
+  \label{fig:woo_b} 
+\end{figure}
+
+
+%-------------------------------------------
+\section{Helmstetter, 2012}
+%-------------------------------------------
+\footnotesize
+	To their forecast's backgroung seismic rate, \citet{helmstetter_2012} suggested
+	an space and time long-term model like 
+		\begin{equation}
+		\ensuremath{\gls{sym:R} = \gls{sym:Rmin} + \sum_{t_i < t}{ 
+			\frac{2\,w(\boldsymbol{r}_i,t_i)}{h_i\,{d_i}^2}
+					\gls{sym:Kt}\gls{sym:Kr} }},
+			\label{eq:helms02}
+		\end{equation}
+\footnotesize
+	where \gls{sym:Rmin} is \glsdesc{sym:Rmin} and
+\small
+		\begin{equation}
+			\ensuremath{ w(\boldsymbol{r},t) = 10^{ \gls{sym:b}(\boldsymbol{r},t) \left[ \gls{sym:Mc_rt} - \gls{sym:Md}
+			\right] } },
+			\label{eq:helms_wi}
+		\end{equation}
+\footnotesize
+	where \gls{sym:wi} is the \glsdesc{sym:wi} on location $\boldsymbol{r}$ and
+	time $t$, \gls{sym:b}$(\boldsymbol{r},t)$ is the \glsdesc{sym:b}, 
+		  \gls{sym:Mc_rt} is the \glsdesc{sym:Mc_rt}, 
+		  \gls{sym:Md} is the \glsdesc{sym:Md}.
+
+The \alert{local adaptive bandwidth} in space and time for each earthquake on
+catalogue could be computed as
+\small
+		\begin{equation}
+			\ensuremath{
+		%		h_i, d_i = \underset{d_i \ge \gls{sym:dk}, h_i \ge \gls{sym:hk}}{\argmin} 
+				h_i, d_i = \argmin_{\substack{h_i \ge \gls{sym:hk} \\
+								              d_i \ge \gls{sym:dk}}
+						           } 
+				\left[ s \left(h_i,d_i 
+					 		  \arrowvert
+							  \gls{sym:k_cnn},\gls{sym:a_cnn}
+					     \right) 
+					   := h_i + \gls{sym:a_cnn}d_i 
+			    \right],
+			}
+			\label{eq:helms_cnn}
+		\end{equation}
+\footnotesize
+	where \gls{sym:k_cnn} is the \glsdesc{sym:k_cnn},
+		 \gls{sym:a_cnn} is the \glsdesc{sym:a_cnn},
+		 \gls{sym:dk} is the \glsdesc{sym:dk} and 
+		 \gls{sym:hk} is the \glsdesc{sym:hk}.
+
+
+The stationary seismic rate on cell position $r_0$ is computed as 
+\footnotesize
+		\begin{equation}
+			\ensuremath{
+				\bar{R}(\boldsymbol{r}_0) = \text{Median}\left[R(\boldsymbol{r}_0, t)\right].
+			}
+			\label{eq:helms_mediana}
+		\end{equation}
+which avoid the declustering methods.
+
+\begin{columns}
+	\begin{column}[T]{0.48\textwidth}
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=.85\textwidth]{helmstetter_hidi} 
+		  \caption{Bandwidth computation for some earthquake ($k_{cnn} = 5$, $a_{cnn}
+		  = 100$)}
+		  \label{fig:h_hidi} 
+		\end{figure}
+	\end{column}
+
+	\begin{column}[T]{0.51\textwidth}
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=1.0\textwidth]{helmstetter_stationary_a} 
+		  \caption{Stationary seismic rate for some cell $r_0$}
+		  \label{fig:h_stationary} 
+		\end{figure}
+	\end{column}
+\end{columns}
+
+
+\footnotesize
+The available kernel shapes are the gaussian and the power-law:
+\begin{columns}
+	\begin{column}[T]{0.49\textwidth}
+		\footnotesize
+		\begin{equation}
+			\ensuremath{
+				K_{gs}(\gls{sym:r}\arrowvert h) = \eta_1(h)
+					e^{- \frac{\|\gls{sym:r}\|^2}
+		 				 	  {2 h^2 }},
+		 	}
+		\label{eq:kernel_gs}
+		\end{equation}
+	\end{column}
+
+	\begin{column}[T]{0.49\textwidth}
+		\footnotesize
+		\begin{equation}
+			\ensuremath{
+				K_{pl}(\gls{sym:r}\arrowvert h) = 
+					\frac{\eta_2(h)}
+		 				 {\left( \|\gls{sym:r}\|^2 + h^2 \right)^{\frac{3}{2}} },
+		 	}
+		\label{eq:kernel_pl}
+		\end{equation}
+	\end{column}
+\end{columns}
+\footnotesize
+where $\eta_1(h)$ e $\eta_2(h)$ are normalization factors.
+
+%===========================================
+\newcolumn
+%===========================================
+
+\footnotesize
+The optimization is done by the maximization of 
+\small
+		\begin{equation}
+			\ensuremath{
+				\gls{sym:L} = \sum_{i_x=1}^{N_x}\sum_{i_y=1}^{N_y}\log p\left[  \gls{sym:Np}, \gls{sym:nxy}  \right]}
+			\label{eq:loglik}
+		\end{equation}
+\footnotesize
+	where \gls{sym:Np} is \glsdesc{sym:Np},
+		\gls{sym:nxy} is \glsdesc{sym:nxy}.
+
+\footnotesize
+The log-likelyhood could be computed using the probability of observe exacly $n$
+events (from target catalog) with the predicted $N_p$ seismic rate
+\small
+		\begin{equation}
+			\ensuremath{
+				\gls{sym:pNn} = \frac{{N_p}^n e^{-N_p}}{n!}.
+			}
+			\label{eq:loglik}
+		\end{equation}
+\footnotesize
+To eval the model information gain over an uniform spatialy distributed seismic
+rate, we compute the Kagan and Knopoff (1977) gain:
+\small
+		\begin{equation}
+			\ensuremath{
+			\begin{align}
+				G & = e^{\sum_{i = 1}^{N_t}
+							\frac{\log \left[  \gls{sym:Npi} / \gls{sym:Nu}  \right]}
+								 {\gls{sym:Nt}}
+					  } \\
+				  & = {\langle  \gls{sym:Npi} / \gls{sym:Nu}  \rangle}_{geom}
+			\end{align}}
+			\label{eq:G}
+		\end{equation}	
+
+\vspace{0.3cm}
+
+
+\begin{columns}[c,totalwidth=\textwidth]
+\column{.5\linewidth}
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=.98\textwidth]{helmstetter_catalogues} 
+	  \caption{Learning and target catalogues}
+	  \label{fig:h_catalogue} 
+	\end{figure}
+\column{.5\linewidth}
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{c|c}
+			Parameter & Value \\ \hline
+			$R_{min}$ & $0.1\times10^{-13}$ \\
+			$a_{cnn}$ & 325 \\
+			$k_{cnn}$ & 1 \\ \hline
+			Gain	  & 2.43
+		\end{tabular}
+		\caption{Optimized parameters}
+		\label{tab:hemlstetter}
+	\end{table}
+\end{columns}
+
+
+\vspace{0.3cm}
+%-------------------------------------------
+\section{Rates and Hazard}
+%-------------------------------------------
+\footnotesize \textbf{\citet{frankel_1995}}:
+\begin{columns}[t,totalwidth=\textwidth]
+	\column{.5\linewidth}
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=.98\textwidth]{a_frankel_br} 
+		  \caption{a-value map}
+		  \label{fig:a_fran_br} 
+		\end{figure}
+	
+	\column{.5\linewidth}
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=.98\textwidth]{pga_frankel} 
+		  \caption{PGA(poe0.1,50y)}
+		  \label{fig:pga_fran} 
+		\end{figure}
+\end{columns}
+
+\footnotesize \textbf{\citet{woo_1996}}:
+\begin{columns}[t,totalwidth=\textwidth]
+\column{.5\linewidth}
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=.98\textwidth]{a_woo} 
+	  \caption{a-value map}
+	  \label{fig:a_woo} 
+	\end{figure}
+\column{.5\linewidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.98\textwidth]{pga_woo_cum} 
+		\caption{PGA(poe0.1,50y)}
+		\label{fig:pga_woo_cum} 
+	\end{figure}
+\end{columns}
+
+\footnotesize \textbf{\citet{helmstetter_2012}}:
+\begin{columns}[t,totalwidth=\textwidth]
+\column{.5\linewidth}
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=.98\textwidth]{a_helmstetter} 
+	  \caption{a-value map}
+	  \label{fig:helm_r} 
+	\end{figure}
+\column{.5\linewidth}
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=.98\textwidth]{pga_helmstetter} 
+	  \caption{PGA(poe0.1,50y)}
+	  \label{fig:helm_h} 
+	\end{figure}
+\end{columns}
+
+
+%-------------------------------------------
+\section{References}
+%-------------------------------------------
+	\scriptsize
+%	\bibliography{bib/bibliografia}
+
+\bibitem[Dourado (2014)]{dourado_2014}{\textbf{Dourado (2014)}}
+J.C Dourado.
+Mapa de amea{\c c}a s{\'\i}smica do brasil.
+Em \emph{Congresso Brasileiro de Geologia}.
+
+\bibitem[Frankel (1995)]{frankel_1995}{\textbf{Frankel (1995)}}
+Arthur Frankel.
+Mapping seismic hazard in the central and eastern united states.
+\emph{Seismological Research Letters}, 66\penalty0 (4):\penalty0
+  8--21.
+
+\bibitem[Giardini {\rm{\em et~al.}} (1999)Giardini, Gr{\"u}nthal, Shedlock, e
+  Zhang]{giardini_1999}{\textbf{Giardini \emph{et~al}} (1999)}
+D.~Giardini, G.~Gr{\"u}nthal, K.~M. Shedlock e P.~Zhang.
+The {GSHAP} global seismic hazard map.
+\emph{Annali di Geofisica}, 42\penalty0 (6):\penalty0 1225--1230.
+
+\bibitem[Helmstetter e Werner (2012)]{helmstetter_2012}{\textbf{Helmstetter e
+  Werner (2012)}}
+Agn{\`e}s Helmstetter e Maximilian~J. Werner.
+Adaptive spatiotemporal smoothing of seismicity for long-term
+  earthquake forecasts in california.
+\emph{Bulletin of the Seismological Society of America}, 102\penalty0
+  (6):\penalty0 2518--2529.
+
+\bibitem[Woo (1996)]{woo_1996}{\textbf{Woo (1996)}}
+G.~Woo.
+Kernel estimation methods for seismic hazard area source modeling.
+\emph{Bulletin of the Seismological Society of America}, 86\penalty0
+  (2):\penalty0 353--362.
+
+\end{poster}
+\end{document}

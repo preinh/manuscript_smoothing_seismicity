@@ -1,3 +1,4 @@
+%!TEX program = pdflatex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % American Geophysical Union (AGU)
 % LaTeX Template
@@ -7,16 +8,16 @@
 % http://www.LaTeXTemplates.com
 %
 % Original author:
-% The AGUTeX class and agu-ps referencing style were created and are owned 
+% The AGUTeX class and agu-ps referencing style were created and are owned
 % by AGU: http://publications.agu.org/author-resource-center/author-guide/latex-formatting-toolkit/
 %
 % This template has been modified from the blank AGU template to include
 % examples of how to insert content and drastically change commenting. The
 % structural integrity is maintained as in the original blank template.
 %
-% Important notes: 
-% This template retains extensive commenting from the AGU template. It is heavily 
-% advised you read these comments and follow them in order to insure a speedy 
+% Important notes:
+% This template retains extensive commenting from the AGU template. It is heavily
+% advised you read these comments and follow them in order to insure a speedy
 % submission process.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,6 +104,37 @@
 \setkeys{Gin}{draft=false}
 
 % See how to enter figures and tables at the end of the article, after references.
+\usepackage{float}
+%\usepackage{caption}
+\usepackage{subcaption}
+
+%----------------------------------------------------------------------------------------
+%	Glossaries
+%----------------------------------------------------------------------------------------
+
+% Glossaries
+\usepackage[sanitize=none,acronym,toc]{glossaries}
+%\usepackage[acronym,toc]{glossaries}
+% Define a new glossary type
+\newglossary[slg,toc]{symbols}{sym}{sbl}{Lista de Símbolos}
+\newglossary[elg]{equations}{eqn}{eql}{Equations}
+\makeglossaries
+
+% ---------------------------------------------------------------------------- %
+% Dicionario de Termos:
+\input{d01-terms}
+\input{d02-symbols}
+\input{d03-acronyms}
+\input{d04-equations}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\erf}{erf}
+% ---------------------------------------------------------------------------- %
+
+
 
 %----------------------------------------------------------------------------------------
 %	RUNNING HEAD AND CORRESPONDING AUTHOR
@@ -114,12 +146,12 @@
 %------------------------------------------------
 
 % Shorter version of title entered in capital letters:
-\titlerunninghead{Brazilian Smoothing Seismicity and PSHA}
+\titlerunninghead{Smoothed seismicity Brazilian PSHA}
 
 %------------------------------------------------
 
 % Corresponding author mailing address and e-mail address:
-\authoraddr{Corresponding author: Marlon Pirchiner, Department of Geophysics, IAG, USP, São Paulo, Brazil.
+\authoraddr{Corresponding author: Marlon Pirchiner, Department of Geophysics, IAG, USP, S\~ao Paulo, Brazil.
 (marlon.pirchiner@iag.usp.br)}
 
 %----------------------------------------------------------------------------------------
@@ -130,8 +162,8 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{Smoothing seismicity techniques applied to 
-seismic sources characterization and 
+\title{Smoothing seismicity techniques applied to
+seismic sources characterization and
 probabilistic seismic hazard analysis in Brazil}
 
 %----------------------------------------------------------------------------------------
@@ -144,8 +176,8 @@ probabilistic seismic hazard analysis in Brazil}
 
 \authors{Marlon Pirchiner\altaffilmark{1,2}}
 
-\altaffiltext{1}{Department of Geophysics, 
-Institute of Astronomy, Geophysics and Atmospherical Sciences, 
+\altaffiltext{1}{Department of Geophysics,
+Institute of Astronomy, Geophysics and Atmospherical Sciences,
 University of São Paulo, São Paulo, Brazil.}
 
 \altaffiltext{2}{School of Applied Math, Getúlio Vargas Foundation, Rio de Janeiro, Brazil.}
@@ -158,38 +190,36 @@ University of São Paulo, São Paulo, Brazil.}
 
 \begin{abstract}
 
-Intraplate seismicity is a hard problem to solve in tectonics, 
-main during the lack of observed seismicity in many areas where seismic 
-hazard assesment are also difficult and the methods applied are often 
-close correlated to the geometries defined by the experts with valuable 
+Intraplate seismicity is a hard problem to solve in tectonics,
+mainly during the lack of observed seismicity in many areas where seismic
+hazard assesment are also difficult and the methods applied are often
+close correlated to the geometries defined by the experts with valuable
 criteria.
 
-Three smoothing seismicity techniques are reviewed in order 
-to investigate their results when applied over the Brazilian seismicity 
+Three smoothing seismicity techniques are reviewed in order
+to investigate their results when applied over the Brazilian seismicity
 and suggesting a seismic hazard assesment.
 
-All the methods are based on a kernel density estimation. The main 
-difference between them is the \emph{bandwidth selection} process. 
+All this methods are based on a kernel density estimation. The main
+difference between them is the bandwidth selection process.
 
-The Frankel method use a \emph{fixed} bandwidth in space. Woo method
+Frankel in their method uses a \emph{fixed} bandwidth in space. Woo's method
 suggest a bandwidth as function of the \emph{magnitude}.
-Helmstetter and Werner proposes a \emph{local-adaptive} 
-in space and time bandwidth, chosen for each event. 
-It was proposed initialy to take care of the background seismicity rate 
-on long-term earthquake forecast context, but the one year forecasted 
-seismic rate could be a grid of points seismic sources under a 
-time-independent assumption.
+Helmstetter and Werner proposes a \emph{local-adaptive}
+in space and time kernel bandwidths, chosen for each event.
+This last one was proposed initialy to take care of the background seismicity rate
+on long-term earthquake forecast context and the time-independent assumption
+about the annual background seismic rate could be used
+(not indiscriminately REFERENCE) as a grid of points seismic sources.
 
-In the conclusions the results shown that 
+As conclusions the results shown that all methods gives defines better
+some known seismic regions and could be used in the Brazilian seismicity case,
+all of them, improoving the spatial resolution of the GSHAP model, the last one
+made on the region.
 
-all methods gives good results and 
-could be used in the Brazilian seismicity case, 
+The Last two methods was implemented and are available as a free software on
+the Hazard Modeling Toolkit (HMTK) from GEM Foundation.
 
-all of them, 
-% ###### improoving #########
-the spatial resolution of the actual state-of-art GSHAP model.
-
-The Last two methods was implemented and are available as a free software on HMTK from GEM Foundation. 
 All the hazard calculations was performed on OpenQuake open source software.
 
 \end{abstract}
@@ -205,15 +235,10 @@ All the hazard calculations was performed on OpenQuake open source software.
 
 \section{Introduction}
 
-\subsection{Intraplate Seismicity}
-\subsection{Previous Brazilian Studies}
-\subsection{Previous Smoothing Seismicity (Frankel,Woo,Helmstetter\ldots)}
-\subsection{Specifical Purpose}
-
 Brazil have no recent seismic hazard study at national scale despite some important and localized recent studies
 focused mainly on specific buildings.
 
-The Brazilain seismic hazard building code was made based on GSHAP model which is the well accepted state of art model
+The Brazilian seismic hazard building code was made based on GSHAP model which is the well accepted state of art model
 for the whole region.
 
 A significant number of earthquakes has been recorded in the last years, mainly after the national seismic network
@@ -227,7 +252,7 @@ distributions must to be assigned in other ways.
 
 In the kernel density estimation theory two things there always be handled. The kernel shape and bandwidth.
 Almost kernels used are gaussian or power-laws in one of their variants. The mainly distinction between methods decribed
-is the proposed bandwidth selection process. 
+is the proposed bandwidth selection process.
 
 Frankel smoothing method applies a gaussian Nadaraya-Watson smoothing method with a \emph{fixed}
 smoothing-distance bandwidth to estimate seismicity rate. Gordon Woo proposes an \emph{magnitude-dependent} kernel
@@ -247,43 +272,193 @@ by the specific decisions and optimizations performed on each method modelling. 
 further considerations are discussed.
 
 
+\subsection{Intraplate Seismicity}
+
+Onononono on on ono on on on on ononon on on on on on ono non on ono on on
+
+\subsection{Previous Brazilian Studies}
+
+Onononono on on ono on on on on ononon on on on on on ono non on ono on on
+
+\subsection{Previous Smoothing Seismicity (Frankel, Woo, Helmstetter\ldots)}
+
+Onononono on on ono on on on on ononon on on on on on ono non on ono on on
+
+\subsection{Specifical Purpose}
+
 %------------------------------------------------
+\section{Data}
 
-\section{Materials and Methods}
-
-\subsection{Brazilian Seismic Catalog}
-Boletim sismico brasileiro.
-
-História e versão com Mw.
-\subsection{Brazilian Seismic Catalog}
+%------------------------------------------------
+\section{Methods}
 
 
+\subsection{Frankel}
+
+A proposta de Arthur \citet{frankel_1995} foi usar uma largura de banda fixa,
+nomeada distância de correlação $d_F$, e aplicar o estimador de Nadaraya-Watson (\ref{sec:nadaraya})
+para suavizar o histograma 2D da sismicidade utilizando uma função de núcleo gaussiana:
+\begin{equation}
+	\ensuremath{
+		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
+						   { \sum_{i}     e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}},
+	}
+	\label{eq:ni}
+\end{equation}
+onde $\tilde{n}_j$ é a taxa de sismicidade (número de sismos com magnitude $m$ maior que a mínima magnitude
+\gls{sym:Md} do catálogo) suavizada
+na célula $j$, $n_i$ é o número de sismos em cada outra célula $i$ e
+	\gls{sym:dij} é \glsdesc{sym:dij}.
 
 
 
+\subsection{Woo}
+
+Já Gordon \citet{woo_1996} propôs avaliar a contribuição de uma função de núcleo
+de cada sismo $i$ ocorrido em $\boldsymbol{r}_i$
+na célula centrada em $\boldsymbol{r}$ que dependa também de sua
+magnitude $m$:
+\begin{equation}
+	\ensuremath{
+		\gls{sym:Rrm} = \sum_{i=1}^{N} \frac{ K(\gls{sym:r} - \gls{sym:ri}, m)}
+											{T({\gls{sym:ri})}},
+	}
+	\label{eq:Rrm}
+\end{equation}
+onde $N$ é o número de tremores $i$ no catálogo
+e $T(\gls{sym:ri})$ é o período em que todo sismo de magnitude acima de $m$ é completamente observado
+em \gls{sym:ri}.
 
 
-Suspendisse viverra eleifend nulla at facilisis. Nullam eget tellus orci. Cras sit amet lorem velit. Maecenas rhoncus pellentesque orci eget vulputate. Phasellus massa nisi, mattis nec elementum accumsan, blandit non neque. In ac enim elit, sit amet luctus ante. Cras feugiat commodo lectus, vitae convallis dui sagittis id. In in tellus lacus, sed lobortis eros. Phasellus sit amet eleifend velit. Duis ornare dapibus porttitor. Maecenas eros velit, dignissim at egestas in, tincidunt lacinia erat. Proin elementum mi vel lectus suscipit fringilla. Mauris justo est, ullamcorper in rutrum interdum, accumsan eget mi. Maecenas ut massa aliquet purus eleifend vehicula in a nisi. Fusce molestie cursus lacinia.
+
+\subsection{Helmstetter}
 
 \begin{equation}
-\label{eq:emc}
-e = mc^2
+	\ensuremath{\gls{sym:R} = \sum_{i=1}^{N}{ \frac{1}{h_i\,{d_i}^2} \gls{sym:Kt}\gls{sym:Kr} }},
+	\label{eq:helms01}
+\end{equation}
+onde \gls{sym:R} é \glsdesc{sym:R},
+	  $K_t$ é a \glsdesc{sym:Kt},
+	  $K_r$ é a \glsdesc{sym:Kr}.
+
+
+Como seu interesse é em projeção, restringiram os tempos do catálogo aos $t_i
+< t$ e ponderaram segundo um peso $w$ da seguinte maneira:
+\begin{equation}
+\ensuremath{\gls{sym:R} = \gls{sym:Rmin} + \sum_{t_i < t}{
+	\frac{2\,w(\boldsymbol{r}_i,t_i)}{h_i\,{d_i}^2}
+			\gls{sym:Kt}\gls{sym:Kr} }},
+	\label{eq:helms02}
+\end{equation}
+onde \gls{sym:Rmin} é a \glsdesc{sym:Rmin}, positiva, permitindo que ocorram eventos-surpresa
+onde não se tem registro de sismicidade.
+
+Os pesos $w(\boldsymbol{r}_i,t_i)$, calculados em cada tremor $i$, propostos por Helmstetter são a transformação de
+Gutemberg-Richter. Consideraram uma contribuição maior para a taxa de sismicidade daqueles sismos
+que ocorreram onde e quando a magnitude de completude $M_c$ era maior que
+a mínima magnitude $M_d$ do catálogo
+em locais onde a magnitude de completude e o \emph{valor-b} variam.
+Note que o modelo de pesos acomoda bem variações espaciais e
+temporais tanto da magnitude de completude como do \emph{valor-b}. A expressão é a seguinte:
+\begin{equation}
+	\ensuremath{ w(\boldsymbol{r},t) = 10^{ \gls{sym:b}(\boldsymbol{r},t) \left[ \gls{sym:Mc_rt} - \gls{sym:Md}
+	\right] } },
+	\label{eq:helms_wi}
+\end{equation}
+onde  \gls{sym:wi} é o \glsdesc{sym:wi} na localização $\boldsymbol{r}$ e no instante $t$,
+	  \gls{sym:b}$(\boldsymbol{r},t)$ é o \glsdesc{sym:b},
+	  \gls{sym:Mc_rt} é a \glsdesc{sym:Mc_rt},
+	  \gls{sym:Md} é a \glsdesc{sym:Md}.
+
+
+
+\subsubsection{Bandwidth computation}
+
+
+\begin{equation}
+	\ensuremath{
+%		h_i, d_i = \underset{d_i \ge \gls{sym:dk}, h_i \ge \gls{sym:hk}}{\argmin}
+		h_i, d_i = \argmin_{\substack{h_i \ge \gls{sym:hk} \\
+						              d_i \ge \gls{sym:dk}}
+				           }
+		\left[ s \left(h_i,d_i
+			 		  \arrowvert
+					  \gls{sym:k_cnn},\gls{sym:a_cnn}
+			     \right)
+			   := h_i + \gls{sym:a_cnn}d_i
+	    \right],
+	}
+	\label{eq:helms_cnn}
+\end{equation}
+onde \gls{sym:k_cnn} é o \glsdesc{sym:k_cnn},
+	 \gls{sym:a_cnn} é o \glsdesc{sym:a_cnn},
+	 \gls{sym:dk} é o \glsdesc{sym:dk} e
+	 \gls{sym:hk} é o \glsdesc{sym:hk}.
+
+As larguras de bandas são escolhidas localmente, podendo ser menor, aumentando a resolução
+onde há maior densidade de informação, ou crescer onde há escassez de informação e menor resolução.
+
+
+
+
+\subsubsection{Taxa de sismicidade estacionária}
+Mesmo havendo modelado a dependência com o tempo para distribuição da taxa de sismicidade,
+a taxa estacionária $\bar{R}$ que se preserva no longo-prazo em uma determinada localização
+$\boldsymbol{r}_0$ é a que mais interessa à \gls{psha} e,
+segundo o método proposto por \citet{helmstetter_2012}, será definida
+pelo valor da mediana da taxa fornecida pelo modelo no
+período considerado:
+
+\begin{equation}
+	\ensuremath{
+		\bar{R}(\boldsymbol{r}_0) = \text{Mediana}\left[R(\boldsymbol{r}_0, t)\right].
+	}
+	\label{eq:stationary_rate}
 \end{equation}
 
-Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris eu sapien nunc, sit amet accumsan dui. Nulla ac diam ut nunc placerat semper eget et libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras hendrerit ullamcorper sapien vitae luctus. Quisque vel diam massa. Vestibulum dui nibh, facilisis vel vestibulum eu, viverra in quam.
+O fato de se tomar a mediana faz com que variações na taxa de sismicidade devido a pré e pós-eventos
+não interfiram significativamente no valor da taxa estacionária. A decorrência mais importante desse fato
+é que o método dispensa a remoção de agrupamentos (seção \ref{sec:declustering}) do catálogo, um método paramétrico e
+quase sempre controverso.
 
-\begin{eqnarray}
-  x_{1} & = & (x - x_{0}) \cos \Theta \nonumber \\
-        && + (y - y_{0}) \sin \Theta  \nonumber \\
-  y_{1} & = & -(x - x_{0}) \sin \Theta \nonumber \\
-        && + (y - y_{0}) \cos \Theta.
-\end{eqnarray}
+
+\subsubsection{Verossimilhança}
+
+Para otimizar os parâmetros do modelo de Helmstetter, é preciso dividir o catálogo de sismos.
+Uma parte serve para o aprendizado do modelo e a outra para avaliação.
+
+Se a ocorrência de tremores pode ser modelada por um processo de Poisson com taxa $N_p$,
+então a probabilidade de se observar exatamente $n$ eventos no período de tempo considerado é dada por
+
+\begin{equation}
+	\ensuremath{
+		\gls{sym:pNn} = \frac{{N_p}^n e^{-N_p}}{n!}.
+	}
+	\label{eq:poisson_probability}
+\end{equation}
+
+E o logarítmo, a ser maximizado, da verossimilhança entre
+o que o modelo predisse e o que foi observado
+pode ser escrito como
+
+\begin{equation}
+	\ensuremath{
+		\gls{sym:L} = \sum_{i_x=1}^{N_x}\sum_{i_y=1}^{N_y}\log p\left[  \gls{sym:Np}, \gls{sym:nxy}  \right]
+	}
+	\label{eq:loglik}
+\end{equation}
+onde \gls{sym:Np} é \glsdesc{sym:Np},
+	\gls{sym:nxy} é \glsdesc{sym:nxy}.
+
+Os parâmetros $R_{min}$, $a_{cnn}$ e $k_{cnn}$ do modelo são otimizados
+pela maximização da verossimilhança $L$.
+
 
 %------------------------------------------------
 
 \section{Results}
 
-Referencing equation \ref{eq:emc}. Mauris vel lorem magna, tristique auctor ipsum. Aliquam pharetra eleifend massa. Donec porttitor sagittis luctus. Aliquam pretium luctus leo quis congue. Morbi vel felis mi. Referencing Table \ref{sampletable}. Referencing Figure \ref{placeholder}.
+Referencing equation \ref{eq:emc}. Mauris vel lorem magna, tristique auctor ipsum. Aliquam pharetra eleifend massa. Donec porttitor sagittis luctus. Aliquam pretium luctus leo quis congue. Morbi vel felis mi. Referencing Table \ref{fig_seismicity}. Referencing Figure \ref{placeholder}.
 
 \subsection{Simulations}
 
@@ -488,22 +663,164 @@ Lu, P., and M.~Ando (2012), Difference of scattering geometrical optics
 
 \newpage
 
+% =========
+% intro
+% =========
+
 \begin{figure}
-\includegraphics[width=0.4\linewidth]{placeholder.jpg}
-\caption{Figure caption}\label{placeholder}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=0.4\textwidth]{placeholder}
+		\caption{caption A}
+		\label{placeholder_a}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=0.4\textwidth]{placeholder}
+		\caption{caption B}
+		\label{placeholder_b}
+	\end{subfigure}
+	\caption{main caption}
+	\label{placeholder}
 \end{figure}
 
-\begin{table}
-\caption{Table caption}\label{sampletable}
-\begin{tabular}{l l l}
-\hline
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\hline
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\hline
-\end{tabular}
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_seismicity_br}
+	\caption{Brazilian earthquake catalog.}
+	\label{fig_seismicity}
+\end{figure}
+
+% =========
+% data
+% =========
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_hmtk_bsb2013_rate}
+	\caption{Earthquake records by year}
+	\label{fig_seismic_rate}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_time_mag_count_br_1960}
+	\caption{Magnitude count by year.}
+	\label{fig_time_mag_count}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_decluster_br}
+	\caption{Catalog declustering.}
+	\label{fig_decluster}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_occurrence}
+	\caption{Annual earthquake recurrence.}
+	\label{fig_occurrence}
+\end{figure}
+
+% =========
+% Methods
+% =========
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_a_frankel_br}
+	\caption{Smoothed seismicity: Frankel's method.}
+	\label{fig_a_frankel}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_woo_bandwidth}
+	\caption{Magnitude dependence bandwidth.}
+	\label{fig_woo_bandwidth}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_a_woo}
+	\caption{Smoothed seismicity: Woo's method.}
+	\label{fig_a_woo}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_hidi}
+	\caption{Local bandwidth example.}
+	\label{fig_helmstetter_hidi}
+\end{figure}
+
+
+% TODO add HI_DI histograms
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_stationary_a}
+	\caption{Stationary seismic rate}
+	\label{fig_helmstetter_stationary_rate}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_catalogues}
+	\caption{Learning and target catalogues.}
+	\label{fig_helmstetter_catalogues}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_a_helmstetter}
+	\caption{Smoothed seismicity: Helmstetter's method.}
+	\label{fig_a_helmstetter}
+\end{figure}
+
+% =========
+% Results
+% =========
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_pga_gshap}
+	\caption{GSHAP results: PGA (poe 10\%/50y)}
+	\label{fig_pga_gshap}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_pga_frankel}
+	\caption{Frankel's results: PGA (poe 10\%/50y)}
+	\label{fig_pga_frankel}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_pga_woo}
+	\caption{Woo's results: PGA (poe 10\%/50y)}
+	\label{fig_pga_woo}
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.4\linewidth]{z_img_pga_helmstetter}
+	\caption{Helmstetter's results: PGA (poe 10\%/50y)}
+	\label{fig_pga_helmstetter}
+\end{figure}
+
+
+% TABLES
+
+\begin{table}[H]
+	\caption{Table caption}
+	\begin{tabular}{l l l}
+		\hline
+		\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+		\hline
+		Treatment 1         & 0.0003262           & 0.562 \\
+		Treatment 2         & 0.0015681           & 0.910 \\
+		Treatment 3         & 0.0009271           & 0.296 \\
+		\hline
+	\end{tabular}
+	\label{sampletable}
 \end{table}
 
 \end{document}
@@ -580,7 +897,7 @@ More Information and Advice:
 
 Math coded inside display math mode \[ ...\]
  will not be numbered, e.g.,:
- \[ x^2=y^2 + z^2\]
+ \[ x^2=y^2 + z^2 \]
 
  Math coded inside \begin{equation} and \end{equation} will
  be automatically numbered, e.g.,:
