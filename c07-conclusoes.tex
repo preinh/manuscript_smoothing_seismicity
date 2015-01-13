@@ -1,0 +1,87 @@
+%% ------------------------------------------------------------------------- %%
+\chapter{Discussão}
+\label{cap:conclusoes}
+
+Apesar de possuirem implementações distintas de um mesmo fundamento matemático e estatítstico
+que é a estimativa de densidade por funções de núcleo, os métodos, no geral, conseguiram
+estimar das características da sismicidade a partir da sismicidade histórica catalogada.
+
+Alguns distribuiram mais a taxa de sismicidade e a ameaça, uns destacando certas feições, outros outras.
+Pode-se perceber que a caracterização da distribuição de frequência e magnitude, o uso da sua forma discreta 
+ou truncada, pode ter influência no valor calculado para a ameaça e merece atenção.
+
+Não parece haver um modelo mais correto, mesmo
+porque todas as formulações são coerentes ao que se propuseram. Mesmo assim
+os resultados, considerando suas diferentes proposições variam bastante.
+O modelo de projeção de ocorrência de rupturas de Helmstetter talvez nem
+fosse aplicável num universo de poucas amostras distribuídas em uma área tão vasta.
+
+Essa caracterização suavizada da taxa de sismicidade, mesmo que executada de forma
+distinta por critérios distintos, certamente terá relevãncia e deverá ser considerada
+de alguma forma pelos sismólogos ou engenheiros modeladores de ameaça sísmica,
+mesmo que apenas para cumprir certo percentual de uma árvore lógica.
+
+Ficou claro também, mesmo não tendo sido o foco específico desse trabalho, 
+não ser possível negligenciar a ocorrência de sismos profundos da zona de 
+subducção para a ameaça sísmica do extremo oeste do país. Mesmo os sismos muito profundos (da ordem de centenas de km)
+não provocando grandes impactos nas estruturas, sismos maiores e um pouco mais distantes podem ter razoáveis amplitudes em determinados perídos do espectro de aceleração.
+
+O openquake como calculador de ameaças foi positivo do ponto de vista metodológico,
+e o material bem documentado serviu de apoio e esclarecimento do cálculo.
+
+O resultado discrepante entre os valores apresentados pelo Crisis-2007 e o Openquake,
+precisam ser investigados com maior detalhe, mas os resultados do openquake foram compatíveis com o
+modelo global, mesmo os valores calculados com o mesmo modelo de fontes sísmicas.
+
+O HMTK se mostrou uma ferramenta essencial para a modelagem da ameaça. 
+Muitas funcionalidades permitem facilmente a implementação dos principais fluxos de trabalho.
+
+Por fim, talvez seja possível dizer que os objetivos propostos foram cumpridos.
+
+%------------------------------------------------------
+\section{Considerações Finais} 
+
+Foi possível de certa forma aplicar as técnicas de suavização, estimadoras das taxas suavizadas de sismicidade, 
+gerar uma grade regular de fontes sísmicas pontuais, e então calcular a ameaça sísmica obtendo 
+valores razoáveis, sem com isso definir zonas sísmicas, é o que se conhece também como métodos de \emph{zoneless}.
+
+As diferenças nas formas de escolher a largura de banda das funções de núcleo de cada método,
+podem talvez render ao método de Hemlstetter alguma vantagem, por ser localmente adaptável,
+quando define claramente feições no nordeste. as outros métodos, com escolhas mais rígidas,
+também o fizeram, privilegiando outras regiões.
+
+O ajuste do método de Woo para o Brasil forneceu enormes larguras de banda, com cerca de 1500km para
+as maiores magnitudes (são poucas e o método se baseia em vizinhos mais próximos), isso dilui
+a influência dos grandes sismos nas taxas de sismicidade.
+
+No caso do Brasil, essas primeiras estimativas sugerem que estudos de maior detalhe 
+sejam feitos nas regiões de maior destaque.
+
+
+
+%------------------------------------------------------
+\section{Sugestões para Pesquisas Futuras} 
+
+Ainda há muito o que explorar.
+
+A variação temporal e espacial da magnitude de completude no Brasil seria a principal fonte de informação 
+para melhoria significativa da resposta dos métodos que dependem dessas correções para darem bons resultados.
+Seu conhecimento permite também um mapeamento dos \emph{valores-b}. \citet{vorobieva_2013} aponta caminhos muito
+interessantes.
+
+Consideração de modelos que levem em consideração a distribuição da perda de tensão na forma de momento sísmico,
+e mesmo a suavização da distribuição de momento acumulado espacialmente pela placa também podem ser outra alternativa.
+
+Na modelagem da ameaça sísmica, um passo importante, seria trabalhar daqui por diante também com uma metodologia
+para seleção das relações de atenuação.
+
+Nas regiões de maior sismicidade, talvez seja possível estudar modelos onde a taxa de sismicidade varia com o tempo
+como os modelos de sequência epidêmica de pós-abalos, que podem dar melhor resposta com pouco volume de dados.
+
+Coletar incertezas e elaborar um cenário de ameaça,
+detalhando a árvore lógica de possibilidades e variações
+tanto nos modelos de fonte sísmica, incluíndo eventos históricos característicos, 
+como nos modelos de atenuação. 
+
+Estudos de desagregação \citep{pagani_2007} também precisarão ser feitos no futuro.
+

@@ -1,0 +1,537 @@
+%% ------------------------------------------------------------------------- %%
+\chapter{Contexto Teórico}
+\label{cap:teoria}
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Apresentação}
+%\index{área do trabalho!fundamentos}
+\label{sec:c04_apresentacao}
+
+Este capítulo apresenta a formalização das teorias aplicadas na fase de
+processamento. 
+
+Trata-se essencialmente das \gls{smoothing} que, em geral, permitem extrair 
+feições importantes do conjunto de dados.
+
+Quando aplicadas à caracterização das \glspl{seismic_source} em \gls{psha}
+tornam possível gerar um conjunto regular de \glspl{point_source} 
+singularmente definidas pela suavização das \glspl{seismic_rate} 
+nas células de uma malha regular.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{\Gls{smoothing}}
+\index{suavização!fundamentos, metodologia}
+\label{sec:04_smoothing_general}
+
+A ideia, no fundo, é estimar a distribuição espacial da taxa anual de sismicidade $R$
+ou sua \gls{pdf}.
+O método mais simples conhecido para essa estimativa seria o histograma.
+
+\subsection{Histograma 2D: uma possível \glsdesc{pdf} para a taxa de sismicidade}
+
+Numa malha regular a taxa anual de sismicidade em cada célula seria calculada 
+contando, à partir de um catálogo com tempo de observação conhecido,
+\begin{equation}
+\scriptsize
+	\ensuremath{
+	\frac{\text{o número observado de sismos na célula}}
+		 {\text{área/volume da célula} \times 
+		  \text{número total de sismos observados}}
+	/
+	\text{tempo de observação em anos}
+	}
+\normalsize.
+\label{eq:rate_count}
+\end{equation}
+
+Isso seria equivalente a preparar um histograma normalizado 
+dos tremores em duas (ou três, considerando a profundidade) dimensões.
+
+O que se busca, em geral, por essas técnicas é suavizar justamente essas contagens ou esse histograma
+normalizado que representa uma estimativa da função de densidade de probabilidade da taxa de ocorrência espacial de tremores. 
+
+%\newtheorem{prop}{Proposição}
+%\begin{prop}
+
+\subsection{Regressão e Suavizadores}
+
+
+Para os $n$ pares (célula, taxa de sismicidade) $(x_1, R_1), (x_2, R_2), \cdots, (x_n, R_n)$
+obtidos pela contagem anterior, considere um modelo para a taxa de sismicidade $R$ 
+em uma determinada célula $x_i$ a partir dessa amostra dado por
+\begin{equation}
+	\ensuremath{
+		R(x_i) = \lambda(x_i) + \epsilon(x_i),\;\;\; i=1,\dots,n
+	}
+\label{eq:rate_model}
+\end{equation}
+
+onde os $\epsilon_i$ são \gls{va} não-correlacionadas que representam os erros 
+tais que $E(\epsilon_i \arrowvert X = x_i) = 0$ 
+e a  $Var(\epsilon_i \arrowvert X = x_i) = \sigma^2(x_i)$. A função  
+$\lambda(x_i) = E(R_i \arrowvert X = x_i)$ é uma função de regressão.
+%\end{prop}
+
+É possível definir um estimador ou suavizador linear $\hat{\lambda}$ para $\lambda$, 
+se para todo $x \in \mathbb{R}$ existe uma sequência de pesos $w_1(x), w_2(x),\cdots,w_n(x)$ tais que
+$\sum_{i=1}^{n}w_i(x) = 1$, como sendo
+
+\begin{equation}
+	\ensuremath{
+		\hat{\lambda}(x) = \sum_{i=1}^{n}w_i(x)\,R_i.
+	}
+\label{eq:rate_estim}
+\end{equation}
+
+A questão passa a ser então como encontrar essa sequência de pesos $w_i$.
+
+\subsection{Função de Núcleo e Estimadores de Nadaraya-Watson}
+\label{sec:nadaraya}
+Uma função de núcleo $K$ (\emph{Kernel}) é qualquer função par, contínua e limitada que satisfaz as seguintes
+propriedades:
+
+%\begin{enumerate}[(i)]
+%	\item $\int \lvert K(\boldsymbol{u})\rvert \,\mathrm{d}\boldsymbol{u} < \infty $
+%	\item $\underset{ \lvert\boldsymbol{u} \rvert \to \infty }{\lim} \lvert \boldsymbol{u} K(\boldsymbol{u})\rvert = 0$
+%	\item $\int \! K(\boldsymbol{u}) \,\mathrm{d}\boldsymbol{u} = 1 $
+%\end{enumerate}
+\begin{center}
+(i) $\int \lvert K(\boldsymbol{r})\rvert \,\mathrm{d}\boldsymbol{r} < \infty $
+\;\;\;\;\;(ii) $\underset{ \lvert\boldsymbol{r} \rvert \to \infty }{\lim} 
+				\lvert \boldsymbol{r} \, K(\boldsymbol{r})\rvert =0$ 
+\;\;\;\;\;(iii) $\int \! K(\boldsymbol{r})	\,\mathrm{d}\boldsymbol{r} = 1 $.
+\end{center}
+
+Uma das possíveis maneiras de se encontrar os pesos $w_i$ é o 
+Estimador de Nadaraya-Watson \citep{nadaraya_1965}. 
+
+Seja $h \in \mathbb{R}, h > 0$ e $K$ uma função de núcleo. 
+Nadaraya e Watson propõem, para a estimativa \eqref{eq:rate_estim}, os pesos
+\begin{equation}
+	\ensuremath{
+		w_i(x) = \frac{ K\left( \frac{x - x_i}{h} \right)}
+					  {\sum_{j=1}^{n} K\left( \frac{x - x_j}{h} \right) },
+	}
+\label{eq:rate_wi}
+\end{equation}
+onde $h$ é conhecida como largura de banda ou \emph{bandwidth}.
+
+
+
+\subsection{Formas das funções de núcleo}
+
+Dentre as possíveis expressões para as funções de núcleo é relevante destacar duas \citep{kagan_2000}. 
+
+A equação \eqref{eq:kernel_gs} apresenta a expressão da função de núcleo gaussiana:
+
+\begin{equation}
+	\ensuremath{
+		K_{gs}(\gls{sym:r}\arrowvert h) = \eta_1(h)
+			e^{- \frac{\|\gls{sym:r}\|^2}
+ 				 	  {2 h^2 }},
+ 	}
+\label{eq:kernel_gs}
+\end{equation}
+onde $h$ é a largura de banda definida para a função de núcleo e $\eta_1(h)$ um fator de normalização
+para que sua integral seja igual à unidade.
+
+
+Outra forma possível para a função de núcleo é uma Lei de Potência (\emph{power-law}), que decai com o 
+inverso do cubo da distância, como na equação
+\eqref{eq:kernel_pl} a seguir:
+
+\begin{equation}
+	\ensuremath{
+		K_{pl}(\gls{sym:r}\arrowvert h) = 
+			\frac{\eta_2(h)}
+ 				 {\left( \|\gls{sym:r}\|^2 + h^2 \right)^{\frac{3}{2}} },
+ 	}
+\label{eq:kernel_pl}
+\end{equation}
+onde $h$ é a largura de banda definida para a função de núcleo e $\eta_2(h)$ um fator de normalização
+para que sua integral também seja igual à unidade.
+
+
+Quaisquer dessas duas funções podem ser usadas como função de núcleo 
+para os estimadores de Nadaraya-Watson apresentados anteriormente.
+
+\subsection{Contribuição de uma função de núcleo bidimensional}
+
+É importante notar que há uma outra abordagem possível para a estimativa da taxa de sismicidade.
+
+Se, em vez de suavizar o histograma do catálogo sísmico numa malha regular, a proposta for
+avaliar a contribuição em probabilidade pela \gls{pdf} de cada tremor em uma determinada célula da malha, 
+é possível considerar uma função de núcleo como a \gls{pdf} da ocorrência de cada tremor, e,
+essa contribuição numa célula $j$, devido ao tremor $i$ em $\boldsymbol{r}_i$, dada pela integral da
+função de núcleo na área/volume da célula \citep{zechar_2010-2}: 
+\begin{equation}
+	\ensuremath{
+		R_{j}(\boldsymbol{r}_i \arrowvert h) = \int\limits_{\mathrm{cell}\;j}\!K( \gls{sym:r} -
+		\gls{sym:ri}\,\arrowvert\,h)\,\mathrm{d}\gls{sym:r} },
+\label{eq:kernel_int}
+\end{equation}
+onde $h$ é a largura de banda da suavização.
+
+
+Em todos os casos apresentados, é fácil notar que, a determinação da largura de banda influencia diretamente
+a estimativa da taxa de sismicidade. Os métodos estudados variam essencialmente 
+na forma com que a escolha da largura de banda é concebida e proposta.
+
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Frankel, 1995}
+\index{Frankel, 1995}
+\label{sec:frankel}
+
+A proposta de Arthur \citet{frankel_1995} foi usar uma largura de banda fixa, 
+nomeada distância de correlação $d_F$, e aplicar o estimador de Nadaraya-Watson (\ref{sec:nadaraya})
+para suavizar o histograma 2D da sismicidade utilizando uma função de núcleo gaussiana:
+\begin{equation}
+	\ensuremath{
+		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
+						   { \sum_{i}     e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}},
+	}
+	\label{eq:ni}
+\end{equation}
+onde $\tilde{n}_j$ é a taxa de sismicidade (número de sismos com magnitude $m$ maior que a mínima magnitude
+\gls{sym:Md} do catálogo) suavizada
+na célula $j$, $n_i$ é o número de sismos em cada outra célula $i$ e
+	\gls{sym:dij} é \glsdesc{sym:dij}.
+
+
+\citet{zechar_2010-2} propuseram uma variação da abordagem de Frankel avaliando a contribuição
+de cada tremor $i$ na célula $j$ em vez de suavizar o histograma 2D, mas para isso
+é preciso avaliar essa contribuição como na equação \eqref{eq:kernel_int}.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Woo, 1996}
+\index{Woo, 1996}
+\label{sec:woo}
+
+Já Gordon \citet{woo_1996} propôs avaliar a contribuição de uma função de núcleo 
+de cada sismo $i$ ocorrido em $\boldsymbol{r}_i$ 
+na célula centrada em $\boldsymbol{r}$ que dependa também de sua
+magnitude $m$:
+\begin{equation}
+	\ensuremath{
+		\gls{sym:Rrm} = \sum_{i=1}^{N} \frac{ K(\gls{sym:r} - \gls{sym:ri}, m)}
+											{T({\gls{sym:ri})}},
+	}
+	\label{eq:Rrm}
+\end{equation}
+onde $N$ é o número de tremores $i$ no catálogo 
+e $T(\gls{sym:ri})$ é o período em que todo sismo de magnitude acima de $m$ é completamente observado 
+em \gls{sym:ri}.
+
+A função de núcleo utilizada por Woo foi a proposta por \citet{kagan_knopoff_1980}
+para um domínio espacial infinito:
+\begin{equation}
+	\ensuremath{
+		K_{KJ}(\gls{sym:r}, m \arrowvert \gls{sym:aW}) =  \frac{  \gls{sym:aW}  -1}{\pi\gls{sym:hm}^2}
+							\left( 1 + \frac{\gls{sym:r}^2}{\gls{sym:hm}^2} \right)^{-\gls{sym:aW}},
+	}
+	\label{eq:k_kj}
+\end{equation}
+onde \gls{sym:aW} é, segundo \citet{verejones_1992}, \glsdesc{sym:aW}.
+
+Uma variante limitada para a função de núcleo foi proposta por \citet{verejones_1992}:\begin{equation}
+	\ensuremath{
+		K_{VJ}(\gls{sym:r}, m \arrowvert \gls{sym:DW}) = 
+		\begin{cases}
+			\frac{\gls{sym:DW}}{2\pi\,\gls{sym:hm}} 
+			\left( \frac{\gls{sym:hm}}{\gls{sym:r}} \right)^{2 - \gls{sym:DW}} 
+			  & \gls{sym:r} \leq \gls{sym:hm} \\
+			0 & \gls{sym:r} > \gls{sym:hm}
+		\end{cases},
+	}
+	\label{eq:k_vj}
+\end{equation}
+onde \gls{sym:DW} é \glsdesc{sym:DW}.
+
+Para a largura de banda \gls{sym:hm}, nos dois casos, Gordon Woo propôs utilizar a relação
+\begin{equation}
+	\ensuremath{
+		h(m\arrowvert \gls{sym:a0}, \gls{sym:a1}) = \gls{sym:a0}e^{\gls{sym:a1}m},
+	}
+	\label{eq:hm}
+\end{equation}
+em que $a_0$ e $a_1$ são determinados pela regressão entre a 
+distância média $h$ de cada tremor ao vizinho mais próximo em cada faixa de magnitude $m \pm \mathrm{d}m$.
+É uma largura de banda dependente da magnitude.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Helmstetter, 2012}
+\index{hemlstetter, 2012}
+\label{sec:helmstetter}
+
+O trabalho de  Agnès Helmstetter e Maximilian Werner \citep{helmstetter_2012} é focado principalmente em 
+projeção de longo-prazo para ocorrência de tremores/rupturas. 
+O principal pressuposto dessa técnica (seção \ref{sec:projecao}) é que nesse período a taxa
+de sismicidade se mantenha invariante, que também é o pressuposto da \gls{psha}.
+
+\subsection{Taxa de sismicidade}
+Para eles a taxa de sismicidade em uma localização
+$\boldsymbol{r}$ e em um instante $t$ 
+em função dos tempos $T_i$ e localizações $\mathbf{r}_i$ dos tremores $i$ em um catálogo 
+poderia ser expresso por
+\begin{equation}
+	\ensuremath{\gls{sym:R} = \sum_{i=1}^{N}{ \frac{1}{h_i\,{d_i}^2} \gls{sym:Kt}\gls{sym:Kr} }},
+	\label{eq:helms01}
+\end{equation}
+onde \gls{sym:R} é \glsdesc{sym:R}, 
+	  $K_t$ é a \glsdesc{sym:Kt}, 
+	  $K_r$ é a \glsdesc{sym:Kr}.
+
+Como seu interesse é em projeção, restringiram os tempos do catálogo aos $t_i
+< t$ e ponderaram segundo um peso $w$ da seguinte maneira:
+\begin{equation}
+\ensuremath{\gls{sym:R} = \gls{sym:Rmin} + \sum_{t_i < t}{ 
+	\frac{2\,w(\boldsymbol{r}_i,t_i)}{h_i\,{d_i}^2}
+			\gls{sym:Kt}\gls{sym:Kr} }},
+	\label{eq:helms02}
+\end{equation}
+onde \gls{sym:Rmin} é a \glsdesc{sym:Rmin}, positiva, permitindo que ocorram eventos-surpresa 
+onde não se tem registro de sismicidade.
+
+Os pesos $w(\boldsymbol{r}_i,t_i)$, calculados em cada tremor $i$, propostos por Helmstetter são a transformação de
+Gutemberg-Richter. Consideraram uma contribuição maior para a taxa de sismicidade daqueles sismos 
+que ocorreram onde e quando a magnitude de completude $M_c$ era maior que 
+a mínima magnitude $M_d$ do catálogo 
+em locais onde a magnitude de completude e o \emph{valor-b} variam. 
+Note que o modelo de pesos acomoda bem variações espaciais e
+temporais tanto da magnitude de completude como do \emph{valor-b}. A expressão é a seguinte:
+\begin{equation}
+	\ensuremath{ w(\boldsymbol{r},t) = 10^{ \gls{sym:b}(\boldsymbol{r},t) \left[ \gls{sym:Mc_rt} - \gls{sym:Md}
+	\right] } },
+	\label{eq:helms_wi}
+\end{equation}
+onde  \gls{sym:wi} é o \glsdesc{sym:wi} na localização $\boldsymbol{r}$ e no instante $t$, 
+	  \gls{sym:b}$(\boldsymbol{r},t)$ é o \glsdesc{sym:b}, 
+	  \gls{sym:Mc_rt} é a \glsdesc{sym:Mc_rt}, 
+	  \gls{sym:Md} é a \glsdesc{sym:Md}.
+
+\subsection{Método acoplado dos vizinhos mais próximos}
+
+Em sismologia, as funções de núcleo no espaço e no tempo são usualmente estimadas
+pela distância entre cada tremor e seu $k^{simo}$ vizinho mais próximo. 
+
+A definição de cada $h_i$ e $d_i$ é feita por otimização, 
+pelo método acoplado do $k^{ésimo}$ vizinho mais próximo
+proposto por \citet{choi_1999}
+com uma modificação para a função de núcleo temporal assimétrica.
+
+Para cada tremor $i$, as larguras de banda  $h_i$ e $d_i$ são escolhidas para
+minimizar a soma $h_i + a_{cnn}\,d_i$ sob a condição de que hajam ao menos $k_{cnn}$
+eventos a uma distância espacial menor que $d_i$ e, simultaneamente, estejam
+no intervalo de tempo $[t_i - h_i, t_i[$. O parâmetro $k_{cnn}$ controla a suavização 
+geral do modelo, e $a_{cnn}$ controla a importância relativa entre o tempo e o espaço.
+Valores altos de $a_{cnn}$ apresentam alta resolução espacial e, ao mesmo tempo, 
+são mais suaves no domínio do tempo. Em outras palavras:
+
+\begin{equation}
+	\ensuremath{
+%		h_i, d_i = \underset{d_i \ge \gls{sym:dk}, h_i \ge \gls{sym:hk}}{\argmin} 
+		h_i, d_i = \argmin_{\substack{h_i \ge \gls{sym:hk} \\
+						              d_i \ge \gls{sym:dk}}
+				           } 
+		\left[ s \left(h_i,d_i 
+			 		  \arrowvert
+					  \gls{sym:k_cnn},\gls{sym:a_cnn}
+			     \right) 
+			   := h_i + \gls{sym:a_cnn}d_i 
+	    \right],
+	}
+	\label{eq:helms_cnn}
+\end{equation}
+onde \gls{sym:k_cnn} é o \glsdesc{sym:k_cnn},
+	 \gls{sym:a_cnn} é o \glsdesc{sym:a_cnn},
+	 \gls{sym:dk} é o \glsdesc{sym:dk} e 
+	 \gls{sym:hk} é o \glsdesc{sym:hk}.
+
+As larguras de bandas são escolhidas localmente, podendo ser menor, aumentando a resolução 
+onde há maior densidade de informação, ou crescer onde há escassez de informação e menor resolução.
+
+
+\subsection{Taxa de sismicidade estacionária}
+Mesmo havendo modelado a dependência com o tempo para distribuição da taxa de sismicidade,
+a taxa estacionária $\bar{R}$ que se preserva no longo-prazo em uma determinada localização  
+$\boldsymbol{r}_0$ é a que mais interessa à \gls{psha} e,
+segundo o método proposto por \citet{helmstetter_2012}, será definida
+pelo valor da mediana da taxa fornecida pelo modelo no
+período considerado:
+
+\begin{equation}
+	\ensuremath{
+		\bar{R}(\boldsymbol{r}_0) = \text{Mediana}\left[R(\boldsymbol{r}_0, t)\right].
+	}
+	\label{eq:helms_mediana}
+\end{equation}
+
+O fato de se tomar a mediana faz com que variações na taxa de sismicidade devido a pré e pós-eventos
+não interfiram significativamente no valor da taxa estacionária. A decorrência mais importante desse fato
+é que o método dispensa a remoção de agrupamentos (seção \ref{sec:declustering}) do catálogo, um método paramétrico e
+quase sempre controverso.
+
+\subsection{Verossimilhança}
+
+Para otimizar os parâmetros do modelo de Helmstetter, é preciso dividir o catálogo de sismos.
+Uma parte serve para o aprendizado do modelo e a outra para avaliação.
+
+Se a ocorrência de tremores pode ser modelada por um processo de Poisson com taxa $N_p$, 
+então a probabilidade de se observar exatamente $n$ eventos no período de tempo considerado é dada por
+
+\begin{equation}
+	\ensuremath{
+		\gls{sym:pNn} = \frac{{N_p}^n e^{-N_p}}{n!}.
+	}
+	\label{eq:loglik}
+\end{equation}
+
+E o logarítmo, a ser maximizado, da verossimilhança entre 
+o que o modelo predisse e o que foi observado 
+pode ser escrito como
+
+\begin{equation}
+	\ensuremath{
+		\gls{sym:L} = \sum_{i_x=1}^{N_x}\sum_{i_y=1}^{N_y}\log p\left[  \gls{sym:Np}, \gls{sym:nxy}  \right]
+	}
+	\label{eq:loglik}
+\end{equation}
+onde \gls{sym:Np} é \glsdesc{sym:Np},
+	\gls{sym:nxy} é \glsdesc{sym:nxy}.
+
+Os parâmetros $R_{min}$, $a_{cnn}$ e $k_{cnn}$ do modelo são otimizados 
+pela maximização da verossimilhança $L$.
+
+\subsection{Ganho}
+
+Uma distribuição de Poisson espacialmente uniforme para a sismicidade com taxa $N_u$
+teria sua verossimilhança $L_u$ expressa por
+\begin{equation}
+	\ensuremath{
+		\gls{sym:Lu} = -N_t + 
+		\sum_{i_x = 1}^{N_x}\sum_{i_y=1}^{N_y}
+		\gls{sym:nxy}\log N_u - \log \left[ \gls{sym:nxy}! \right]
+	}
+	\label{eq:lu}
+\end{equation}
+onde $N_u = N_t/N_c$ com $N_t$ o número de sismos no catálogo-alvo e $N_c$ o número de células, 
+
+
+O ganho de probabilidade $G$ por tremor predito no catálogo-alvo (de teste)
+sobre o que seria predito por uma distribuição espacialmente uniforme 
+foi definido por \citet{kagan_knopoff_1977} como
+\begin{equation}
+	\ensuremath{
+		\gls{sym:G} = e^{ \frac{\gls{sym:L} - \gls{sym:Lu}}{\gls{sym:Nt}}   }.
+	}
+	\label{eq:gain}
+\end{equation}
+
+Quando se compara dois modelos frente o mesmo catálogo-alvo, com a mesma quantidade de tremores $N_t$,
+a equação \eqref{eq:gain} pode ser simplificada, pois 
+\begin{equation}
+	\ensuremath{
+	\begin{align}
+		L - L_u & = \sum_{i_x = 1}^{N_x}\sum_{i_y=1}^{N_y}
+				  \gls{sym:nxy}\log \left[ \frac{\gls{sym:Np}}{\gls{sym:Nu}} \right] \\
+				& = \sum_{i = 1}^{N_t}\log \left[\frac{\gls{sym:Npi}}{\gls{sym:Nu}} \right]
+	\end{align}}
+	\label{eq:llu}
+\end{equation}
+
+e o ganho $G$ do modelo passa a ser o mesmo que média geométrica da taxa prevista pelo modelo sobre 
+a taxa uniforme em todas as células:
+\begin{equation}
+	\ensuremath{
+	\begin{align}
+		G & = e^{\sum_{i = 1}^{N_t}
+					\frac{\log \left[  \gls{sym:Npi} / \gls{sym:Nu}  \right]}
+						 {\gls{sym:Nt}}
+			  } \\
+		  & = {\langle  \gls{sym:Npi} / \gls{sym:Nu}  \rangle}_{geom}
+	\end{align}}
+	\label{eq:G}
+\end{equation}
+onde $\langle\cdot\rangle_{geom}$ significa média geométrica.
+
+\subsection{Testes}
+
+\citet{helmstetter_2012} usam os testes propostos por \citet{schorlemmer_2007}
+e \citet{rhoades_2011} para comparar diferentes modelos.
+
+O teste-T avalia quando o ganho de informação de um modelo é significativamente diferente
+de um outro.
+
+Para isso as taxas preditas pelos modelos são re-normalizadas para que o valor da taxa de sismicidade
+prevista pelos modelos seja igual à taxa observada.
+
+Sendo \gls{sym:NAi} a \glsdesc{sym:NAi} e \gls{sym:NBi} a \glsdesc{sym:NBi}, o ganho de informação $I_{inf}$
+por tremor se reduz à 
+\begin{equation}
+	\ensuremath{
+		\gls{sym:I} = \frac{1}{\gls{sym:Nt}} 
+					  \sum_{i = 1}^{N_t}\log\left[ \frac{\gls{sym:NAi}}
+					  								  {\gls{sym:NBi}}  \right].
+	}
+	\label{eq:gain_info}
+\end{equation}
+
+O ganho de informação $I_{inf}$ se relaciona com o ganho dos modelos (eq. \eqref{eq:gain}) por
+\begin{equation}
+	\ensuremath{
+		I_{inf} = \log\left(\frac{G_A}{G_B}\right).
+	}
+	\label{eq:gain_info_G}
+\end{equation}
+
+
+A variância da amostra de Rhoades apresentada por Helmstetter é 
+
+\begin{equation}
+	\ensuremath{
+		\sigma^2 = 	\frac{1}{N_t - 1}
+					{\left(
+					\sum_{i-1}^{N_t}
+						{x_i}^2 
+					\right)}
+					- 
+					\frac{1}{{N_t}^2 - N_t}
+					{\left(
+						\sum_{i=1}^{N_t}{x_i}
+					\right)}^2,
+	}
+	\label{eq:var}
+\end{equation}
+onde $x_i = \log\left[ \gls{sym:NAi} / \gls{sym:NBi}  \right]$.
+
+Seja o valor $T_s$ também definido por Rhoades e apresentado por Helmstetter
+
+\begin{equation}
+	\ensuremath{
+		\gls{sym:Ts} = \frac{I_{inf}\sqrt{N_t}}{\sigma}.
+	}
+	\label{eq:T}
+\end{equation}
+
+Se $x_i$ é independente e tem distribuição normal,
+então $T_s$ deve ter distribuição de Student com $N_t - 1$ graus de liberdade. Para grandes valores de $N_t$
+a distribuição converge rapidamente para a normal.
+
+O valor do ganho de informação é considerado significante se $T_s > 2$ no intervalo de 95\% de confiança.
+
+O teste de Wilcoxon é usado no caso de que $x_i$ não tenha distribuição normal
+mas permanece simétrica e independente \citep{rhoades_2011}.
+Esse teste avalia o quanto a mediana de $x_i$ difere significativamente de zero.
+Isso é o mesmo que avaliar o quanto a taxa prevista por um modelo é significativamente diferente da prevista por 
+outro modelo.
+
+A probabilidade $p_W$ de se observar um valor maior que a mediana de $x_i$ é retornada pelo teste.
+Valores de $p_W < 0.05$ indicam que a mediana de $x_i$ é significativamente diferente de 0.
+
+
