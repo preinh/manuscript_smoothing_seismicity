@@ -68,6 +68,7 @@
 % substitute the initials of the journal for "jgrga" below.)
 
 \documentclass[draft, grl]{agutex}
+%\documentclass[grl]{agutex}
 
 % To create numbered lines:
 
@@ -75,8 +76,8 @@
 
 % To activate the commands, uncomment \usepackage{lineno} and \linenumbers*[1]command, below:
 
-% \usepackage{lineno}
-% \linenumbers*[1]
+\usepackage{lineno}
+\linenumbers*[1]
 
 %  To add line numbers to lines with equations:
 %  \begin{linenomath*}
@@ -127,7 +128,8 @@
 %-----------------------------------------------------------------------------
 
 % Glossaries
-\usepackage[sanitize=none,acronym,toc]{glossaries}
+%\usepackage[sanitize=none,acronym,toc]{glossaries}
+\usepackage[acronym,toc]{glossaries}
 %\usepackage[acronym,toc]{glossaries}
 % Define a new glossary type
 \newglossary[slg,toc]{symbols}{sym}{sbl}{Lista de Símbolos}
@@ -204,44 +206,27 @@ University of São Paulo (USP), São Paulo, Brazil.}
 
 \begin{abstract}
 
-Intraplate seismicity is a hard problem to solve in tectonics,
-mainly during the lack of observed seismicity in many areas where seismic
-hazard assesment are also difficult and the methods applied are often
-close correlated to the geometries defined by the experts with valuable
-criteria.
+Intraplate seismicity is a hard problem to solve in tectonics, mainly during the lack of observed seismicity in many areas where seismic hazard assesment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
 
-Three smoothing seismicity techniques are reviewed in order
-to investigate their results when applied over the Brazilian seismicity
-and suggesting a seismic hazard assesment.
+Three smoothing seismicity techniques are reviewed in order to investigate their results when applied over the Brazilian seismicity and suggesting a seismic hazard assesment.
 
-All this methods are based on a kernel density estimation. The main
-difference between them is the bandwidth selection process.
+All this methods are based on a kernel density estimation. The main difference between them is the bandwidth selection process.
 
-Frankel in their method uses a \emph{fixed} bandwidth in space. Woo's method
-suggest a bandwidth as function of the \emph{magnitude}.
-Helmstetter and Werner proposes a \emph{local-adaptive}
-in space and time kernel bandwidths, chosen for each event.
-This last one was proposed initialy to take care of the background seismicity rate
-on long-term earthquake forecast context and the time-independent assumption
-about the annual background seismic rate could be used
+Frankel in their method uses a \emph{fixed} bandwidth in space. Woo's method suggest a bandwidth as function of the \emph{magnitude}. Helmstetter and Werner proposes a \emph{local-adaptive} in space and time kernel bandwidths, chosen for each event.
+This last one was proposed initialy to take care of the background seismicity rateon long-term earthquake forecast context and the time-independent assumption about the annual background seismic rate could be used
 (not indiscriminately REFERENCE) as a grid of points seismic sources.
 
-As conclusions the results shown that all methods gives defines better
-some known seismic regions and could be used in the Brazilian seismicity case,
-all of them, improoving the spatial resolution of the GSHAP model, the last one
-made on the region.
+As conclusions the results shown that all methods gives defines better some known seismic regions and could be used in the Brazilian seismicity case, all of them, improoving the spatial resolution of the GSHAP model, the last one made on the region.
 
-The Last two methods was implemented and are available as a free software on
-the Hazard Modeling Toolkit (HMTK) from GEM Foundation.
+The Last two methods was implemented and are available as a free software on the Hazard Modeling Toolkit (HMTK) from GEM Foundation.
 
 All the hazard calculations was performed on OpenQuake open source software.
 
 \end{abstract}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	ARTICLE CONTENT
-%----------------------------------------------------------------------------------------
-
+%------------------------------------------------------------------------------
 % The body of the article must start with a \begin{article} command
 % \end{article} must follow the references section, before the figures and tables.
 
@@ -249,41 +234,23 @@ All the hazard calculations was performed on OpenQuake open source software.
 
 \section{Introduction}
 
-Brazil have no recent seismic hazard study at national scale despite some important and localized recent studies
-focused mainly on specific buildings.
+Brazil have no recent seismic hazard study at national scale despite some important and localized recent studies focused mainly on specific buildings.
 
-The Brazilian seismic hazard building code was made based on GSHAP model which is the well accepted state of art model
-for the whole region.
+The Brazilian seismic hazard building code was made based on GSHAP model which is the well accepted state of art model for the whole region.
 
-A significant number of earthquakes has been recorded in the last years, mainly after the national seismic network
-(RSBR) operation, and an actualized hazard map whould be computed.
+A significant number of earthquakes has been recorded in the last years, mainly after the national seismic network (RSBR) operation, and an actualized hazard map whould be computed.
 
-Although the standard Cornell Mcguire zoning methodolgy for the classical hazard seismic assesment, the goal is
-review a few smoothing seismicity methods based on kernel density estimation. This estimation allow a seismic point
-sources grid definition. The seismic rate (a-value) associated to each source is definided by the smoothed seismicity
-methods, but the more parameters like b-values, minimum and maximum magnitudes, rupture and depth
-distributions must to be assigned in other ways.
+Although the standard Cornell Mcguire zoning methodolgy for the classical hazard seismic assesment, the goal is review a few smoothing seismicity methods based on kernel density estimation. This estimation allow a seismic point sources grid definition. The seismic rate (\emph{a}-value) associated to each source is definided by the smoothed seismicity methods, but the more parameters like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions must to be assigned in other ways.
 
-In the kernel density estimation theory two things there always be handled. The kernel shape and bandwidth.
-Almost kernels used are gaussian or power-laws in one of their variants. The mainly distinction between methods decribed
-is the proposed bandwidth selection process.
+In the kernel density estimation theory two things there always be handled. The kernel shape and bandwidth. Almost kernels used are gaussian or power-laws in one of their variants. The mainly distinction between methods decribed is the proposed bandwidth selection process.
 
-Frankel smoothing method applies a gaussian Nadaraya-Watson smoothing method with a \emph{fixed}
-smoothing-distance bandwidth to estimate seismicity rate. Gordon Woo proposes an \emph{magnitude-dependent} kernel
-bandwidth based on the nearest neighbour mean distance in magnitude bins. Helmstetter proposes a \emph{local-adaptive}
-bandwidth, based on kernel estimations on both space and time dimentions, estimation of the background seismicity rate
-for long-term forecasts. Using one-year forecast and assume time-independence, the same assumption of PSHA, of
-seismicity rate is possible to use these values on seismic sources characterization.
+Frankel smoothing method applies a gaussian Nadaraya-Watson smoothing method with a \emph{fixed} smoothing-distance bandwidth to estimate seismicity rate. Gordon Woo proposes an \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbour mean distance in magnitude bins. Helmstetter proposes a \emph{local-adaptive} bandwidth, based on kernel estimations on both space and time dimentions, estimation of the background seismicity rate for long-term forecasts. Using one-year forecast and assume time-independence, the same assumption of PSHA, of seismicity rate is possible to use these values on seismic sources characterization.
 
-To perform the hazard calculation, the OpenQuake suite was choosed. The modeller environment used was the HMTK also
-available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was
-implemented in the context of this paper and they are free available on a public repository.
+To perform the hazard calculation, the OpenQuake suite was choosed. The modeller environment used was the HMTK also available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
 
 The earthquake catalog data comes from the Brazilian seismological research authorities.
 
-The Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow
-by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and
-further considerations are discussed.
+The Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and further considerations are discussed.
 
 
 \subsection{Intraplate Seismicity}
@@ -304,8 +271,8 @@ Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 \section{Data}
 
 %------------------------------------------------
-\section{Methods}
-
+\section{Smoothing methods}
+Under this work, three smoothing methods was considered. On this section brief explanation of each one will be done.
 
 \subsection{Frankel}
 
@@ -331,14 +298,14 @@ Gordon \citet{woo_1996} suggested to evaluate the contribution of each earthquak
 	}
 	\label{eq:Rrm}
 \end{equation}
-where $N$ is the number of earthquakes $i$ on the catalogue
+where $N$ is the number of earthquakes $i$ on the catalog
 and $T(\gls{sym:ri})$ is the timeframe which all earthquakes with magnitude above $m$ is completely observed on \gls{sym:ri}.
 
 
 Any kernel could be applied on that definition. In practice Woo used a \citet{kagan_knopoff_1980} for a infinity spatial domain:
 \begin{equation}
 	\ensuremath{
-		K_{KJ}(\gls{sym:r}, m \arrowvert \gls{sym:aW}) =  \frac{  \gls{sym:aW}  -1}{\pi\gls{sym:hm}^2}
+		K_{KK}(\gls{sym:r}, m \arrowvert \gls{sym:aW}) =  \frac{  \gls{sym:aW}  -1}{\pi\gls{sym:hm}^2}
 							\left[ 1 + \frac{\gls{sym:r}^2}{\gls{sym:hm}^2} \right]^{-\gls{sym:aW}},
 	}
 	\label{eq:k_kj}
@@ -357,44 +324,40 @@ where $a_0$ and $a_1$ are computed by the regression of the mean nearest distanc
 
 
 
-\subsection{Helmstetter}
+\subsection{Helmstetter and Werner}
 
+
+Even work on a forecast perspective, the background seismicity rate for a long-term time-independent forecast could be used to charachterize a diffused seismicity under the common assumption that this background seismic rate is invariant over time.
+
+\citet{helmstetter_2012} proposes a seismicity model space and time dependent using kernels for space and time independently:
 \begin{equation}
 	\ensuremath{\gls{sym:R} = \sum_{i=1}^{N}{ \frac{1}{h_i\,{d_i}^2} \gls{sym:Kt}\gls{sym:Kr} }},
 	\label{eq:helms01}
 \end{equation}
-onde \gls{sym:R} é \glsdesc{sym:R},
-	  $K_t$ é a \glsdesc{sym:Kt},
-	  $K_r$ é a \glsdesc{sym:Kr}.
+where \gls{sym:R} is the \glsdesc{sym:R},
+	  $K_t$ is the \glsdesc{sym:Kt},
+	  $K_r$ is the \glsdesc{sym:Kr}.
 
 
-Como seu interesse é em projeção, restringiram os tempos do catálogo aos $t_i
-< t$ e ponderaram segundo um peso $w$ da seguinte maneira:
+As they are interested in forecast, just past time $t_i < t$ need to be considered. Also the observation completeness is taken in account by a set of weights $w$ in this follow way:
 \begin{equation}
 \ensuremath{\gls{sym:R} = \gls{sym:Rmin} + \sum_{t_i < t}{
 	\frac{2\,w(\boldsymbol{r}_i,t_i)}{h_i\,{d_i}^2}
 			\gls{sym:Kt}\gls{sym:Kr} }},
 	\label{eq:helms02}
 \end{equation}
-onde \gls{sym:Rmin} é a \glsdesc{sym:Rmin}, positiva, permitindo que ocorram eventos-surpresa
-onde não se tem registro de sismicidade.
+where \gls{sym:Rmin} is the \glsdesc{sym:Rmin}, positive, allowing earthquakes to occur where their never occurred yet.
 
-Os pesos $w(\boldsymbol{r}_i,t_i)$, calculados em cada tremor $i$, propostos por Helmstetter são a transformação de
-Gutemberg-Richter. Consideraram uma contribuição maior para a taxa de sismicidade daqueles sismos
-que ocorreram onde e quando a magnitude de completude $M_c$ era maior que
-a mínima magnitude $M_d$ do catálogo
-em locais onde a magnitude de completude e o \emph{valor-b} variam.
-Note que o modelo de pesos acomoda bem variações espaciais e
-temporais tanto da magnitude de completude como do \emph{valor-b}. A expressão é a seguinte:
+The weights $w(\boldsymbol{r}_i,t_i)$, computed for each earthquake $i$, are the Gutemberg-Richter \emph{a}-value projection. These weights increase the seismicity contribution from earthquakes occurred where and when the completeness magnitude $M_c$ was greather than minimum catalog magnitude $M_d$. These weights could easily consider space and time completenes and \emph{b}-value fluctuations. The expression used to compute it:
 \begin{equation}
 	\ensuremath{ w(\boldsymbol{r},t) = 10^{ \gls{sym:b}(\boldsymbol{r},t) \left[ \gls{sym:Mc_rt} - \gls{sym:Md}
 	\right] } },
 	\label{eq:helms_wi}
 \end{equation}
-onde  \gls{sym:wi} é o \glsdesc{sym:wi} na localização $\boldsymbol{r}$ e no instante $t$,
-	  \gls{sym:b}$(\boldsymbol{r},t)$ é o \glsdesc{sym:b},
-	  \gls{sym:Mc_rt} é a \glsdesc{sym:Mc_rt},
-	  \gls{sym:Md} é a \glsdesc{sym:Md}.
+where \gls{sym:wi} is the \glsdesc{sym:wi} at location $\boldsymbol{r}$ on instant $t$,
+	  \gls{sym:b}$(\boldsymbol{r},t)$ is the space and time dependent \glsdesc{sym:b},
+	  \gls{sym:Mc_rt} is the \glsdesc{sym:Mc_rt},
+	  \gls{sym:Md} is the \glsdesc{sym:Md}.
 
 
 
@@ -424,35 +387,25 @@ The bandwidths are defined locally. Could be small in high earthquake density re
 
 
 
-\subsubsection{Taxa de sismicidade estacionária}
-Mesmo havendo modelado a dependência com o tempo para distribuição da taxa de sismicidade,
-a taxa estacionária $\bar{R}$ que se preserva no longo-prazo em uma determinada localização
-$\boldsymbol{r}_0$ é a que mais interessa à \gls{psha} e,
-segundo o método proposto por \citet{helmstetter_2012}, será definida
-pelo valor da mediana da taxa fornecida pelo modelo no
-período considerado:
-
+\subsubsection{Stationary seismic rate}
+After compute the model parameters and completely define it, the time-independent or stationary seismic rate $\bar{R}$ on each location $\boldsymbol{r}_0$ have to be computed. 
+The way to do it proposed by \citet{helmstetter_2012} was to get the median
+on $\boldsymbol{r}_0$ over all considered time window:
 \begin{equation}
 	\ensuremath{
-		\bar{R}(\boldsymbol{r}_0) = \text{Mediana}\left[R(\boldsymbol{r}_0, t)\right].
+		\bar{R}(\boldsymbol{r}_0) = \text{Median}\left[R(\boldsymbol{r}_0, t)\right].
 	}
 	\label{eq:stationary_rate}
 \end{equation}
 
-O fato de se tomar a mediana faz com que variações na taxa de sismicidade devido a pré e pós-eventos
-não interfiram significativamente no valor da taxa estacionária. A decorrência mais importante desse fato
-é que o método dispensa a remoção de agrupamentos (seção \ref{sec:declustering}) do catálogo, um método paramétrico e
-quase sempre controverso.
+The median should avoid the seismicity rate fluctuations derived by fore and after-shocks and consequently the decluster procedures.
 
 
-\subsubsection{Verossimilhança}
+\subsubsection{Maximum likelyhood optimization}
 
-Para otimizar os parâmetros do modelo de Helmstetter, é preciso dividir o catálogo de sismos.
-Uma parte serve para o aprendizado do modelo e a outra para avaliação.
+The model is completely defined by \gls{sym:k_cnn}, \gls{sym:a_cnn} and \gls{sym:Rmin}. To optimize these parameters the catalog is divided in two parts: one for learning about the parameters and other to test them.
 
-Se a ocorrência de tremores pode ser modelada por um processo de Poisson com taxa $N_p$,
-então a probabilidade de se observar exatamente $n$ eventos no período de tempo considerado é dada por
-
+If the earthquake occurrence could be modelled by a Poisson process with rate $N_p$, then the probability to observe exactly $n$ events on the consider time frame is
 \begin{equation}
 	\ensuremath{
 		\gls{sym:pNn} = \frac{{N_p}^n e^{-N_p}}{n!}.
@@ -460,28 +413,24 @@ então a probabilidade de se observar exatamente $n$ eventos no período de temp
 	\label{eq:poisson_probability}
 \end{equation}
 
-E o logarítmo, a ser maximizado, da verossimilhança entre
-o que o modelo predisse e o que foi observado
-pode ser escrito como
-
+Then, over all cells, the (log) likelihood, to be maximized, between model (from the learning catalog) prediction and earthquakes observed on testing catalog is written as
 \begin{equation}
 	\ensuremath{
 		\gls{sym:L} = \sum_{i_x=1}^{N_x}\sum_{i_y=1}^{N_y}\log p\left[  \gls{sym:Np}, \gls{sym:nxy}  \right]
 	}
 	\label{eq:loglik}
 \end{equation}
-onde \gls{sym:Np} é \glsdesc{sym:Np},
-	\gls{sym:nxy} é \glsdesc{sym:nxy}.
+where \gls{sym:Np} is the \glsdesc{sym:Np} and
+	  \gls{sym:nxy} is the \glsdesc{sym:nxy}.
 
-Os parâmetros $R_{min}$, $a_{cnn}$ e $k_{cnn}$ do modelo são otimizados
-pela maximização da verossimilhança $L$.
+The model parameters $R_{min}$, $a_{cnn}$ and $k_{cnn}$ should be optimized by the maximization of log-likelihood $L$.
 
 
 %------------------------------------------------
 
 \section{Results}
 
-Referencing equation \ref{eq:emc}. Mauris vel lorem magna, tristique auctor ipsum. Aliquam pharetra eleifend massa. Donec porttitor sagittis luctus. Aliquam pretium luctus leo quis congue. Morbi vel felis mi. Referencing Table \ref{fig_seismicity}. Referencing Figure \ref{placeholder}.
+Referencing equation. Mauris vel lorem magna, tristique auctor ipsum. Aliquam pharetra eleifend massa. Donec porttitor sagittis luctus. Aliquam pretium luctus leo quis congue. Morbi vel felis mi. Referencing Table \ref{fig_seismicity}. Referencing Figure \ref{placeholder}.
 
 \subsection{Simulations}
 
@@ -552,17 +501,16 @@ Vivamus magna enim, aliquet id cursus a, pharetra ut purus. Phasellus suscipit n
 % \end{notation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
-
+%------------------------------------------------------------------------------
 \begin{acknowledgments}
 The author thanks specially to Marcelo Assumpção for the support and critical discussion as well all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vincent Guigues for all helpful discussions.
 \end{acknowledgments}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 % Either type in your references using
 % \begin{thebibliography}{}
@@ -590,8 +538,8 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 
 % AGU does not want a .bib or a .bbl file. Please copy in the contents of your .bbl file here.
 
-% ---------------------------------------------------------------------------- %
-% Bibliografia
+% ---------------------------------------------------------------------------- % Bibliografy
+% ---------------------------------------------------------------------------- 
 \bibliographystyle{BibTeX/agufull08} 	% citação bibliográfica textual
 \bibliography{bib/bibliografia}  		% associado ao arquivo: 
 
@@ -645,9 +593,9 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 
 \end{article}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 %	FIGURES AND TABLES
-%----------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 %% Enter Figures and Tables here:
 %
@@ -814,7 +762,7 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 
 \begin{figure}
 	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_catalogues}
-	\caption{Learning and target catalogues.}
+	\caption{Learning and target catalogs.}
 	\label{fig_helmstetter_catalogues}
 \end{figure}
 
@@ -920,7 +868,7 @@ More Information and Advice:
 %---------------
 % Level 4 head
 %
-% Use the \subsubsubsection{} command to identify level 3 heads
+% Use the \subsubsubsection{} command to identify level 4 heads
 % An example:
 %\subsubsubsection{Level 4 Head} An example.
 %
