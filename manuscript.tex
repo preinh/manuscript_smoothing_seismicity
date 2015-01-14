@@ -67,7 +67,7 @@
 % (If you are submitting to a journal other than jgrga,
 % substitute the initials of the journal for "jgrga" below.)
 
-\documentclass[draft,grl]{agutex}
+\documentclass[draft, grl]{agutex}
 
 % To create numbered lines:
 
@@ -75,8 +75,8 @@
 
 % To activate the commands, uncomment \usepackage{lineno} and \linenumbers*[1]command, below:
 
-\usepackage{lineno}
-\linenumbers*[1]
+% \usepackage{lineno}
+% \linenumbers*[1]
 
 %  To add line numbers to lines with equations:
 %  \begin{linenomath*}
@@ -104,13 +104,27 @@
 \setkeys{Gin}{draft=false}
 
 % See how to enter figures and tables at the end of the article, after references.
+\usepackage[utf8]{inputenc}
 \usepackage{float}
 %\usepackage{caption}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 
-%----------------------------------------------------------------------------------------
+% \usepackage[round,sort,nonamebreak]{natbib} % citação bibliográfica textual(plainnat-ime.bst)
+% \bibpunct{(}{)}{;}{a}{\hspace{-0.7ex},}{,} % estilo de citação. Veja alguns exemplos em http://merkel.zoneo.net/Latex/natbib.php
+
+\usepackage{amsfonts}
+\usepackage{textcomp}
+
+%-----------------------------------------------------------------------------
+%	colored references
+%-----------------------------------------------------------------------------
+% \usepackage[usenames,svgnames,dvipsnames]{xcolor}
+\usepackage[a4paper,top=2.5cm,bottom=3.0cm,left=2.0cm,right=2.0cm]{geometry}
+% \usepackage[colorlinks=true,citecolor=DarkGreen,linkcolor=NavyBlue,urlcolor=DarkRed,filecolor=Green,bookmarksopen=true]{hyperref}
+% \usepackage[all]{hypcap}      % soluciona o problema com o hyperref
+%-----------------------------------------------------------------------------
 %	Glossaries
-%----------------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------
 
 % Glossaries
 \usepackage[sanitize=none,acronym,toc]{glossaries}
@@ -177,10 +191,10 @@ probabilistic seismic hazard analysis in Brazil}
 \authors{Marlon Pirchiner\altaffilmark{1,2}}
 
 \altaffiltext{1}{Department of Geophysics,
-Institute of Astronomy, Geophysics and Atmospherical Sciences,
-University of São Paulo, São Paulo, Brazil.}
+Institute of Astronomy, Geophysics and Atmospherical Sciences (IAG),
+University of São Paulo (USP), São Paulo, Brazil.}
 
-\altaffiltext{2}{School of Applied Math, Getúlio Vargas Foundation, Rio de Janeiro, Brazil.}
+\altaffiltext{2}{Applied Math School (EMAp), Getúlio Vargas Foundation (FGV), Rio de Janeiro, Brazil.}
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -295,9 +309,7 @@ Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 
 \subsection{Frankel}
 
-A proposta de Arthur \citet{frankel_1995} foi usar uma largura de banda fixa,
-nomeada distância de correlação $d_F$, e aplicar o estimador de Nadaraya-Watson (\ref{sec:nadaraya})
-para suavizar o histograma 2D da sismicidade utilizando uma função de núcleo gaussiana:
+Arthur \citet{frankel_1995} smoothing seismicity proposal consists originally in use a called correlation distance $d_F$ as the kernel \textit{fixed} bandwidth and next to apply the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a gaussian kernel:
 \begin{equation}
 	\ensuremath{
 		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
@@ -305,19 +317,13 @@ para suavizar o histograma 2D da sismicidade utilizando uma função de núcleo 
 	}
 	\label{eq:ni}
 \end{equation}
-onde $\tilde{n}_j$ é a taxa de sismicidade (número de sismos com magnitude $m$ maior que a mínima magnitude
-\gls{sym:Md} do catálogo) suavizada
-na célula $j$, $n_i$ é o número de sismos em cada outra célula $i$ e
-	\gls{sym:dij} é \glsdesc{sym:dij}.
+where $\tilde{n}_j$ is the smoothed seismicity (number of earthquakes with magnitude $m$ above the minimum magnitude \gls{sym:Md} in the catalog) on cell $j$. $n_i$ is the earthquake counting in each other cell $i$ and \gls{sym:dij} is \glsdesc{sym:dij}.
 
 
 
 \subsection{Woo}
 
-Já Gordon \citet{woo_1996} propôs avaliar a contribuição de uma função de núcleo
-de cada sismo $i$ ocorrido em $\boldsymbol{r}_i$
-na célula centrada em $\boldsymbol{r}$ que dependa também de sua
-magnitude $m$:
+Gordon \citet{woo_1996} suggested to evaluate the contribution of each earthquake $i$, far $\boldsymbol{r}_i$ from its kernel, on the cell centered on $\boldsymbol{r}$ in dependence of their magnitude $m$:
 \begin{equation}
 	\ensuremath{
 		\gls{sym:Rrm} = \sum_{i=1}^{N} \frac{ K(\gls{sym:r} - \gls{sym:ri}, m)}
@@ -325,9 +331,29 @@ magnitude $m$:
 	}
 	\label{eq:Rrm}
 \end{equation}
-onde $N$ é o número de tremores $i$ no catálogo
-e $T(\gls{sym:ri})$ é o período em que todo sismo de magnitude acima de $m$ é completamente observado
-em \gls{sym:ri}.
+where $N$ is the number of earthquakes $i$ on the catalogue
+and $T(\gls{sym:ri})$ is the timeframe which all earthquakes with magnitude above $m$ is completely observed on \gls{sym:ri}.
+
+
+Any kernel could be applied on that definition. In practice Woo used a \citet{kagan_knopoff_1980} for a infinity spatial domain:
+\begin{equation}
+	\ensuremath{
+		K_{KJ}(\gls{sym:r}, m \arrowvert \gls{sym:aW}) =  \frac{  \gls{sym:aW}  -1}{\pi\gls{sym:hm}^2}
+							\left[ 1 + \frac{\gls{sym:r}^2}{\gls{sym:hm}^2} \right]^{-\gls{sym:aW}},
+	}
+	\label{eq:k_kj}
+\end{equation}
+where \gls{sym:aW} is, accordingly \citet{verejones_1992}, \glsdesc{sym:aW}.
+
+
+To compute the magnitude-dependent bandwidth function \gls{sym:hm}, Gordon Woo suggested the follow relation
+\begin{equation}
+	\ensuremath{
+		h(m\arrowvert \gls{sym:a0}, \gls{sym:a1}) = \gls{sym:a0}e^{\gls{sym:a1}m},
+	}
+	\label{eq:hm}
+\end{equation}
+where $a_0$ and $a_1$ are computed by the regression of the mean nearest distance $h$ from each magnitude bin $m \pm \mathrm{d}m$.
 
 
 
@@ -372,12 +398,11 @@ onde  \gls{sym:wi} é o \glsdesc{sym:wi} na localização $\boldsymbol{r}$ e no 
 
 
 
-\subsubsection{Bandwidth computation}
+\subsubsection{Local bandwidth computation}
 
-
+The method implemented to compute the space and time bandwidths for each earthquake was the Couppled-Nearest-Neighbour \citep{helmstetter_2012}:
 \begin{equation}
 	\ensuremath{
-%		h_i, d_i = \underset{d_i \ge \gls{sym:dk}, h_i \ge \gls{sym:hk}}{\argmin}
 		h_i, d_i = \argmin_{\substack{h_i \ge \gls{sym:hk} \\
 						              d_i \ge \gls{sym:dk}}
 				           }
@@ -390,14 +415,12 @@ onde  \gls{sym:wi} é o \glsdesc{sym:wi} na localização $\boldsymbol{r}$ e no 
 	}
 	\label{eq:helms_cnn}
 \end{equation}
-onde \gls{sym:k_cnn} é o \glsdesc{sym:k_cnn},
-	 \gls{sym:a_cnn} é o \glsdesc{sym:a_cnn},
-	 \gls{sym:dk} é o \glsdesc{sym:dk} e
-	 \gls{sym:hk} é o \glsdesc{sym:hk}.
+where \gls{sym:k_cnn} is the \glsdesc{sym:k_cnn},
+	 \gls{sym:a_cnn} is a \glsdesc{sym:a_cnn},
+	 \gls{sym:dk} is the \glsdesc{sym:dk} e
+	 \gls{sym:hk} is the \glsdesc{sym:hk}.
 
-As larguras de bandas são escolhidas localmente, podendo ser menor, aumentando a resolução
-onde há maior densidade de informação, ou crescer onde há escassez de informação e menor resolução.
-
+The bandwidths are defined locally. Could be small in high earthquake density regions and higher where earthquakes are rarelly or regions with information lack.
 
 
 
@@ -534,7 +557,7 @@ Vivamus magna enim, aliquet id cursus a, pharetra ut purus. Phasellus suscipit n
 %----------------------------------------------------------------------------------------
 
 \begin{acknowledgments}
-This work was partially supported by a grant from the Spanish Ministry of Science and Technology.
+The author thanks specially to Marcelo Assumpção for the support and critical discussion as well all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vincent Guigues for all helpful discussions.
 \end{acknowledgments}
 
 %----------------------------------------------------------------------------------------
@@ -567,35 +590,41 @@ This work was partially supported by a grant from the Spanish Ministry of Scienc
 
 % AGU does not want a .bib or a .bbl file. Please copy in the contents of your .bbl file here.
 
-\begin{thebibliography}{}
+% ---------------------------------------------------------------------------- %
+% Bibliografia
+\bibliographystyle{BibTeX/agufull08} 	% citação bibliográfica textual
+\bibliography{bib/bibliografia}  		% associado ao arquivo: 
 
-\providecommand{\natexlab}[1]{#1}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
-  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
-  \urlstyle{rm}\Url}\fi
+% \begin{thebibliography}{}
 
-\bibitem[{\textit{Atkinson and Sloan}(1991)}]{AtkinsonSloan}
-Atkinson, K., and I.~Sloan (1991), The numerical solution of first-kind
-  logarithmic-kernel integral equations on smooth open arcs, \textit{Math.
-  Comp.}, \textit{56}(193), 119--139.
+% \providecommand{\natexlab}[1]{#1}
+% \expandafter\ifx\csname urlstyle\endcsname\relax
+%   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+%   \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+%   \urlstyle{rm}\Url}\fi
 
-\bibitem[{\textit{Colton and Kress}(1983)}]{ColtonKress1}
-Colton, D., and R.~Kress (1983), \textit{Integral Equation Methods in
-  Scattering Theory}, John Wiley, New York.
 
-\bibitem[{\textit{Hsiao et~al.}(1991)\textit{Hsiao, Stephan, and
-  Wendland}}]{StephanHsiao}
-Hsiao, G.~C., E.~P. Stephan, and W.~L. Wendland (1991), On the {D}irichlet
-  problem in elasticity for a domain exterior to an arc, \textit{J. Comput.
-  Appl. Math.}, \textit{34}(1), 1--19.
+% \bibitem[{\textit{Atkinson and Sloan}(1991)}]{AtkinsonSloan}
+% Atkinson, K., and I.~Sloan (1991), The numerical solution of first-kind
+%   logarithmic-kernel integral equations on smooth open arcs, \textit{Math.
+%   Comp.}, \textit{56}(193), 119--139.
 
-\bibitem[{\textit{Lu and Ando}(2012)}]{LuAndo}
-Lu, P., and M.~Ando (2012), Difference of scattering geometrical optics
-  components and line integrals of currents in modified edge representation,
-  \textit{Radio Sci.}, \textit{47},  RS3007, \doi{10.1029/2011RS004899}.
+% \bibitem[{\textit{Colton and Kress}(1983)}]{ColtonKress1}
+% Colton, D., and R.~Kress (1983), \textit{Integral Equation Methods in
+%   Scattering Theory}, John Wiley, New York.
 
-\end{thebibliography}
+% \bibitem[{\textit{Hsiao et~al.}(1991)\textit{Hsiao, Stephan, and
+%   Wendland}}]{StephanHsiao}
+% Hsiao, G.~C., E.~P. Stephan, and W.~L. Wendland (1991), On the {D}irichlet
+%   problem in elasticity for a domain exterior to an arc, \textit{J. Comput.
+%   Appl. Math.}, \textit{34}(1), 1--19.
+
+% \bibitem[{\textit{Lu and Ando}(2012)}]{LuAndo}
+% Lu, P., and M.~Ando (2012), Difference of scattering geometrical optics
+%   components and line integrals of currents in modified edge representation,
+%   \textit{Radio Sci.}, \textit{47},  RS3007, \doi{10.1029/2011RS004899}.
+
+% \end{thebibliography}
 
 % Reference citation examples:
 
@@ -668,19 +697,40 @@ Lu, P., and M.~Ando (2012), Difference of scattering geometrical optics
 % =========
 
 \begin{figure}
-	\centering
-	\begin{subfigure}[b]{0.3\textwidth}
-		\includegraphics[width=0.4\textwidth]{placeholder}
-		\caption{caption A}
-		\label{placeholder_a}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.3\textwidth}
-		\includegraphics[width=0.4\textwidth]{placeholder}
-		\caption{caption B}
-		\label{placeholder_b}
-	\end{subfigure}
-	\caption{main caption}
+	\begin{center}
+	\begin{table}[H]
+		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+		\footnotesize(a)
+		& 
+		\footnotesize(b)
+		\\		
+		\includegraphics[width=0.45\textwidth]{placeholder} &
+		\includegraphics[width=0.45\textwidth]{placeholder}
+		\end{tabular}
+	\end{table}
+	\caption{This tabled figure shows the first (a) image and the 2nd one (b). Even with the same bla ba.}
 	\label{placeholder}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\begin{table}[H]
+		\begin{tabular}{ p{0.33\textwidth} 
+						 p{0.33\textwidth} 
+						 p{0.33\textwidth} }
+		\footnotesize(a) &
+		\footnotesize(b) &
+		\footnotesize(c)
+		\\				
+		\includegraphics[width=0.33\textwidth]{z_img_pga_frankel} &
+		\includegraphics[width=0.33\textwidth]{z_img_pga_woo} &
+		\includegraphics[width=0.33\textwidth]{z_img_pga_helmstetter}
+		\end{tabular}
+	\end{table}
+	\caption{This tabled figure shows the first (a) image and the 2nd one (b). Even with the same bla ba.}
+	\label{placeholder2}
+	\end{center}
 \end{figure}
 
 
@@ -822,6 +872,7 @@ Lu, P., and M.~Ando (2012), Difference of scattering geometrical optics
 	\end{tabular}
 	\label{sampletable}
 \end{table}
+
 
 \end{document}
 
