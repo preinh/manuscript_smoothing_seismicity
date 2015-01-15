@@ -267,22 +267,48 @@ Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 
 \subsection{Specifical Purpose}
 
+
+
 %------------------------------------------------
+%
+% seismicity data
+% 
+%------------------------------------------------
+
 \section{Brazilian seismicity data}
 
-The main source of brazilian intraplate seismicity data is current the Brazilian Seismic Bulletin maintained mainly by the Seismological Certer, Institute of Astronomy, Geophysics and Atmospherical Sciences, University of São Paulo \citep{bsb_2014}. This catalog is a compilation from different sources.
+Brazilian intraplate seismicity data is current the Brazilian Seismic Bulletin maintained mainly by the Seismological Certer, Institute of Astronomy, Geophysics and Atmospherical Sciences, University of São Paulo \citep{bsb_2014}. This catalog is a compilation from different sources.
 
 Until 1981, the catalog corresponds to \citet{berrocal_1984} which is a huge compilation effort from historic and instrumental earthquake data with participation of Univesidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON), Universidade Estadual de São Paulo (UNESP) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by University of São Paulo under the same cooperation network. Earlier versions of this catalog was used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs. The number of earthquakes on the catalog 
 
 Today the catalog is distributed in two ways. One could be called \emph{raw} and contains all compiled information even events outside country which effects was felt in Brazil, and other could be called \emph{clean}, since that events with high error and low quality was removed.
 
-This catalog only cover crustal events. Andean deep subduction earthquakes with depht higher than 50km at west was discarded. This deep earthquakes contributions to the ground shaking hope to be consider in the future based on some new comprehensive south-american catalog.
+This catalog only cover crustal events. Andean deep subduction earthquakes with depht higher than 50km at west was discarded. This deep earthquakes contributions to the ground shaking hope to be consider in the future based on some new comprehensive south-american catalog. The epicenters on the catalog is shown on the figure \ref{fig_seismicity}.
 
 Almost magnitude values was computed as $mb$ type or equivalent $mR$ \citep{assumpcao_1983}. Part of them was computed from macroseismic felt area data \citep{berrocal_1984}. Since almost \gls{gmpe} are based on $M_W$ moment scale magnitude, on this present study, a new version of the catalog with $M_W$ values as delivered. \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst almost magnitude values on \citet{bsb_2014} catalog have magnitude values lower than that. On this context the conversion was made folowhing the guidelines on table \ref{tab:guidelines} from an \emph{ad-hoc} communication distributed with the catalog.
 
 
+\subsection{Catalog overview}
+
+Figure \ref{fig_overview} represent some parameters distribution on the catalog. Is easy to note that depth are not well defined into the catalog, and here all earthquakes will considered as in the shallow crust, around 15km.
+From the figures \ref{fig_overview}a and \ref{fig_overview}b, is possible to note the behavior almost uniform on weekday distribution, and a slightly tendence to record earthquakes during the night. This could suggest some influence of daily noise level.
 
 
+\subsection{Declustering procedures}
+
+blsbalba
+
+\subsection{Catalog completeness}
+
+
+blsbalba
+
+
+
+%------------------------------------------------
+%
+% smooothing methods
+% 
 %------------------------------------------------
 \section{Smoothing methods}
 Under this work, three smoothing methods was considered. On this section brief explanation of each one will be done.
@@ -658,6 +684,35 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 % =========
 
 \begin{figure}
+	\includegraphics[width=0.5\linewidth]{z_img_seismicity}
+	\caption{Brazilian seismicity from 1767 to 2014. Source: \citep{bsb_2014}.}
+	\label{fig_seismicity}
+\end{figure}
+
+
+\begin{figure}
+	\begin{center}
+	\begin{table}[H]
+		\begin{tabular}{ p{0.20\textwidth} 
+						 p{0.40\textwidth} 
+						 p{0.40\textwidth} }
+		\footnotesize(a) &
+		\footnotesize(b) &
+		\footnotesize(c)
+		\\				
+		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_depth}  &
+		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_weekday} &
+		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_hour}
+		\end{tabular}
+	\end{table}
+	\caption{Catalogue overview. The histogram (a) shows the depth distribution. The histograms (b) and (c) represent the distributions of weekday and hour which earthquakes occur respectly. Dashed lines represent the mean value.}
+	\label{fig_overview}
+	\end{center}
+\end{figure}
+
+
+
+\begin{figure}
 	\begin{center}
 	\begin{table}[H]
 		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
@@ -694,22 +749,9 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 	\end{center}
 \end{figure}
 
-
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_seismicity_br}
-	\caption{Brazilian earthquake catalog.}
-	\label{fig_seismicity}
-\end{figure}
-
 % =========
 % data
 % =========
-
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_hmtk_bsb2013_rate}
-	\caption{Earthquake records by year}
-	\label{fig_seismic_rate}
-\end{figure}
 
 
 \begin{figure}
@@ -829,7 +871,7 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 		% mb or equival & $$ M_W = 1.21m - 0.76 $$  & 0.3 \\
 		% 		% magnitude from $A_f$  & $$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 8.4\times10^{-4}A_f^{1/2}& 0.4 \\
 		$mb$ or $mR$ 
-		&$ M_W(m) = 1.21 m - 0.76 $  
+		&$ M_W(m) = 1.121 m - 0.76 $  
 		& 0.3 \\
 		Area felt $A_f$ 	
 		&$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 0.00084\sqrt{A_f}$& 0.4 \\
