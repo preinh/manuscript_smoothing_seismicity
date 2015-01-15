@@ -76,8 +76,8 @@
 
 % To activate the commands, uncomment \usepackage{lineno} and \linenumbers*[1]command, below:
 
-\usepackage{lineno}
-\linenumbers*[1]
+% \usepackage{lineno}
+% \linenumbers*[1]
 
 %  To add line numbers to lines with equations:
 %  \begin{linenomath*}
@@ -246,7 +246,7 @@ In the kernel density estimation theory two things there always be handled. The 
 
 Frankel smoothing method applies a gaussian Nadaraya-Watson smoothing method with a \emph{fixed} smoothing-distance bandwidth to estimate seismicity rate. Gordon Woo proposes an \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbour mean distance in magnitude bins. Helmstetter proposes a \emph{local-adaptive} bandwidth, based on kernel estimations on both space and time dimentions, estimation of the background seismicity rate for long-term forecasts. Using one-year forecast and assume time-independence, the same assumption of PSHA, of seismicity rate is possible to use these values on seismic sources characterization.
 
-To perform the hazard calculation, the OpenQuake suite was choosed. The modeller environment used was the HMTK also available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
+To perform the hazard computation, the OpenQuake suite was choosed. The modeller environment used was the HMTK also available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
 
 The earthquake catalog data comes from the Brazilian seismological research authorities.
 
@@ -268,7 +268,20 @@ Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 \subsection{Specifical Purpose}
 
 %------------------------------------------------
-\section{Data}
+\section{Brazilian seismicity data}
+
+The main source of brazilian intraplate seismicity data is current the Brazilian Seismic Bulletin maintained mainly by the Seismological Certer, Institute of Astronomy, Geophysics and Atmospherical Sciences, University of São Paulo \citep{bsb_2014}. This catalog is a compilation from different sources.
+
+Until 1981, the catalog corresponds to \citet{berrocal_1984} which is a huge compilation effort from historic and instrumental earthquake data with participation of Univesidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON), Universidade Estadual de São Paulo (UNESP) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by University of São Paulo under the same cooperation network. Earlier versions of this catalog was used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs. The number of earthquakes on the catalog 
+
+Today the catalog is distributed in two ways. One could be called \emph{raw} and contains all compiled information even events outside country which effects was felt in Brazil, and other could be called \emph{clean}, since that events with high error and low quality was removed.
+
+This catalog only cover crustal events. Andean deep subduction earthquakes with depht higher than 50km at west was discarded. This deep earthquakes contributions to the ground shaking hope to be consider in the future based on some new comprehensive south-american catalog.
+
+Almost magnitude values was computed as $mb$ type or equivalent $mR$ \citep{assumpcao_1983}. Part of them was computed from macroseismic felt area data \citep{berrocal_1984}. Since almost \gls{gmpe} are based on $M_W$ moment scale magnitude, on this present study, a new version of the catalog with $M_W$ values as delivered. \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst almost magnitude values on \citet{bsb_2014} catalog have magnitude values lower than that. On this context the conversion was made folowhing the guidelines on table \ref{tab:guidelines} from an \emph{ad-hoc} communication distributed with the catalog.
+
+
+
 
 %------------------------------------------------
 \section{Smoothing methods}
@@ -808,17 +821,27 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 % TABLES
 
 \begin{table}[H]
-	\caption{Table caption}
+	\caption{BSB 2014.11 $M_W$ proxies \emph{ad-hoc} guidelines.}
 	\begin{tabular}{l l l}
 		\hline
-		\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+		\textbf{magnitude source} & \textbf{rule} & \textbf{uncertainty}\\
 		\hline
-		Treatment 1         & 0.0003262           & 0.562 \\
-		Treatment 2         & 0.0015681           & 0.910 \\
-		Treatment 3         & 0.0009271           & 0.296 \\
+		% mb or equival & $$ M_W = 1.21m - 0.76 $$  & 0.3 \\
+		% 		% magnitude from $A_f$  & $$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 8.4\times10^{-4}A_f^{1/2}& 0.4 \\
+		$mb$ or $mR$ 
+		&$ M_W(m) = 1.21 m - 0.76 $  
+		& 0.3 \\
+		Area felt $A_f$ 	
+		&$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 0.00084\sqrt{A_f}$& 0.4 \\
+		Maximum intensity $I_0$ 	
+		& $mb(I_0) = 1.21 + 0.45 I_0$ then $M_W(m)$
+		& 0.6 \\
+		$mb$ and $A_f$ 	
+		& $M_W(m, A_f) = 0.7 M_W(m) + 0.3 M_W(A_f)$
+		& 0.33 \\
 		\hline
 	\end{tabular}
-	\label{sampletable}
+	\label{tab:guidelines}
 \end{table}
 
 
