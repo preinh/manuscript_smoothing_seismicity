@@ -279,29 +279,64 @@ Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 
 Brazilian intraplate seismicity data is current the Brazilian Seismic Bulletin maintained mainly by the Seismological Certer, Institute of Astronomy, Geophysics and Atmospherical Sciences, University of São Paulo \citep{bsb_2014}. This catalog is a compilation from different sources.
 
+
+
+\subsection{Hypocenters}
+
 Until 1981, the catalog corresponds to \citet{berrocal_1984} which is a huge compilation effort from historic and instrumental earthquake data with participation of Univesidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON), Universidade Estadual de São Paulo (UNESP) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by University of São Paulo under the same cooperation network. Earlier versions of this catalog was used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs. The number of earthquakes on the catalog 
 
 Today the catalog is distributed in two ways. One could be called \emph{raw} and contains all compiled information even events outside country which effects was felt in Brazil, and other could be called \emph{clean}, since that events with high error and low quality was removed.
 
 This catalog only cover crustal events. Andean deep subduction earthquakes with depht higher than 50km at west was discarded. This deep earthquakes contributions to the ground shaking hope to be consider in the future based on some new comprehensive south-american catalog. The epicenters on the catalog is shown on the figure \ref{fig_seismicity}.
 
+
+
+
+\subsection{Magnitudes}
+
 Almost magnitude values was computed as $mb$ type or equivalent $mR$ \citep{assumpcao_1983}. Part of them was computed from macroseismic felt area data \citep{berrocal_1984}. Since almost \gls{gmpe} are based on $M_W$ moment scale magnitude, on this present study, a new version of the catalog with $M_W$ values as delivered. \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst almost magnitude values on \citet{bsb_2014} catalog have magnitude values lower than that. On this context the conversion was made folowhing the guidelines on table \ref{tab:guidelines} from an \emph{ad-hoc} communication distributed with the catalog.
 
 
-\subsection{Catalog overview}
+
+
+\subsection{Catalog check}
 
 Figure \ref{fig_overview} represent some parameters distribution on the catalog. Is easy to note that depth are not well defined into the catalog, and here all earthquakes will considered as in the shallow crust, around 15km.
 From the figures \ref{fig_overview}a and \ref{fig_overview}b, is possible to note the behavior almost uniform on weekday distribution, and a slightly tendence to record earthquakes during the night. This could suggest some influence of daily noise level.
 
+The annual earthquake records since 1900 on the catalog is on the figure \ref{fig_records} where is evident the seismicity increase arround 1986 and 1998 (???) derived by João Câmara [REFERENCE] and BEBEDOURO, SOBRAL?!? activity. Also is possible to note the increasing number of records after 1960 due the operation of global, regional and local stations since that.
+
+
+
 
 \subsection{Declustering procedures}
 
-blsbalba
+To preserve the Poisson assumption about the independece of the events on the catalog, it was submited to some decluster algorithms and the results is shown on the figure \ref{fig_decluster}a.
 
-\subsection{Catalog completeness}
+The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uental \citep{marsan_david_2012}. In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uental distance window.
+
+In the case of this catalog the methods did not presented strong differences at the final results (fig. \ref{fig_decluster}a) and the final choose of Gardner-Knopof/Uhrhammer was based on criteria to maximize the number of events to be analysed.
+
+The map on figure \ref{fig_decluster}b locate all clusters in the catalog. It is an \emph{a-priori} evidence of regions in Brazil where in some time, earthquakes occur sistematically.
 
 
-blsbalba
+
+
+\subsection{Frequency-magnitude distribution}
+
+Figure \ref{fig_occurrence} presents the magnitude and frequency distribution.
+A general $b=1$ fit is also plotted, and the completeness magnitude on the incremental distribution is about 3.0.
+
+
+
+\subsection{Catalogue completeness}
+
+The Brazilian seismicity data completeness has evident time and space dependence. The number of stations and their accuracy increased in the time, and the spatial occupation respects the population density coverage concentrated in the east coast in almost cases with exception only in the central part of the country by the Brasilia Seismic Station (REFERENCE).
+
+The spatial completeness dependence was not considered on this work. History of almost regional stations was not easy available and blocks methodologies, e.g. \citet{mignan_2011} work. 
+
+
+Time dependence was defined by expert criteria and it is shown on the figure
 
 
 
@@ -675,6 +710,51 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 %\tablenotetext{a}{Footnote text here.}
 %\end{table}
 
+
+
+
+% \begin{figure}
+% 	\begin{center}
+% 	\begin{table}[H]
+% 		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+% 		\footnotesize(a)
+% 		& 
+% 		\footnotesize(b)
+% 		\\		
+% 		\includegraphics[width=0.45\textwidth]{placeholder} &
+% 		\includegraphics[width=0.45\textwidth]{placeholder}
+% 		\end{tabular}
+% 	\end{table}
+% 	\caption{This tabled figure shows the first (a) image and the 2nd one (b). Even with the same bla ba.}
+% 	\label{placeholder}
+% 	\end{center}
+% \end{figure}
+
+
+
+% \begin{figure}
+% 	\begin{center}
+% 	\begin{table}[H]
+% 		\begin{tabular}{ p{0.33\textwidth} 
+% 						 p{0.33\textwidth} 
+% 						 p{0.33\textwidth} }
+% 		\footnotesize(a) &
+% 		\footnotesize(b) &
+% 		\footnotesize(c)
+% 		\\				
+% 		\includegraphics[width=0.33\textwidth]{z_img_pga_frankel} &
+% 		\includegraphics[width=0.33\textwidth]{z_img_pga_woo} &
+% 		\includegraphics[width=0.33\textwidth]{z_img_pga_helmstetter}
+% 		\end{tabular}
+% 	\end{table}
+% 	\caption{This tabled figure shows the first (a) image and the 2nd one (b). Even with the same bla ba.}
+% 	\label{placeholder2}
+% 	\end{center}
+% \end{figure}
+
+
+
+
 % See below for how to make sideways figures or tables.
 
 \newpage
@@ -711,78 +791,52 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 \end{figure}
 
 
-
 \begin{figure}
 	\begin{center}
 	\begin{table}[H]
-		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+		\begin{tabular}{ c c }
 		\footnotesize(a)
-		& 
-		\footnotesize(b)
+		& \includegraphics[width=0.45\textwidth]{z_img_hmtk_bsb2014_11_rate}
 		\\		
-		\includegraphics[width=0.45\textwidth]{placeholder} &
-		\includegraphics[width=0.45\textwidth]{placeholder}
+		\footnotesize(b) 
+		& \includegraphics[width=0.40\textwidth]{z_img_time_mag_count_br_1960}
 		\end{tabular}
 	\end{table}
-	\caption{This tabled figure shows the first (a) image and the 2nd one (b). Even with the same bla ba.}
-	\label{placeholder}
+	\caption{Earthquakes by year (a) and discriminated by magnitude (b).}
+	\label{fig_records}
 	\end{center}
 \end{figure}
+
 
 \begin{figure}
 	\begin{center}
 	\begin{table}[H]
-		\begin{tabular}{ p{0.33\textwidth} 
-						 p{0.33\textwidth} 
-						 p{0.33\textwidth} }
-		\footnotesize(a) &
-		\footnotesize(b) &
-		\footnotesize(c)
-		\\				
-		\includegraphics[width=0.33\textwidth]{z_img_pga_frankel} &
-		\includegraphics[width=0.33\textwidth]{z_img_pga_woo} &
-		\includegraphics[width=0.33\textwidth]{z_img_pga_helmstetter}
+		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+		\begin{tabular}{ c c }
+		\footnotesize(a)
+		& \includegraphics[width=0.45\textwidth]{z_img_hmtk_bsb2014_11_decluster}
+		\\		
+		\footnotesize(b) 
+		& \includegraphics[width=0.40\textwidth]{z_img_hmtk_bsb2013_pp_decluster}
 		\end{tabular}
 	\end{table}
-	\caption{This tabled figure shows the first (a) image and the 2nd one (b). Even with the same bla ba.}
-	\label{placeholder2}
+	\caption{Decluster evaluation (a) and the clusters map (b).}
+	\label{fig_decluster}
 	\end{center}
 \end{figure}
 
-% =========
-% data
-% =========
-
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_time_mag_count_br_1960}
-	\caption{Magnitude count by year.}
-	\label{fig_time_mag_count}
-\end{figure}
-
-
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_decluster_br}
-	\caption{Catalog declustering.}
-	\label{fig_decluster}
-\end{figure}
-
-
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_occurrence}
+	\includegraphics[width=1.0\linewidth]{z_img_hmtk_bsb2014_11_completeness}
 	\caption{Annual earthquake recurrence.}
 	\label{fig_occurrence}
 \end{figure}
 
+
 % =========
 % Methods
 % =========
-
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_a_frankel_br}
-	\caption{Smoothed seismicity: Frankel's method.}
-	\label{fig_a_frankel}
-\end{figure}
 
 
 \begin{figure}
@@ -792,11 +846,7 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 \end{figure}
 
 
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_a_woo}
-	\caption{Smoothed seismicity: Woo's method.}
-	\label{fig_a_woo}
-\end{figure}
+
 
 
 \begin{figure}
@@ -805,8 +855,9 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 	\label{fig_helmstetter_hidi}
 \end{figure}
 
-
 % TODO add HI_DI histograms
+
+
 
 \begin{figure}
 	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_stationary_a}
@@ -822,41 +873,79 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 \end{figure}
 
 
+
+% =========
+% Smoothed Rates
+% =========
+
+
+
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_a_helmstetter}
-	\caption{Smoothed seismicity: Helmstetter's method.}
-	\label{fig_a_helmstetter}
+	\begin{center}
+	\begin{table}[H]
+		\begin{tabular}{ p{0.33\textwidth} 
+						 p{0.34\textwidth} 
+						 p{0.33\textwidth} }
+		\footnotesize(a) &
+		\footnotesize(b) &
+		\footnotesize(c)
+		\\				
+		\includegraphics[height=5cm]{z_img_a_frankel_br}  &
+		\includegraphics[height=5cm]{z_img_a_woo} &
+		\includegraphics[height=5cm]{z_img_a_helmstetter}
+		\end{tabular}
+	\end{table}
+	\caption{Smoothed rates comparission: (a) shows \citet{frankel_1995} method smoothed rate results, (b) and (c) represent rates smoothed by \citet{woo_1996} and \citet{helmstetter_2012} methods respectly.}
+	\label{fig_rates}
+	\end{center}
 \end{figure}
+
+
+
 
 % =========
 % Results
 % =========
 
+
+
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_pga_gshap}
-	\caption{GSHAP results: PGA (poe 10\%/50y)}
-	\label{fig_pga_gshap}
+	\begin{center}
+	\begin{table}[H]
+		\begin{tabular}{ p{0.33\textwidth} 
+						 p{0.34\textwidth} 
+						 p{0.33\textwidth} }
+		\footnotesize(a) &
+		\footnotesize(b) &
+		\footnotesize(c)
+		\\				
+		\includegraphics[height=5cm]{z_img_pga_frankel}  &
+		\includegraphics[height=5cm]{z_img_pga_woo} &
+		\includegraphics[height=5cm]{z_img_pga_helmstetter}
+		\end{tabular}
+	\end{table}
+	\caption{PGA (poe 10\%/50y) comparission for (a) \citet{frankel_1995}, (b) \citet{woo_1996} and (c) \citet{helmstetter_2012} methods.}
+	\label{fig_pga}
+	\end{center}
 \end{figure}
 
 
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_pga_frankel}
-	\caption{Frankel's results: PGA (poe 10\%/50y)}
-	\label{fig_pga_frankel}
-\end{figure}
-
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_pga_woo}
-	\caption{Woo's results: PGA (poe 10\%/50y)}
-	\label{fig_pga_woo}
-\end{figure}
-
-
-\begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_pga_helmstetter}
-	\caption{Helmstetter's results: PGA (poe 10\%/50y)}
-	\label{fig_pga_helmstetter}
+	\begin{center}
+	\begin{table}[H]
+		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+		\footnotesize(a)
+		& 
+		\footnotesize(b)
+		\\		
+		\includegraphics[width=0.45\textwidth]{z_img_pga_gshap} &
+		\includegraphics[width=0.45\textwidth]{z_img_pga_helmstetter}
+		\end{tabular}
+	\end{table}
+	\caption{Previous available Brazillian PSHA from (a) GSHAP project and the PSHA proposed by this work (b). }
+	\label{placeholder}
+	\end{center}
 \end{figure}
 
 
