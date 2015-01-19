@@ -179,7 +179,7 @@
 %----------------------------------------------------------------------------------------
 
 \title{Smoothing seismicity techniques applied to
-seismic sources characterization and
+seismic source characterization and
 probabilistic seismic hazard analysis in Brazil}
 
 %----------------------------------------------------------------------------------------
@@ -208,15 +208,15 @@ University of São Paulo (USP), São Paulo, Brazil.}
 
 Intraplate seismicity is a hard problem to solve in tectonics, mainly during the lack of observed seismicity in many areas where seismic hazard assesment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
 
-Three smoothing seismicity techniques are reviewed in order to investigate their results when applied over the Brazilian seismicity and suggesting a seismic hazard assesment.
+Three smoothing seismicity techniques are reviewed and their application tothe Brazilian seismicity and a seismic hazard assesment are discussed.
 
-All this methods are based on a kernel density estimation. The main difference between them is the bandwidth selection process.
+All these smoothing methods are based on a kernel density estimation. The main difference between them is the bandwidth selection process.
 
-Frankel in their method uses a \emph{fixed} bandwidth in space. Woo's method suggest a bandwidth as function of the \emph{magnitude}. Helmstetter and Werner proposes a \emph{local-adaptive} in space and time kernel bandwidths, chosen for each event.
-This last one was proposed initialy to take care of the background seismicity rateon long-term earthquake forecast context and the time-independent assumption about the annual background seismic rate could be used
+The method of \citet{frankel_1995} uses a \emph{fixed} bandwidth in space. \citet{woo_1996} suggests a bandwidth as function of the \emph{magnitude}. \citet{helmstetter_2012} propose a \emph{locally-adaptive} kernel bandwidths in space and time, chosen for each event.
+This last one was proposed initialy to take care of the background seismicity rate in the context of long-term earthquake forecast and the time-independent assumption about the annual background seismic rate could be used
 (not indiscriminately REFERENCE) as a grid of points seismic sources.
 
-As conclusions the results shown that all methods gives defines better some known seismic regions and could be used in the Brazilian seismicity case, all of them, improoving the spatial resolution of the GSHAP model, the last one made on the region.
+The results shown that all methods clearly define some known seismic regions and could be used in the Brazilian seismicity. All methods improve the spatial resolution of the GSHAP model, the only previously available for the region.
 
 The Last two methods was implemented and are available as a free software on the Hazard Modeling Toolkit (HMTK) from GEM Foundation.
 
@@ -234,90 +234,95 @@ All the hazard calculations was performed on OpenQuake open source software.
 
 \section{Introduction}
 
-Brazil have no recent seismic hazard study at national scale despite some important and localized recent studies focused mainly on specific buildings.
-
-The Brazilian seismic hazard building code was made based on GSHAP model which is the well accepted state of art model for the whole region.
-
-A significant number of earthquakes has been recorded in the last years, mainly after the national seismic network (RSBR) operation, and an actualized hazard map whould be computed.
-
-Although the standard Cornell Mcguire zoning methodolgy for the classical hazard seismic assesment, the goal is review a few smoothing seismicity methods based on kernel density estimation. This estimation allow a seismic point sources grid definition. The seismic rate (\emph{a}-value) associated to each source is definided by the smoothed seismicity methods, but the more parameters like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions must to be assigned in other ways.
-
-In the kernel density estimation theory two things there always be handled. The kernel shape and bandwidth. Almost kernels used are gaussian or power-laws in one of their variants. The mainly distinction between methods decribed is the proposed bandwidth selection process.
-
-Frankel smoothing method applies a gaussian Nadaraya-Watson smoothing method with a \emph{fixed} smoothing-distance bandwidth to estimate seismicity rate. Gordon Woo proposes an \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbour mean distance in magnitude bins. Helmstetter proposes a \emph{local-adaptive} bandwidth, based on kernel estimations on both space and time dimentions, estimation of the background seismicity rate for long-term forecasts. Using one-year forecast and assume time-independence, the same assumption of PSHA, of seismicity rate is possible to use these values on seismic sources characterization.
-
-To perform the hazard computation, the OpenQuake suite was choosed. The modeller environment used was the HMTK also available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
-
-The earthquake catalog data comes from the Brazilian seismological research authorities.
-
-The Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and further considerations are discussed.
-
-
 \subsection{Intraplate Seismicity}
 
 Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 
 \subsection{Previous Brazilian Studies}
 
-Onononono on on ono on on on on ononon on on on on on ono non on ono on on
+Despite some studies of seismicity rates and attempts at defining the main seismic zones \citep{berrocal_1984}, 2000, Assumpção in \citep{talwani_2014} (REFERENCE), Brazil has no seismic hazard map at national scale.
+
+The Brazilian seismic hazard building code (REFERENCE) [ABNT] was based on the GSHAP results for South America, which is the last published model for the whole region. Howerver, some significant seismic areas (Porto dos Gaúchos [REFERENCIA]), are not represented in the GPSHAP-based building codes.
+
+A significant number of earthquakes has been recorded in the last decades allowing a better definition of seismic zones. For this reason an updated hazard map is needed.
+
 
 \subsection{Previous Smoothing Seismicity (Frankel, Woo, Helmstetter\ldots)}
 
-Onononono on on ono on on on on ononon on on on on on ono non on ono on on
+Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology could be used to assess seismic hazard using expert pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on kernel density estimation which results in a grid of smoothed seismicity.
+
+This kernel density estimation or the smoothed seismicity grid allow to define a grid of seismic point sources. The seismic rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods, but the other parameters, like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions, must be assigned in other ways.
+
+In the kernel density estimation both its shape and its bandwidth need to be defined. Most kernels are gaussian or power-laws in one of their variants. The main distinction between the methods described here is the bandwidth selection process.
+
+\citet{frankel_1995} smoothing method applies a gaussian \citet{nadaraya_1964}-\citet{watson_1964} smoothing technique with a \emph{fixed} smoothing-distance bandwidth to estimate the seismicity rate. \citet{woo_1996} proposes a \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbour mean distance in magnitude bins. \citet{helmstetter_2012} proposes a \emph{locally-adaptive} bandwidth, based on kernel estimations for the background seismicity rate in long-term forecasts on both space and time dimensions.
+
+Using one-year forecast and assuming time-independence of the seismicity rate, the same assumption of PSHA, it is possible to use these seismicity values on seismic sources characterization. (REVER E COMENTAR)
+
+
+
+\subsection{Hazard computation}
+
+To perform the hazard computation, the OpenQuake suite was chosen. The modelling tool was the HMTK also available by GEM scientifical board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
+
+The earthquake catalog data comes from the Brazilian seismological research authorities.
+
+The Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and further considerations are discussed.
+
 
 \subsection{Specifical Purpose}
+
 
 
 
 %------------------------------------------------
 %
 % seismicity data
-% 
+%
 %------------------------------------------------
 
 \section{Brazilian seismicity data}
 
-Brazilian intraplate seismicity data is current the Brazilian Seismic Bulletin maintained mainly by the Seismological Certer, Institute of Astronomy, Geophysics and Atmospherical Sciences, University of São Paulo \citep{bsb_2014}. This catalog is a compilation from different sources.
-
+Data on intraplate seismicity in Brazil is currently the Brazilian Seismic Bulletin maintained mainly by the Seismological Center of the University of São Paulo \citep{bsb_2014}. This catalog is a joint compilation from different sources.
 
 
 \subsection{Hypocenters}
 
-Until 1981, the catalog corresponds to \citet{berrocal_1984} which is a huge compilation effort from historic and instrumental earthquake data with participation of Univesidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON), Universidade Estadual de São Paulo (UNESP) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by University of São Paulo under the same cooperation network. Earlier versions of this catalog was used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs. The number of earthquakes on the catalog 
+For events up to 1981, the catalog corresponds to \citet{berrocal_1984} which is a comprehensive compilation of historic and instrumental data with participation of Universidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from the annual bulletins published by Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by University of São Paulo under the same cooperation network in addition to Universidade Estadual Paulista (UNESP). Earlier versions of this catalog were used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs.
 
-Today the catalog is distributed in two ways. One could be called \emph{raw} and contains all compiled information even events outside country which effects was felt in Brazil, and other could be called \emph{clean}, since that events with high error and low quality was removed.
+Today the catalog is distributed in two ways. One, which could be called \emph{raw}, contains all compiled information, such as: events outside the country which were felt in Brazil, errors in previous versions and also non-seismic events (known quarry blasts, sonic boom, etc). The other way could be called \emph{clean}, where all non-seismic and low quality events were removed. This last one was used in this paper and the total number of entries is [CALCULAR O NUMERO DE EVENTOS NO CATALOGO].
 
-This catalog only cover crustal events. Andean deep subduction earthquakes with depht higher than 50km at west was discarded. This deep earthquakes contributions to the ground shaking hope to be consider in the future based on some new comprehensive south-american catalog. The epicenters on the catalog is shown on the figure \ref{fig_seismicity}.
-
+This catalog only cover crustal events. Andean subduction earthquakes deeper than 50km in the Brazil-Peru border was discarded. The epicenters of the catalog are shown in figure \ref{fig_seismicity}.
 
 
 
 \subsection{Magnitudes}
 
-Almost magnitude values was computed as $mb$ type or equivalent $mR$ \citep{assumpcao_1983}. Part of them was computed from macroseismic felt area data \citep{berrocal_1984}. Since almost \gls{gmpe} are based on $M_W$ moment scale magnitude, on this present study, a new version of the catalog with $M_W$ values as delivered. \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst almost magnitude values on \citet{bsb_2014} catalog have magnitude values lower than that. On this context the conversion was made folowhing the guidelines on table \ref{tab:guidelines} from an \emph{ad-hoc} communication distributed with the catalog.
-
+Most magnitudes were computed as $mb$ type or the equivalent $mR$ \citep{assumpcao_1983} regional magnitude. For historical events magnitudes were estimated from macroseismic data (felt area and maximum intensity) \citep{berrocal_1984}. Since most \gls{gmpe} are based on $M_W$ moment scale magnitude, in this present study, we converted all $mb$ magnitudes to $M_W$ values following the guidelines on table \ref{tab:guidelines}. REFERENCIA PARA STEPHANE/ASSUMPCAO WORK IN PROGRESS.. (Johnston)
+% Other proxies for intraplate regions like \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst almost magnitude values on \citet{bsb_2014} catalog have magnitude values lower than that.
 
 
 
 \subsection{Catalog check}
 
-Figure \ref{fig_overview} represent some parameters distribution on the catalog. Is easy to note that depth are not well defined into the catalog, and here all earthquakes will considered as in the shallow crust, around 15km.
-From the figures \ref{fig_overview}a and \ref{fig_overview}b, is possible to note the behavior almost uniform on weekday distribution, and a slightly tendence to record earthquakes during the night. This could suggest some influence of daily noise level.
+Figure \ref{fig_overview} shows the distribution of depths, day of the week and origin hour. Most events have no depth determination and the well determined depths (from pP or local networks) are mostly less than 10km.
 
-The annual earthquake records since 1900 on the catalog is on the figure \ref{fig_records} where is evident the seismicity increase arround 1986 and 1998 (???) derived by João Câmara [REFERENCE] and BEBEDOURO, SOBRAL?!? activity. Also is possible to note the increasing number of records after 1960 due the operation of global, regional and local stations since that.
+From the figures \ref{fig_overview}b and \ref{fig_overview}c show an almost uniform distribution of day of the week, and a slightly trend to record earthquakes during the night. This could suggest some influence of daily noise level.
+
+The annual number of earthquakes since 1900 (figure \ref{fig_records}) shows a steady increase since 1960 and two peaks in 1986 and 1998 derived from two large seismic sequences: João Câmara [REFERENCE, TAKEYA et al 1989] and Porto dos Gaúchos [REFERENCE, BARROS 2009]. The increasing number of records after 1960 is due to the operation of global, regional and local stations.
 
 
 
 
 \subsection{Declustering procedures}
 
-To preserve the Poisson assumption about the independece of the events on the catalog, it was submited to some decluster algorithms and the results is shown on the figure \ref{fig_decluster}a.
+To preserve the Poisson assumption about the independence of the events several declustering algorithms were tried and the results as shown in figure \ref{fig_decluster}a. The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uental \citep{marsan_david_2012}
+(REVER REFERENCIA DO PROPRIO gruental ou CORRIGIN POIS NAO EH MARSAN DAVID mas Thomas van Stiphout, Jiancang Zhuang, and David Marsan].
+In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uental distance window.
 
-The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uental \citep{marsan_david_2012}. In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uental distance window.
+In the case of Brazilian catalog the methods did not present large differences at the final number of earthquakes (fig. \ref{fig_decluster}a) and the Gardner-Knopof/Uhrhammer combination was chosen to maximize the number of events.
 
-In the case of this catalog the methods did not presented strong differences at the final results (fig. \ref{fig_decluster}a) and the final choose of Gardner-Knopof/Uhrhammer was based on criteria to maximize the number of events to be analysed.
-
-The map on figure \ref{fig_decluster}b locate all clusters in the catalog. It is an \emph{a-priori} evidence of regions in Brazil where in some time, earthquakes occur sistematically.
+The map of figure \ref{fig_decluster}b locates all clusters in the catalog. It is an \emph{a-priori} evidence of regions in Brazil where long earthquake series tend to occur more frequently.
 
 
 
@@ -329,28 +334,36 @@ A general $b=1$ fit is also plotted, and the completeness magnitude on the incre
 
 
 
-\subsection{Catalogue completeness}
+\subsection{Catalog completeness}
 
-The Brazilian seismicity data completeness has evident time and space dependence. The number of stations and their accuracy increased in the time, and the spatial occupation respects the population density coverage concentrated in the east coast in almost cases with exception only in the central part of the country by the Brasilia Seismic Station (REFERENCE).
+The completeness of Brazilian seismicity data has evident time and space dependence.
 
-The spatial completeness dependence was not considered on this work. History of almost regional stations was not easy available and blocks methodologies, e.g. \citet{mignan_2011} work. 
+The number and quality of stations increased over time. The population density, previously concentrated along the coast increased in other regions.
+
+% and the spatial occupation respects the population density coverage concentrated in the east coast in most cases with exception only in the central part of the country by the Brasilia Seismic Station (REFERENCE).
+
+The histories of most regional stations are not easy available which hinders application of methodologies, such as \citet{mignan_2011}. For this reason, spatial completeness was not considered and temporal completeness parameters for the whole country was defined by expert criteria (figure FIGURA COMPLETENESS )
 
 
-Time dependence was defined by expert criteria and it is shown on the figure
 
+- completeza é problema temporal mas nesse caso tambem espacial nao negligenciavel
+- se conhecia metodos para lidar com completeza espacial
+- também se conhece o método multiescala (provavel bom solucionador)
+- método de Stepp
+- mas usa-se uma completeness temporal simples.
 
 
 %------------------------------------------------
 %
 % smooothing methods
-% 
+%
 %------------------------------------------------
 \section{Smoothing methods}
-Under this work, three smoothing methods was considered. On this section brief explanation of each one will be done.
+Three smoothing methods are now briefly explained.
 
-\subsection{Frankel}
+\subsection{Frankel: fixed bandwidth}
 
-Arthur \citet{frankel_1995} smoothing seismicity proposal consists originally in use a called correlation distance $d_F$ as the kernel \textit{fixed} bandwidth and next to apply the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a gaussian kernel:
+Arthur \citet{frankel_1995} smoothing seismicity proposal consisted originally in using a "correlation distance" $d_F$ as the \textit{fixed} kernel bandwidth and applying the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a gaussian kernel:
 \begin{equation}
 	\ensuremath{
 		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
@@ -362,9 +375,9 @@ where $\tilde{n}_j$ is the smoothed seismicity (number of earthquakes with magni
 
 
 
-\subsection{Woo}
+\subsection{Woo: magnitude-dependent bandwidth}
 
-Gordon \citet{woo_1996} suggested to evaluate the contribution of each earthquake $i$, far $\boldsymbol{r}_i$ from its kernel, on the cell centered on $\boldsymbol{r}$ in dependence of their magnitude $m$:
+\citet{woo_1996} suggested to evaluate the contribution of each earthquake $i$, located at $\boldsymbol{r}_i$, to the seismicity rate $R$ (number of earthquakes per year and unity area) on the cell centered in $\boldsymbol{r}$, depending on the magnitude $m$:
 \begin{equation}
 	\ensuremath{
 		\gls{sym:Rrm} = \sum_{i=1}^{N} \frac{ K(\gls{sym:r} - \gls{sym:ri}, m)}
@@ -372,11 +385,11 @@ Gordon \citet{woo_1996} suggested to evaluate the contribution of each earthquak
 	}
 	\label{eq:Rrm}
 \end{equation}
-where $N$ is the number of earthquakes $i$ on the catalog
-and $T(\gls{sym:ri})$ is the timeframe which all earthquakes with magnitude above $m$ is completely observed on \gls{sym:ri}.
+where $N$ is the number of earthquakes $i$ in the magnitude bin $m \pm \mathrm{d}m$,
+and $T(\gls{sym:ri})$ is the completess time of magnitude $m$ observed on \gls{sym:ri}.
 
 
-Any kernel could be applied on that definition. In practice Woo used a \citet{kagan_knopoff_1980} for a infinity spatial domain:
+Any kernel could be applied on that definition. I used used the \citet{kagan_knopoff_1980} kernel for infinite spatial domain as described by \citet{woo_1996}:
 \begin{equation}
 	\ensuremath{
 		K_{KK}(\gls{sym:r}, m \arrowvert \gls{sym:aW}) =  \frac{  \gls{sym:aW}  -1}{\pi\gls{sym:hm}^2}
@@ -384,21 +397,26 @@ Any kernel could be applied on that definition. In practice Woo used a \citet{ka
 	}
 	\label{eq:k_kj}
 \end{equation}
-where \gls{sym:aW} is, accordingly \citet{verejones_1992}, \glsdesc{sym:aW}.
+where \gls{sym:aW} is \glsdesc{sym:aW} \citep{verejones_1992}.
 
 
-To compute the magnitude-dependent bandwidth function \gls{sym:hm}, Gordon Woo suggested the follow relation
+VERIFICAR SE É O CASO DE APRESENTAR OUTRAS FORMAS DE KERNEL. DAR PREFERENCIAS AOS REALMENTE UTILIZADOS.
+
+
+To compute the magnitude-dependent bandwidth function \gls{sym:hm}, \citet{woo_1996} suggested the follow relation
 \begin{equation}
 	\ensuremath{
 		h(m\arrowvert \gls{sym:a0}, \gls{sym:a1}) = \gls{sym:a0}e^{\gls{sym:a1}m},
 	}
 	\label{eq:hm}
 \end{equation}
-where $a_0$ and $a_1$ are computed by the regression of the mean nearest distance $h$ from each magnitude bin $m \pm \mathrm{d}m$.
+where $a_0$ and $a_1$ are computed by the regression of the mean nearest distance $h$ from each magnitude bin $m \pm \mathrm{d}m$, as illustrated on figure \ref{fig_woo_bandwidth}.
+
+Just to compare, in figure \ref{fig_woo_bandwidth} it is shown the functions computed by \citet{beauval_2003} for Norway and Spain. The angular coeficient ($a_1$) is in the same range of the others but the general mean distance between events into the same magnitude bin is higher than other countries. It is in some way expected. Brazil is quite large than mentioned countries.
 
 
 
-\subsection{Helmstetter and Werner}
+\subsection{Helmstetter and Werner: locally-adaptive space and time bandwidths}
 
 
 Even work on a forecast perspective, the background seismicity rate for a long-term time-independent forecast could be used to charachterize a diffused seismicity under the common assumption that this background seismic rate is invariant over time.
@@ -462,7 +480,7 @@ The bandwidths are defined locally. Could be small in high earthquake density re
 
 
 \subsubsection{Stationary seismic rate}
-After compute the model parameters and completely define it, the time-independent or stationary seismic rate $\bar{R}$ on each location $\boldsymbol{r}_0$ have to be computed. 
+After compute the model parameters and completely define it, the time-independent or stationary seismic rate $\bar{R}$ on each location $\boldsymbol{r}_0$ have to be computed.
 The way to do it proposed by \citet{helmstetter_2012} was to get the median
 on $\boldsymbol{r}_0$ over all considered time window:
 \begin{equation}
@@ -613,9 +631,9 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 % AGU does not want a .bib or a .bbl file. Please copy in the contents of your .bbl file here.
 
 % ---------------------------------------------------------------------------- % Bibliografy
-% ---------------------------------------------------------------------------- 
+% ----------------------------------------------------------------------------
 \bibliographystyle{BibTeX/agufull08} 	% citação bibliográfica textual
-\bibliography{bib/bibliografia}  		% associado ao arquivo: 
+\bibliography{bib/bibliografia}  		% associado ao arquivo:
 
 % \begin{thebibliography}{}
 
@@ -718,9 +736,9 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 % 	\begin{table}[H]
 % 		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
 % 		\footnotesize(a)
-% 		& 
+% 		&
 % 		\footnotesize(b)
-% 		\\		
+% 		\\
 % 		\includegraphics[width=0.45\textwidth]{placeholder} &
 % 		\includegraphics[width=0.45\textwidth]{placeholder}
 % 		\end{tabular}
@@ -735,13 +753,13 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 % \begin{figure}
 % 	\begin{center}
 % 	\begin{table}[H]
-% 		\begin{tabular}{ p{0.33\textwidth} 
-% 						 p{0.33\textwidth} 
+% 		\begin{tabular}{ p{0.33\textwidth}
+% 						 p{0.33\textwidth}
 % 						 p{0.33\textwidth} }
 % 		\footnotesize(a) &
 % 		\footnotesize(b) &
 % 		\footnotesize(c)
-% 		\\				
+% 		\\
 % 		\includegraphics[width=0.33\textwidth]{z_img_pga_frankel} &
 % 		\includegraphics[width=0.33\textwidth]{z_img_pga_woo} &
 % 		\includegraphics[width=0.33\textwidth]{z_img_pga_helmstetter}
@@ -773,13 +791,13 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 \begin{figure}
 	\begin{center}
 	\begin{table}[H]
-		\begin{tabular}{ p{0.20\textwidth} 
-						 p{0.40\textwidth} 
+		\begin{tabular}{ p{0.20\textwidth}
+						 p{0.40\textwidth}
 						 p{0.40\textwidth} }
 		\footnotesize(a) &
 		\footnotesize(b) &
 		\footnotesize(c)
-		\\				
+		\\
 		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_depth}  &
 		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_weekday} &
 		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_hour}
@@ -798,8 +816,8 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 		\begin{tabular}{ c c }
 		\footnotesize(a)
 		& \includegraphics[width=0.45\textwidth]{z_img_hmtk_bsb2014_11_rate}
-		\\		
-		\footnotesize(b) 
+		\\
+		\footnotesize(b)
 		& \includegraphics[width=0.40\textwidth]{z_img_time_mag_count_br_1960}
 		\end{tabular}
 	\end{table}
@@ -816,8 +834,8 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 		\begin{tabular}{ c c }
 		\footnotesize(a)
 		& \includegraphics[width=0.45\textwidth]{z_img_hmtk_bsb2014_11_decluster}
-		\\		
-		\footnotesize(b) 
+		\\
+		\footnotesize(b)
 		& \includegraphics[width=0.40\textwidth]{z_img_hmtk_bsb2013_pp_decluster}
 		\end{tabular}
 	\end{table}
@@ -883,13 +901,13 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 \begin{figure}
 	\begin{center}
 	\begin{table}[H]
-		\begin{tabular}{ p{0.33\textwidth} 
-						 p{0.34\textwidth} 
+		\begin{tabular}{ p{0.33\textwidth}
+						 p{0.34\textwidth}
 						 p{0.33\textwidth} }
 		\footnotesize(a) &
 		\footnotesize(b) &
 		\footnotesize(c)
-		\\				
+		\\
 		\includegraphics[height=5cm]{z_img_a_frankel_br}  &
 		\includegraphics[height=5cm]{z_img_a_woo} &
 		\includegraphics[height=5cm]{z_img_a_helmstetter}
@@ -912,13 +930,13 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 \begin{figure}
 	\begin{center}
 	\begin{table}[H]
-		\begin{tabular}{ p{0.33\textwidth} 
-						 p{0.34\textwidth} 
+		\begin{tabular}{ p{0.33\textwidth}
+						 p{0.34\textwidth}
 						 p{0.33\textwidth} }
 		\footnotesize(a) &
 		\footnotesize(b) &
 		\footnotesize(c)
-		\\				
+		\\
 		\includegraphics[height=5cm]{z_img_pga_frankel}  &
 		\includegraphics[height=5cm]{z_img_pga_woo} &
 		\includegraphics[height=5cm]{z_img_pga_helmstetter}
@@ -936,9 +954,9 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 	\begin{table}[H]
 		\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
 		\footnotesize(a)
-		& 
+		&
 		\footnotesize(b)
-		\\		
+		\\
 		\includegraphics[width=0.45\textwidth]{z_img_pga_gshap} &
 		\includegraphics[width=0.45\textwidth]{z_img_pga_helmstetter}
 		\end{tabular}
@@ -959,15 +977,15 @@ The author thanks specially to Marcelo Assumpção for the support and critical 
 		\hline
 		% mb or equival & $$ M_W = 1.21m - 0.76 $$  & 0.3 \\
 		% 		% magnitude from $A_f$  & $$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 8.4\times10^{-4}A_f^{1/2}& 0.4 \\
-		$mb$ or $mR$ 
-		&$ M_W(m) = 1.121 m - 0.76 $  
+		$mb$ or $mR$
+		&$ M_W(m) = 1.121 m - 0.76 $
 		& 0.3 \\
-		Area felt $A_f$ 	
+		Area felt $A_f$
 		&$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 0.00084\sqrt{A_f}$& 0.4 \\
-		Maximum intensity $I_0$ 	
+		Maximum intensity $I_0$
 		& $mb(I_0) = 1.21 + 0.45 I_0$ then $M_W(m)$
 		& 0.6 \\
-		$mb$ and $A_f$ 	
+		$mb$ and $A_f$
 		& $M_W(m, A_f) = 0.7 M_W(m) + 0.3 M_W(A_f)$
 		& 0.33 \\
 		\hline
