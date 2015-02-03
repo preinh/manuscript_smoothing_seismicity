@@ -157,7 +157,7 @@
 %----------------------------------------------------------------------------------------
 
 % Author names in capital letters:
-\authorrunninghead{PIRCHINER M.}
+\authorrunninghead{PIRCHINER M. and ASSUMP\c{C}\~AO M.}
 
 %------------------------------------------------
 
@@ -208,11 +208,12 @@ University of São Paulo (USP), São Paulo, Brazil.}
 
 Intraplate seismicity is a hard problem to solve in tectonics, mainly during the lack of observed seismicity in many areas where seismic hazard assesment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
 
-Three smoothing seismicity techniques are reviewed and their application tothe Brazilian seismicity and a seismic hazard assesment are discussed.
+Three smoothing seismicity techniques are reviewed and their application to the Brazilian seismicity and a seismic hazard assesment are discussed.
 
-All these smoothing methods are based on a kernel density estimation. The main difference between them is the bandwidth selection process.
+All these smoothing methods are based on a \gls{kde}. The main difference between them is the bandwidth selection process.
 
 The method of \citet{frankel_1995} uses a \emph{fixed} bandwidth in space. \citet{woo_1996} suggests a bandwidth as function of the \emph{magnitude}. \citet{helmstetter_2012} propose a \emph{locally-adaptive} kernel bandwidths in space and time, chosen for each event.
+
 This last one was proposed initialy to take care of the background seismicity rate in the context of long-term earthquake forecast and the time-independent assumption about the annual background seismic rate could be used
 (not indiscriminately REFERENCE) as a grid of points seismic sources.
 
@@ -242,18 +243,18 @@ Onononono on on ono on on on on ononon on on on on on ono non on ono on on
 
 Despite some studies of seismicity rates and attempts at defining the main seismic zones \citep{berrocal_1984}, 2000, Assumpção in \citep{talwani_2014} (REFERENCE), Brazil has no seismic hazard map at national scale.
 
-The Brazilian seismic hazard building code (REFERENCE) [ABNT] was based on the GSHAP results for South America, which is the last published model for the whole region. Howerver, some significant seismic areas (Porto dos Gaúchos [REFERENCIA]), are not represented in the GPSHAP-based building codes.
+The Brazilian seismic hazard building code \citep{nbr_15421_2006} was based on the GSHAP \citep{giardini_1999} results for South America \citep{shedlock_tanner_1999}, which is the last published model for the whole region. Howerver, some significant seismic areas (Porto dos Gaúchos \citep{barros_2009}), are not represented in the GPSHAP-based building codes.
 
-A significant number of earthquakes has been recorded in the last decades allowing a better definition of seismic zones. For this reason an updated hazard map is needed.
+A significant number of earthquakes has been recorded in the last decades \citep{bsb_2014} allowing a better definition of seismic zones. For this reason an updated hazard map is needed.
 
 
 \subsection{Previous Smoothing Seismicity (Frankel, Woo, Helmstetter\ldots)}
 
-Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology could be used to assess seismic hazard using expert pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on kernel density estimation which results in a grid of smoothed seismicity.
+Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology could be used to assess seismic hazard using expert pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on \gls{kde} which results in a grid of smoothed seismicity without define any seismic zone polygon.
 
-This kernel density estimation or the smoothed seismicity grid allow to define a grid of seismic point sources. The seismic rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods, but the other parameters, like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions, must be assigned in other ways.
+The seismicity \gls{kde} or the smoothed seismicity grid allow to define a grid of seismic point sources. The seismic rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods, but the other parameters, like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions, must be assigned in other ways.
 
-In the kernel density estimation both its shape and its bandwidth need to be defined. Most kernels are gaussian or power-laws in one of their variants. The main distinction between the methods described here is the bandwidth selection process.
+To perform the \gls{kde}, both its shape and bandwidth needs to be defined. Most kernels are gaussian or power-laws or one of their variants. The main distinction between the methods described here is the bandwidth selection process.
 
 \citet{frankel_1995} smoothing method applies a gaussian \citet{nadaraya_1964}-\citet{watson_1964} smoothing technique with a \emph{fixed} smoothing-distance bandwidth to estimate the seismicity rate. \citet{woo_1996} proposes a \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbour mean distance in magnitude bins. \citet{helmstetter_2012} proposes a \emph{locally-adaptive} bandwidth, based on kernel estimations for the background seismicity rate in long-term forecasts on both space and time dimensions.
 
@@ -288,7 +289,7 @@ Data on intraplate seismicity in Brazil is currently the Brazilian Seismic Bulle
 
 \subsection{Hypocenters}
 
-For events up to 1981, the catalog corresponds to \citet{berrocal_1984} which is a comprehensive compilation of historic and instrumental data with participation of Universidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from the annual bulletins published by Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by University of São Paulo under the same cooperation network in addition to Universidade Estadual Paulista (UNESP). Earlier versions of this catalog were used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs.
+For events up to 1981, the catalog corresponds to \citet{berrocal_1984} which is a comprehensive compilation of historic and instrumental data with participation of Universidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from the annual bulletins published by Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by USP under the same cooperation network in addition to Universidade Estadual Paulista (UNESP). Earlier versions of this catalog were used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs.
 
 Today the catalog is distributed in two ways. One, which could be called \emph{raw}, contains all compiled information, such as: events outside the country which were felt in Brazil, errors in previous versions and also non-seismic events (known quarry blasts, sonic boom, etc). The other way could be called \emph{clean}, where all non-seismic and low quality events were removed. This last one was used in this paper and the total number of entries is [CALCULAR O NUMERO DE EVENTOS NO CATALOGO].
 
@@ -298,27 +299,25 @@ This catalog only cover crustal events. Andean subduction earthquakes deeper tha
 
 \subsection{Magnitudes}
 
-Most magnitudes were computed as $mb$ type or the equivalent $mR$ \citep{assumpcao_1983} regional magnitude. For historical events magnitudes were estimated from macroseismic data (felt area and maximum intensity) \citep{berrocal_1984}. Since most \gls{gmpe} are based on $M_W$ moment scale magnitude, in this present study, we converted all $mb$ magnitudes to $M_W$ values following the guidelines on table \ref{tab:guidelines}. REFERENCIA PARA STEPHANE/ASSUMPCAO WORK IN PROGRESS.. (Johnston)
+Most magnitudes were computed as $mb$ type or the equivalent $mR$ \citep{assumpcao_1983} regional magnitude. For historical events magnitudes were estimated from macroseismic data (felt area and maximum intensity) \citep{berrocal_1984}. Since most \gls{gmpe} are based on $M_W$ moment scale magnitude, in this present study, we converted all $mb$ magnitudes to $M_W$ values following the guidelines on table \ref{tab:guidelines}. REFERENCIA PARA STEPHANE/ASSUMPCAO WORK IN PROGRESS. (Johnston)
 % Other proxies for intraplate regions like \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst almost magnitude values on \citet{bsb_2014} catalog have magnitude values lower than that.
 
 
 
-\subsection{Catalog check}
+\subsection{Catalog checking}
 
-Figure \ref{fig_overview} shows the distribution of depths, day of the week and origin hour. Most events have no depth determination and the well determined depths (from pP or local networks) are mostly less than 10km.
+Figure \ref{fig_overview} shows the distribution of depths, day of the week and origin hour. Most events have no depth determination and the well determined depths (from $pP$ phases or local networks) are mostly less than 10km.
 
-From the figures \ref{fig_overview}b and \ref{fig_overview}c show an almost uniform distribution of day of the week, and a slightly trend to record earthquakes during the night. This could suggest some influence of daily noise level.
+Figures \ref{fig_overview}b and \ref{fig_overview}c show an almost uniform distribution of day of the week, and a slightly trend to record earthquakes during the night. This could suggest some influence of daily noise level.
 
-The annual number of earthquakes since 1900 (figure \ref{fig_records}) shows a steady increase since 1960 and two peaks in 1986 and 1998 derived from two large seismic sequences: João Câmara [REFERENCE, TAKEYA et al 1989] and Porto dos Gaúchos [REFERENCE, BARROS 2009]. The increasing number of records after 1960 is due to the operation of global, regional and local stations.
-
+The annual number of earthquakes since 1900 (figure \ref{fig_records}) shows a steady increase since 1960 and two peaks in 1986 and 1998 derived from two large seismic sequences: João Câmara \citep{takeya_1989} and Porto dos Gaúchos \citep{barros_2009}. The increasing number of records after 1960 is due to the operation of global, regional and local stations.
 
 
 
 \subsection{Declustering procedures}
 
-To preserve the Poisson assumption about the independence of the events several declustering algorithms were tried and the results as shown in figure \ref{fig_decluster}a. The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uental \citep{marsan_david_2012}
-(REVER REFERENCIA DO PROPRIO gruental ou CORRIGIN POIS NAO EH MARSAN DAVID mas Thomas van Stiphout, Jiancang Zhuang, and David Marsan].
-In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uental distance window.
+To preserve the Poissonian assumption about the independence of the events, several declustering algorithms were tried and the results as shown in figure \ref{fig_decluster}a. The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uenthal \citep{van_stiphout_2012}.
+In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uenthal distance window.
 
 In the case of Brazilian catalog the methods did not present large differences at the final number of earthquakes (fig. \ref{fig_decluster}a) and the Gardner-Knopof/Uhrhammer combination was chosen to maximize the number of events.
 
@@ -326,10 +325,9 @@ The map of figure \ref{fig_decluster}b locates all clusters in the catalog. It i
 
 
 
-
 \subsection{Frequency-magnitude distribution}
 
-Figure \ref{fig_occurrence} presents the magnitude and frequency distribution.
+Figure \ref{fig_occurrence} presents the catalog \gls{mfd}.
 A general $b=1$ fit is also plotted, and the completeness magnitude on the incremental distribution is about 3.0.
 
 
@@ -345,12 +343,13 @@ The number and quality of stations increased over time. The population density, 
 The histories of most regional stations are not easy available which hinders application of methodologies, such as \citet{mignan_2011}. For this reason, spatial completeness was not considered and temporal completeness parameters for the whole country was defined by expert criteria (figure FIGURA COMPLETENESS )
 
 
-
-- completeza é problema temporal mas nesse caso tambem espacial nao negligenciavel
-- se conhecia metodos para lidar com completeza espacial
-- também se conhece o método multiescala (provavel bom solucionador)
-- método de Stepp
-- mas usa-se uma completeness temporal simples.
+\begin{itemize}
+	\item completeza é problema temporal mas nesse caso tambem espacial nao negligenciavel
+	\item se conhecia metodos para lidar com completeza espacial
+	\item também se conhece o método multiescala (provavel bom solucionador)
+	\item conhece-se o método de Stepp
+	\item mas usa-se uma completeness temporal simples
+\end{itemize}
 
 
 %------------------------------------------------
@@ -363,7 +362,7 @@ Three smoothing methods are now briefly explained.
 
 \subsection{Frankel: fixed bandwidth}
 
-Arthur \citet{frankel_1995} smoothing seismicity proposal consisted originally in using a "correlation distance" $d_F$ as the \textit{fixed} kernel bandwidth and applying the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a gaussian kernel:
+\citet{frankel_1995} smoothing seismicity proposal consisted originally in using a "correlation distance" $d_F$ as the \textit{fixed} kernel bandwidth and applying the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a gaussian kernel:
 \begin{equation}
 	\ensuremath{
 		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
@@ -440,22 +439,23 @@ As they are interested in forecast, just past time $t_i < t$ need to be consider
 \end{equation}
 where \gls{sym:Rmin} is the \glsdesc{sym:Rmin}, positive, allowing earthquakes to occur where their never occurred yet.
 
-The weights $w(\boldsymbol{r}_i,t_i)$, computed for each earthquake $i$, are the Gutemberg-Richter \emph{a}-value projection. These weights increase the seismicity contribution from earthquakes occurred where and when the completeness magnitude $M_c$ was greather than minimum catalog magnitude $M_d$. These weights could easily consider space and time completenes and \emph{b}-value fluctuations. The expression used to compute it:
+The weights $w(\boldsymbol{r}_i,t_i)$, computed for each earthquake $i$, are the Gutemberg-Richter \emph{a}-value projection. This is the expression used to compute it:
 \begin{equation}
 	\ensuremath{ w(\boldsymbol{r},t) = 10^{ \gls{sym:b}(\boldsymbol{r},t) \left[ \gls{sym:Mc_rt} - \gls{sym:Md}
 	\right] } },
 	\label{eq:helms_wi}
 \end{equation}
-where \gls{sym:wi} is the \glsdesc{sym:wi} at location $\boldsymbol{r}$ on instant $t$,
+where \gls{sym:wi} is the \glsdesc{sym:wi} factor computed on location $\boldsymbol{r}$ on instant $t$,
 	  \gls{sym:b}$(\boldsymbol{r},t)$ is the space and time dependent \glsdesc{sym:b},
 	  \gls{sym:Mc_rt} is the \glsdesc{sym:Mc_rt},
 	  \gls{sym:Md} is the \glsdesc{sym:Md}.
 
+These weights increase the seismicity contribution from earthquakes occurred where and when the completeness magnitude $M_c$ was greather than minimum catalog magnitude $M_d$. They also could easily take into account the space and time completenes and \emph{b}-value fluctuations. 
 
 
 \subsubsection{Local bandwidth computation}
 
-The method implemented to compute the space and time bandwidths for each earthquake was the Couppled-Nearest-Neighbour \citep{helmstetter_2012}:
+The method implemented to compute the space and time bandwidths for each earthquake was the \gls{cnn} \citep{helmstetter_2012} expressed as:
 \begin{equation}
 	\ensuremath{
 		h_i, d_i = \argmin_{\substack{h_i \ge \gls{sym:hk} \\
@@ -472,17 +472,15 @@ The method implemented to compute the space and time bandwidths for each earthqu
 \end{equation}
 where \gls{sym:k_cnn} is the \glsdesc{sym:k_cnn},
 	 \gls{sym:a_cnn} is a \glsdesc{sym:a_cnn},
-	 \gls{sym:dk} is the \glsdesc{sym:dk} e
+	 \gls{sym:dk} is the \glsdesc{sym:dk} and
 	 \gls{sym:hk} is the \glsdesc{sym:hk}.
 
-The bandwidths are defined locally. Could be small in high earthquake density regions and higher where earthquakes are rarelly or regions with information lack.
+The bandwidths are defined locally by this simple optimization process. It could be small on high earthquake density regions and higher where earthquakes are rarelly or regions with information lack.
 
 
 
 \subsubsection{Stationary seismic rate}
-After compute the model parameters and completely define it, the time-independent or stationary seismic rate $\bar{R}$ on each location $\boldsymbol{r}_0$ have to be computed.
-The way to do it proposed by \citet{helmstetter_2012} was to get the median
-on $\boldsymbol{r}_0$ over all considered time window:
+After compute the model parameters it is completely defined, and the time-independent or stationary seismic rate $\bar{R}$ on each location $\boldsymbol{r}_0$ can be computed on the way proposed by \citet{helmstetter_2012} taking the median value for some location $\boldsymbol{r}_0$ over all considered time window:
 \begin{equation}
 	\ensuremath{
 		\bar{R}(\boldsymbol{r}_0) = \text{Median}\left[R(\boldsymbol{r}_0, t)\right].
@@ -490,14 +488,14 @@ on $\boldsymbol{r}_0$ over all considered time window:
 	\label{eq:stationary_rate}
 \end{equation}
 
-The median should avoid the seismicity rate fluctuations derived by fore and after-shocks and consequently the decluster procedures.
+The median should avoid the seismicity rate fluctuations derived by fore and after-shocks and consequently the decluster procedures. This is one of the most important achievement of this methodology.
 
 
 \subsubsection{Maximum likelyhood optimization}
 
-The model is completely defined by \gls{sym:k_cnn}, \gls{sym:a_cnn} and \gls{sym:Rmin}. To optimize these parameters the catalog is divided in two parts: one for learning about the parameters and other to test them.
+The model is completely defined by \gls{sym:k_cnn}, \gls{sym:a_cnn} and \gls{sym:Rmin}. To optimize these parameters the catalog is divided in two parts: one for learning about the parameters and other to test them. The target catalog will able us to check the model prediction performance derived from its chosen parameters. The best model parameters will maximize the prediction model capacity likely the target catalog.
 
-If the earthquake occurrence could be modelled by a Poisson process with rate $N_p$, then the probability to observe exactly $n$ events on the consider time frame is
+If the earthquake occurrence could be modelled by a Poisson process with rate $N_p$, then the probability to observe exactly $n$ events on the considered time frame is
 \begin{equation}
 	\ensuremath{
 		\gls{sym:pNn} = \frac{{N_p}^n e^{-N_p}}{n!}.
@@ -505,7 +503,7 @@ If the earthquake occurrence could be modelled by a Poisson process with rate $N
 	\label{eq:poisson_probability}
 \end{equation}
 
-Then, over all cells, the (log) likelihood, to be maximized, between model (from the learning catalog) prediction and earthquakes observed on testing catalog is written as
+Then, over all cells, the log-likelihood, to be maximized, between model (from the learning catalog) prediction and earthquakes observed (on testing catalog) is written as
 \begin{equation}
 	\ensuremath{
 		\gls{sym:L} = \sum_{i_x=1}^{N_x}\sum_{i_y=1}^{N_y}\log p\left[  \gls{sym:Np}, \gls{sym:nxy}  \right]
@@ -597,7 +595,9 @@ Vivamus magna enim, aliquet id cursus a, pharetra ut purus. Phasellus suscipit n
 %	ACKNOWLEDGEMENTS
 %------------------------------------------------------------------------------
 \begin{acknowledgments}
-The author thanks specially to Marcelo Assumpção for the support and critical discussion as well all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vincent Guigues for all helpful discussions.
+The author thanks specially to 
+%Marcelo Assumpção for the support and critical discussion as well 
+all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vincent Guigues for all helpful discussions.
 \end{acknowledgments}
 
 %------------------------------------------------------------------------------
