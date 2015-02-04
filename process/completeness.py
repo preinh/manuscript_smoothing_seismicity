@@ -126,4 +126,4 @@ completeness_table = completeness_algorithm.completeness(catalogue_uh,
                                         _config,
                                         saveplot="cumulative_rate_plots")
 
-#print completeness_table
+print completeness_table
