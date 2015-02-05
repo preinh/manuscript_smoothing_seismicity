@@ -42,7 +42,7 @@ config = {
 #    'catalog': project_home + "/data/catalogs/hmtk_bsb2013.csv",
     'catalog': project_home + "/data/catalogs/hmtk_bsb2014.11.csv",
     'declustered_catalog': project_home + "/"+_model+"/catalogs/bsb2014.11_declustered_catalog.csv",
-    'source_model': project_home + "/"+_model+"/raw/"+_model+"_bsb2014.11_geometries.xml",
+    #'source_model': project_home + "/"+_model+"/raw/"+_model+"_bsb2014.11_geometries.xml",
     'map_config': {'min_lon': -80.0, 'max_lon': -30.0, 'min_lat': -37.0, 'max_lat': 13.0, 'resolution':'l'},
     # BR_Geral
     'fixed_completeness1' : np.array([[2014., 3.5],
