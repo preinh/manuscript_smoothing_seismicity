@@ -239,20 +239,20 @@ All the hazard calculations was performed on OpenQuake \citep{pagani_2014} open 
 
 \section{Introduction}
 
-\subsection{Intraplate Seismicity}
+\subsection{Intraplate seismicity}
 
-Onononono on on ono on on on on ononon on on on on on ono non on ono on on
+COMENTAR CAPITULO DO LIVRO
 
-\subsection{Previous Brazilian Studies}
+\subsection{Previous studies in Brazil}
 
 Despite some studies of seismicity rates and attempts at defining the main seismic zones \citep{berrocal_1984, berrocal_1996, assumpcao_et_al_2014}, Brazil has no seismic hazard map at national scale.
 
-The Brazilian seismic hazard building code \citep{nbr_15421_2006} was based on the GSHAP \citep{giardini_1999} results for South America \citep{shedlock_tanner_1999}, which is the last published model for the whole region. However, some significant seismic areas (Porto dos Gaúchos \citep{barros_2009}), are not represented in the GPSHAP-based building codes.
+The Brazilian seismic hazard building code \citep{nbr_15421_2006} was based on the GSHAP \citep{giardini_1999} results for South America \citep{tanner_shepherd_1997, shedlock_tanner_1999}, which is the last published model for the whole region. However, some significant seismic areas (Porto dos Gaúchos \citep{barros_2009}), are not represented in the GPSHAP-based building codes.
 
 A significant number of earthquakes has been recorded in the last decades \citep{bsb_2014} allowing a better definition of seismic zones. For this reason an updated hazard map is needed.
 
 
-\subsection{Smoothing Seismicity}
+\subsection{Smoothed seismicity}
 
 Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology could be used to assess seismic hazard using expert pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on \gls{kde} which results in a grid of smoothed seismicity without define any seismic zone polygon.
 
@@ -260,24 +260,24 @@ The seismicity \gls{kde} or the smoothed seismicity grid allow to define a grid 
 
 To perform the \gls{kde}, both its shape and bandwidth needs to be defined. Most kernels are Gaussian or power-laws or one of their variants. The main distinction between the methods described here is the bandwidth selection process.
 
-\citet{frankel_1995} smoothing method applies a Gaussian \citet{nadaraya_1964}-\citet{watson_1964} smoothing technique with a \emph{fixed} smoothing-distance bandwidth to estimate the seismicity rate. \citet{woo_1996} proposes a \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbor mean distance in magnitude bins. \citet{helmstetter_2012} proposes a \emph{locally-adaptive} bandwidth, based on kernel estimations for the background seismicity rate in long-term forecasts on both space and time dimensions.
+\citet{frankel_1995} smoothing method applies a Gaussian \citet{nadaraya_1964}-\citet{watson_1964} smoothing technique with a \emph{fixed} smoothing-distance bandwidth to estimate the seismicity rate smoothing the 2D histogram counting. This version of the algorithm is already implemented on the \gls{hmtk} \citep{weatherill_2012, weatherill_2014_1}. There is also a simple variant of Frankel's method discussed by \citet{zechar_jordan_2010} which sum the contribution of each earthquake kernel on given cell. \citet{woo_1996} proposes a \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbor mean distance in magnitude bins. \citet{helmstetter_2012} proposes a \emph{locally-adaptive} bandwidth, based on kernel estimations for the background seismicity rate in long-term forecasts on both space and time dimensions.
 
-Using one-year forecast and assuming time-independence of the seismicity rate, the same assumption of PSHA, it is possible to use these seismicity values on seismic sources characterization. (REVER E COMENTAR)
-
+Using the background seismic rate computed to the forecast and assuming time-independence of that, the same assumption of PSHA, it is possible, preserving their differences \citep{marzocchi_2011}, to use these forecasted seismicity values on seismic sources characterization \citep{weatherill_pagani_2014}. 
 
 
 \subsection{Hazard computation}
 
-To perform the hazard computation, the OpenQuake suite was chosen. The modelling tool was the HMTK also available by GEM scientific board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
+To perform the hazard computation, the OpenQuake suite \citep{pagani_2014} was chosen. The modelling tool was the \gls{hmtk} also open available by \gls{gem} scientific board. The Frankel method was already implemented on the toolkit and the other two was implemented in the context of this paper and they are free available on a public repository.
 
 The earthquake catalog data comes from the Brazilian seismological research authorities.
 
-The Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and further considerations are discussed.
 
+\subsection{Specific purposes}
 
-\subsection{Specific Purpose}
+The specific purposes of this paper are: (i) review 3 distincts smoothing/zoneless methods to describe spatially the seismicity rate, (ii) update the seismic hazard studies at national scale by proposing a new hazard model,
+(iii) use the GEM-OpenQuake tools to perform hazard calculation and (iv) add and share with the community two more new smoothing methods into the \gls{hmtk}.
 
-
+To aim this, the Brazilian seismicity data is presented including some overview plots. Next the method's theory is presented follow by the specific decisions and optimizations performed on each method modelling. And last, the results, conclusions and further considerations are discussed.
 
 
 %------------------------------------------------
@@ -310,7 +310,7 @@ Most magnitudes were computed as $mb$ type or the equivalent $mR$ \citep{assumpc
 
 \subsection{Catalog checking}
 
-Figure \ref{fig_overview} shows the distribution of depths, day of the week and origin hour \citep{woessner_2010-1}. Most events have no depth determination and the well determined depths (from $pP$ phases or local networks) are mostly less than 10km.
+Figure \ref{fig_overview} shows the distribution of depths, day of the week and origin hour following \citet{gulia_2012}. Most events have no depth determination and the well determined depths (from $pP$ phases or local networks) are mostly less than 10km.
 
 Figures \ref{fig_overview}b and \ref{fig_overview}c show an almost uniform distribution of day of the week, and a slightly trend to record earthquakes during the night. This could suggest some influence of daily noise level.
 
@@ -341,16 +341,15 @@ The completeness of Brazilian seismicity data has evident time and space depende
 
 Brazil just recently was installed its permanent seismic network \citep{pirchiner_2011}. The number and quality of stations increased over time. The population density, previously concentrated along the coast increased in other regions changing the historical detectability.
 
-There are many methodologies to assessment of the temporal and spatial completeness \citep{stepp_1972, mignan_woessner_2012, ogata_1993, wiemer_wyss_2000, cao_gao_2002, woessner_2005, mignan_2011, mignan_2012, vorobieva_2013, mignan_2013, nasir_2013, mignan_2014}, or explaining how to compute the real \gls{pde} from the waveforms \citep{schorlemmer_2008}, but the time and the effort to proceed this exhaustive study of the \glsdesc{sym:Mc}, despite its relevance, was not intended to be done on the scope of this paper.
+There are many methodologies to assessment of the temporal and spatial completeness \citep{stepp_1972, mignan_woessner_2012, ogata_1993, wiemer_wyss_2000, cao_gao_2002, stucchi_2004, woessner_2005, mignan_2011, mignan_2012, vorobieva_2013, mignan_2013, nasir_2013, mignan_2014}, or explaining how to compute the real \gls{pde} from the waveforms \citep{schorlemmer_2008}, but the time and the effort to proceed this exhaustive study of the \glsdesc{sym:Mc}, despite its relevance, was not intended to be done on the scope of this paper.
 
 The waveforms from the earliest years was not in digital form. The histories of most regional (temporary) stations are not easy available. In addition, the low number of earthquakes in the catalog also difficults some high resolution statistical methods. All of this hinders the direct application of most that methodologies.
 
-For this reason, the spatial completeness was not considered and the temporal completeness parameters for the whole country was defined by the simplest expert criteria. 
+For this reason, the spatial completeness was not considered and the temporal completeness parameters for the whole country was defined by an easy cumulative rate criteria using historical information about the network evolution and the \citet{stepp_1972} plot (fig. \ref{fig_completeness}a). TALK ABOUT BRASILIA STATION??? 
 
-Figure COMPLETENESS shows the magnitude time distribution and the used completeness table. We chosen just one time and magnitude cut. 
+Figure \ref{fig_completeness}b shows the magnitude time distribution in a scatter plot as the cumulative number of events which is important to perform the \gls{tcef} \citep{nasir_2013}. The linear behavior of cumulative rate on the recent years, gives an idea about the constant record trend. Figure \ref{fig_completeness}b also show three (from many) possible completeness tables to allow quick check their distinctions. We chosen the ``simplest'' one. 
 
-
-
+IMPROVE THIS DECISION EXPLANATION
 
 %------------------------------------------------
 %
@@ -362,7 +361,7 @@ Three smoothing methods are now briefly explained.
 
 \subsection{Frankel: fixed bandwidth}
 
-\citet{frankel_1995} smoothing seismicity proposal consisted originally in using a "correlation distance" $d_F$ as the \textit{fixed} kernel bandwidth and applying the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a Gaussian kernel:
+\citet{frankel_1995} smoothing seismicity proposal consisted originally in using a ``correlation distance'' $d_F$ as the \textit{fixed} kernel bandwidth and applying the Nadaraya-Watson \citep{nadaraya_1964, watson_1964} estimator to smooth a 2D seismicity histogram using a Gaussian kernel:
 \begin{equation}
 	\ensuremath{
 		\tilde{n}_j = \frac{ \sum_{i} n_i \,e^{ - \left(\frac{\gls{sym:dij}}{\gls{sym:dF}}\right)^2}}
@@ -768,7 +767,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 % =========
 
 \begin{figure}
-	\includegraphics[width=0.5\linewidth]{z_img_seismicity}
+	\includegraphics[width=0.99\linewidth]{z_img_seismicity}
 	\caption{Brazilian seismicity from 1767 to 2014. Source: \citep{bsb_2014}.}
 	\label{fig_seismicity}
 \end{figure}
@@ -801,10 +800,10 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
 		\begin{tabular}{ c c }
 		\footnotesize(a)
-		& \includegraphics[width=0.45\textwidth]{z_img_hmtk_bsb2014_11_rate}
+		& \includegraphics[width=0.99\textwidth]{z_img_hmtk_bsb2014_11_rate}
 		\\
 		\footnotesize(b)
-		& \includegraphics[width=0.40\textwidth]{z_img_time_mag_count_br_1960}
+		& \includegraphics[width=0.90\textwidth]{z_img_time_mag_count_br_1960}
 		\end{tabular}
 	\end{table}
 	\caption{Earthquakes by year (a) and discriminated by magnitude (b).}
@@ -819,13 +818,13 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
 		\begin{tabular}{ c c }
 		\footnotesize(a)
-		& \includegraphics[width=0.45\textwidth]{z_img_hmtk_bsb2014_11_decluster}
+		& \includegraphics[width=0.70\textwidth]{z_img_hmtk_bsb2014_11_decluster}
 		\\
 		\footnotesize(b)
-        & \includegraphics[width=0.40\textwidth]{z_img_hmtk_bsb2014_11_clusters}
+        & \includegraphics[width=0.60\textwidth]{z_img_hmtk_bsb2014_11_clusters}
 		\end{tabular}
 	\end{table}
-	\caption{Decluster evaluation (a) and the clusters map (b).}
+	\caption{Decluster evaluation (a) using distinct algorithms and windows. There is no significant differences between final results. The map (b) of clusters from selected method shows places where earthquake sequences tends to occur more frequently.}
 	\label{fig_decluster}
 	\end{center}
 \end{figure}
@@ -837,14 +836,14 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
 		\begin{tabular}{ c c }
 		\footnotesize(a)
-        & \includegraphics[width=0.45\textwidth]{z_img_completeness_temporal_stepp}
+        & \includegraphics[width=0.99\textwidth]{z_img_completeness_temporal_stepp}
 		\\
 		\footnotesize(b)
-		& \includegraphics[width=0.45\textwidth]{z_img_completeness_temporal_scatter}
+		& \includegraphics[width=0.99\textwidth]{z_img_completeness_temporal_scatter}
 		\end{tabular}
 	\end{table}
 	\caption{Completeness evaluation. 
-	Magnitude-Time scatter plot (a) and the Stepp plot (b).}
+	The Stepp plot (a) was made using $\Delta_{mag}=0.5$ and $\Delta_{time}=2$ as magnitude and time bins. The magnitude-time scatter plot (b) shows in addition, three diferent temporal completess models and some cumulative rates to better perform a visual analysis.}
 	\label{fig_completeness}
 	\end{center}
 \end{figure}
@@ -852,7 +851,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{figure}
-    \includegraphics[width=.45\linewidth]{z_img_hmtk_bsb2014_11_recurrence}
+    \includegraphics[width=.99\linewidth]{z_img_hmtk_bsb2014_11_recurrence}
     \caption{Annual earthquake recurrence.}
     \label{fig_occurrence}
 \end{figure}
@@ -868,14 +867,14 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_woo_bandwidth}
+	\includegraphics[width=0.99\linewidth]{z_img_woo_bandwidth}
 	\caption{Magnitude dependence bandwidth.}
 	\label{fig_woo_bandwidth}
 \end{figure}
 
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_woo_kernels}
+	\includegraphics[width=0.99\linewidth]{z_img_woo_kernels}
 	\caption{\citet{kagan_knopoff_1980} kernel shapes for some magnitude values.}
 	\label{fig_woo_kernels}
 \end{figure}
@@ -885,7 +884,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_hidi}
+	\includegraphics[width=0.99\linewidth]{z_img_helmstetter_hidi}
 	\caption{Local bandwidth example.}
 	\label{fig_helmstetter_hidi}
 \end{figure}
@@ -898,10 +897,10 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
 		\begin{tabular}{ c c }
 		\footnotesize(a)
-		& \includegraphics[width=0.45\textwidth]{z_img_hi_histogram}
+		& \includegraphics[width=0.99\textwidth]{z_img_hi_histogram}
 		\\
 		\footnotesize(b)
-        & \includegraphics[width=0.45\textwidth]{z_img_di_histogram}
+        & \includegraphics[width=0.99\textwidth]{z_img_di_histogram}
 		\end{tabular}
 	\end{table}
 	\caption{(a) $h_i$ and (b) $d_i$ distributions from \gls{bsb}.}
@@ -912,14 +911,14 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_stationary_a}
+	\includegraphics[width=0.99\linewidth]{z_img_helmstetter_stationary_a}
 	\caption{Stationary seismic rate}
 	\label{fig_helmstetter_stationary_rate}
 \end{figure}
 
 
 \begin{figure}
-	\includegraphics[width=0.4\linewidth]{z_img_helmstetter_catalogues}
+	\includegraphics[width=0.99\linewidth]{z_img_helmstetter_catalogues}
 	\caption{Learning and testing catalogs.}
 	\label{fig_helmstetter_catalogues}
 \end{figure}
@@ -1035,16 +1034,16 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		\hline
 	\textbf{magnitude} & \textbf{year (Stepp)} & \textbf{year (simplest)} \\
 		\hline
-		2.0 & 1982 & 1885 \\
-		2.5 & 1980 & 1965 \\
-		3.0 & 1976 &  \\
-		3.5 & 1969 & 1960 \\
-		4.0 & 1955 &  \\
-		4.5 &  & 1900 \\
-		5.0 & 1952 &  \\
-		5.5 & 1927 &  \\
-		6.0 &  &  \\
-		6.5 &  &  \\
+		2.0 & 1982 	& 1885 \\
+		2.5 & 1980 	& 1965 \\
+		3.0 & 1976 	&  \\
+		3.5 & 1969 	& 1960 \\
+		4.0 & 1955 	&  \\
+		4.5 &  		& 1935 \\
+		5.0 & 1952 	&  \\
+		5.5 & 1927 	&  \\
+		6.0 &  		&  \\
+		6.5 &  		&  \\
 		\hline
 	\end{tabular}
 	\label{tab:completeness}

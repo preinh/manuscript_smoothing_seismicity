@@ -46,16 +46,16 @@ config = {
     'map_config': {'min_lon': -80.0, 'max_lon': -30.0, 'min_lat': -37.0, 'max_lat': 13.0, 'resolution':'l'},
     # BR_Geral
     'fixed_completeness1' : np.array([[2014., 3.5],
-                                   [1980., 4.5],
-                                   [1968., 5.0],
-                                   [1962., 6.0],
-                                   [1940., 7.0]]),
+                                     [1980., 4.5],
+                                     [1968., 5.0],
+                                     [1962., 6.0],
+                                     [1940., 6.5]]),
 
     # pirchiner_simplificado
     'fixed_completeness2' : np.array([[1985., 2.0],
                                       [1975., 3.0],
                                       [1960., 4.0],
-                                      [1900., 6.0]]),
+                                      [1935., 6.5]]),
 
 }
 
@@ -131,6 +131,7 @@ completeness_table = completeness_algorithm.completeness(catalogue_uh,
 completeness_table_stepp = completeness_table
 print completeness_table
 print config['fixed_completeness2']
+
 plot_magnitude_time_scatter(catalogue_uh,
   # completeness_table=config['fixed_completeness2'],
   # completeness_table=completeness_table,
@@ -143,22 +144,97 @@ plot_magnitude_time_scatter(catalogue_uh,
   figsize=(9, 4),
   overlay=True)
 
-completeness_table=config['fixed_completeness2']
-plt.step(completeness_table[:,0], completeness_table[:,1], 
+completeness_table = config['fixed_completeness2']
+plt.step(completeness_table[:, 0], completeness_table[:, 1], 
   where='post', 
   linewidth=4,
   color='Navy',
   label="Simplified")
 
+completeness_table = config['fixed_completeness1']
+plt.step(completeness_table[:, 0], completeness_table[:, 1],
+  where='post',
+  linewidth=2,
+  color='darkgreen',
+  label=u"Assumpção")
+
 completeness_table=completeness_table_stepp
-plt.step(completeness_table[:,0], completeness_table[:,1], 
+plt.step(completeness_table[:, 0], completeness_table[:, 1],
   where='post',
   linewidth=2,
   color = 'red',
   label="Stepp")
 
+_c = deepcopy(catalogue_uh)
+_c.catalogue_mt_filter(config['fixed_completeness2'], reverse=True)
+plot_magnitude_time_scatter(_c,
+  # completeness_table=config['fixed_completeness2'],
+  # completeness_table=completeness_table,
+  fmt_string='k+',
+  color='Blue',
+  # color='orange',
+  # filename="../z_img_completeness_temporal_scatter_fixed.pdf", 
+  # filetype='pdf', 
+  #dpi=300,
+  #figsize=(9, 4),
+  overlay=True)
 
 plt.legend(loc=2)
+
+Y = catalogue_uh.data['year']
+max_year = np.max(Y)
+min_year = np.min(Y)
+
+bins = np.arange(min_year - .5, max_year + 1.5, 1)
+
+ax2 = plt.gca().twinx()
+ax2.hist(catalogue.data['year'],
+  bins=bins,
+  histtype='step',
+  linestyle='dashed',
+  linewidth=2,
+  color='k',
+  normed=True,
+  cumulative=True,
+  label="M > 2")
+
+
+_c = deepcopy(catalogue_uh)
+_idx = _c.data['magnitude'] >= 3.0
+_c.purge_catalogue(_idx)
+
+ax2.hist(_c.data['year'],
+  bins=bins,
+  histtype='step',
+  linestyle='dashed',
+  linewidth=2,
+  color='gray',
+  normed=True,
+  cumulative=True,
+  label="M > 3")
+
+
+# _c = deepcopy(catalogue_uh)
+_idx = _c.data['magnitude'] >= 4
+_c.purge_catalogue(_idx)
+
+ax2.hist(_c.data['year'],
+  bins=bins,
+  histtype='step',
+  linestyle='dashed',
+  linewidth=2,
+  color='lightgray',
+  normed=True,
+  cumulative=True,
+  label="M > 4")
+
+ax2.set_ylabel("cumulative normalized distribution")
+
+
+plt.xlim((min_year,max_year))
+ax2.legend(loc=2, bbox_to_anchor=(0, 0.7))
+
+
 plt.show()
 
 # create_stepp_plot(model=completeness_algorithm,
