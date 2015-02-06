@@ -335,25 +335,21 @@ Figure \ref{fig_occurrence} presents the catalog \gls{mfd}.
 A general $b=1$ fit is also plotted, and the completeness magnitude on the incremental distribution is about 3.0.
 
 
-
 \subsection{Catalog completeness}
 
 The completeness of Brazilian seismicity data has evident time and space dependence.
 
-The number and quality of stations increased over time. The population density, previously concentrated along the coast increased in other regions.
+Brazil just recently was installed its permanent seismic network \citep{pirchiner_2011}. The number and quality of stations increased over time. The population density, previously concentrated along the coast increased in other regions changing the historical detectability.
 
-% and the spatial occupation respects the population density coverage concentrated in the east coast in most cases with exception only in the central part of the country by the Brasilia Seismic Station (REFERENCE).
+There are many methodologies to assessment of the temporal and spatial completeness \citep{stepp_1972, mignan_woessner_2012, ogata_1993, wiemer_wyss_2000, cao_gao_2002, woessner_2005, mignan_2011, mignan_2012, vorobieva_2013, mignan_2013, nasir_2013, mignan_2014}, or explaining how to compute the real \gls{pde} from the waveforms \citep{schorlemmer_2008}, but the time and the effort to proceed this exhaustive study of the \glsdesc{sym:Mc}, despite its relevance, was not intended to be done on the scope of this paper.
 
-The histories of most regional stations are not easy available which hinders application of methodologies, such as \citet{mignan_2011}. For this reason, spatial completeness was not considered and temporal completeness parameters for the whole country was defined by expert criteria (figure FIGURA COMPLETENESS )
+The waveforms from the earliest years was not in digital form. The histories of most regional (temporary) stations are not easy available. In addition, the low number of earthquakes in the catalog also difficults some high resolution statistical methods. All of this hinders the direct application of most that methodologies.
+
+For this reason, the spatial completeness was not considered and the temporal completeness parameters for the whole country was defined by the simplest expert criteria. 
+
+Figure COMPLETENESS shows the magnitude time distribution and the used completeness table. We chosen just one time and magnitude cut. 
 
 
-\begin{itemize}
-	\item completeza é problema temporal mas nesse caso tambem espacial nao negligenciavel
-	\item se conhecia metodos para lidar com completeza espacial
-	\item também se conhece o método multiescala (provavel bom solucionador)
-	\item conhece-se o método de Stepp
-	\item mas usa-se uma completeness temporal simples
-\end{itemize}
 
 
 %------------------------------------------------
@@ -836,10 +832,23 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{figure}
-    \includegraphics[width=.45\linewidth]{z_img_hmtk_bsb2014_11_completeness}
-    \caption{Completeness}
-    \label{fig_completeness}
+	\begin{center}
+	\begin{table}[H]
+		%\begin{tabular}{ p{0.5\textwidth} p{0.5\textwidth} }
+		\begin{tabular}{ c c }
+		\footnotesize(a)
+        & \includegraphics[width=0.45\textwidth]{z_img_completeness_temporal_stepp}
+		\\
+		\footnotesize(b)
+		& \includegraphics[width=0.45\textwidth]{z_img_completeness_temporal_scatter}
+		\end{tabular}
+	\end{table}
+	\caption{Completeness evaluation. 
+	Magnitude-Time scatter plot (a) and the Stepp plot (b).}
+	\label{fig_completeness}
+	\end{center}
 \end{figure}
+
 
 
 \begin{figure}
@@ -847,6 +856,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
     \caption{Annual earthquake recurrence.}
     \label{fig_occurrence}
 \end{figure}
+
 
 
 
@@ -1017,6 +1027,28 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 	\label{tab:guidelines}
 \end{table}
 
+
+\begin{table}[H]
+	\caption{Temporal completeness comparision. For each magnitude interval,
+	the completess was computed by the \citet{stepp_1972} method and the respective assigned value.}
+	\begin{tabular}{c c c}
+		\hline
+	\textbf{magnitude} & \textbf{year (Stepp)} & \textbf{year (simplest)} \\
+		\hline
+		2.0 & 1982 & 1885 \\
+		2.5 & 1980 & 1965 \\
+		3.0 & 1976 &  \\
+		3.5 & 1969 & 1960 \\
+		4.0 & 1955 &  \\
+		4.5 &  & 1900 \\
+		5.0 & 1952 &  \\
+		5.5 & 1927 &  \\
+		6.0 &  &  \\
+		6.5 &  &  \\
+		\hline
+	\end{tabular}
+	\label{tab:completeness}
+\end{table}
 
 \end{document}
 
