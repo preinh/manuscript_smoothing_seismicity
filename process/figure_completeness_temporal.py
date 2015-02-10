@@ -2,6 +2,8 @@
 # Python Numerical and Plotting Libraries
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+# from matplotlib.lines import mlines
 from copy import deepcopy
 
 # HMTK Catalogue Import/Export Libraries
@@ -45,17 +47,17 @@ config = {
     #'source_model': project_home + "/"+_model+"/raw/"+_model+"_bsb2014.11_geometries.xml",
     'map_config': {'min_lon': -80.0, 'max_lon': -30.0, 'min_lat': -37.0, 'max_lat': 13.0, 'resolution':'l'},
     # BR_Geral
-    'fixed_completeness1' : np.array([[2014., 3.5],
-                                     [1980., 4.5],
-                                     [1968., 5.0],
-                                     [1962., 6.0],
-                                     [1940., 6.5]]),
+    'fixed_completeness1' : np.array([[2014., 3.16],
+                                      [1980., 4.28],
+                                      [1968., 4.85],
+                                      [1962., 6.0],
+                                      [1940., 6.5]]),
 
     # pirchiner_simplificado
-    'fixed_completeness2' : np.array([[1985., 2.0],
-                                      [1975., 3.0],
-                                      [1960., 4.0],
-                                      [1935., 6.5]]),
+    'fixed_completeness2' : np.array([[2014., 3.0],
+                                      [1975., 3.8],
+                                      [1960., 4.8],
+                                      [1938., 6.5]]),
 
 }
 
@@ -71,7 +73,7 @@ catalogue.sort_catalogue_chronologically()
 print 'Catalogue sorted chronologically!'
 
 # 3.0 - 0.3 uncertainty
-min_mag = 2.0
+min_mag = 3.0
 # filter magnitudes Mw lower than 3.0
 _idx = catalogue.data['magnitude'] >= min_mag
 catalogue.purge_catalogue(_idx)
@@ -119,7 +121,7 @@ catalogue_uh.get_number_events()
 #print config['fixed_completeness']
 # completeness
 _config = {'magnitude_bin': 0.5,
-           'time_bin': 2.0,
+           'time_bin': 5.0,
            'increment_lock': True}
 completeness_algorithm = Stepp1971()
 # completeness_algorithm = SimpleCumulativeRate()
@@ -132,46 +134,89 @@ completeness_table_stepp = completeness_table
 print completeness_table
 print config['fixed_completeness2']
 
-plot_magnitude_time_scatter(catalogue_uh,
+
+_c = deepcopy(catalogue_uh)
+# _c.catalogue_mt_filter(config['fixed_completeness2'], reverse=True)
+_c.catalogue_mt_filter(config['fixed_completeness1'], reverse=False)
+
+plot_magnitude_time_scatter(_c,
   # completeness_table=config['fixed_completeness2'],
   # completeness_table=completeness_table,
-  fmt_string='k+',
-  color='SkyBlue',
+  # fmt_string='k+',
+  marker='+',
+  s=60,
+  # linestyle='',
+  alpha=0.8,
+  linewidth=2,
+  edgecolor='lightgreen',
+  color='lightgreen',
   # color='orange',
   # filename="../z_img_completeness_temporal_scatter_fixed.pdf", 
   # filetype='pdf', 
   dpi=300,
-  figsize=(9, 4),
+  figsize=(20, 10),
   overlay=True)
 
 completeness_table = config['fixed_completeness2']
-plt.step(completeness_table[:, 0], completeness_table[:, 1], 
-  where='post', 
+# plt.step(completeness_table[:, 0], completeness_table[:, 1], 
+#   where='post', 
+#   linewidth=3,
+#   color='blue',
+#   label="Simplified")
+
+
+completeness_table=completeness_table_stepp
+completeness_table = np.vstack((completeness_table, [1933, 6.5]))
+plt.step(completeness_table[:, 0], completeness_table[:, 1],
+  where='post',
   linewidth=4,
-  color='Navy',
-  label="Simplified")
+  # alpha=0.6,
+  color = 'darkorange',
+  label="Stepp1972")
 
 completeness_table = config['fixed_completeness1']
 plt.step(completeness_table[:, 0], completeness_table[:, 1],
   where='post',
-  linewidth=2,
-  color='darkgreen',
-  label=u"Assumpção")
-
-completeness_table=completeness_table_stepp
-plt.step(completeness_table[:, 0], completeness_table[:, 1],
-  where='post',
-  linewidth=2,
-  color = 'red',
-  label="Stepp")
+  linewidth=4,
+  color='green',
+  # alpha=0.6,
+  label=u"Assumpção2014")
 
 _c = deepcopy(catalogue_uh)
-_c.catalogue_mt_filter(config['fixed_completeness2'], reverse=True)
+# _c.catalogue_mt_filter(config['fixed_completeness2'], reverse=True)
+_c.catalogue_mt_filter(completeness_table_stepp, reverse=True)
 plot_magnitude_time_scatter(_c,
   # completeness_table=config['fixed_completeness2'],
   # completeness_table=completeness_table,
-  fmt_string='k+',
-  color='Blue',
+  #fmt_string='k+',
+  marker='+',
+  s=60,
+  alpha=0.8,
+  # linestyle='',
+  linewidth=2,
+  edgecolor='red',
+  color='red',
+  # color='orange',
+  # filename="../z_img_completeness_temporal_scatter_fixed.pdf", 
+  # filetype='pdf', 
+  #dpi=300,
+  #figsize=(9, 4),
+  overlay=True)
+
+_c = deepcopy(catalogue_uh)
+_c.catalogue_mt_filter(config['fixed_completeness1'], reverse=True)
+_c.catalogue_mt_filter(completeness_table_stepp, reverse=False)
+plot_magnitude_time_scatter(_c,
+  # completeness_table=config['fixed_completeness2'],
+  # completeness_table=completeness_table,
+  #fmt_string='k+',
+  marker='+',
+  s=60,
+  alpha=0.8,
+  # linestyle='',
+  linewidth=2,
+  edgecolor='gold',
+  color='gold',
   # color='orange',
   # filename="../z_img_completeness_temporal_scatter_fixed.pdf", 
   # filetype='pdf', 
@@ -180,10 +225,12 @@ plot_magnitude_time_scatter(_c,
   overlay=True)
 
 plt.legend(loc=2)
+#plt.gca().set_ylabel("Magnitude")
 
 Y = catalogue_uh.data['year']
 max_year = np.max(Y)
 min_year = np.min(Y)
+plt.ylim((3,6.5))
 
 bins = np.arange(min_year - .5, max_year + 1.5, 1)
 
@@ -192,29 +239,14 @@ ax2.hist(catalogue.data['year'],
   bins=bins,
   histtype='step',
   linestyle='dashed',
-  linewidth=2,
-  color='k',
-  normed=True,
-  cumulative=True,
-  label="M > 2")
-
-
-_c = deepcopy(catalogue_uh)
-_idx = _c.data['magnitude'] >= 3.0
-_c.purge_catalogue(_idx)
-
-ax2.hist(_c.data['year'],
-  bins=bins,
-  histtype='step',
-  linestyle='dashed',
-  linewidth=2,
-  color='gray',
+  linewidth=4,
+  color='0.70',
   normed=True,
   cumulative=True,
   label="M > 3")
 
 
-# _c = deepcopy(catalogue_uh)
+_c = deepcopy(catalogue_uh)
 _idx = _c.data['magnitude'] >= 4
 _c.purge_catalogue(_idx)
 
@@ -222,18 +254,57 @@ ax2.hist(_c.data['year'],
   bins=bins,
   histtype='step',
   linestyle='dashed',
-  linewidth=2,
-  color='lightgray',
+  linewidth=4,
+  color='0.50',
   normed=True,
   cumulative=True,
   label="M > 4")
 
-ax2.set_ylabel("cumulative normalized distribution")
+
+# _c = deepcopy(catalogue_uh)
+_idx = _c.data['magnitude'] >= 5
+_c.purge_catalogue(_idx)
+
+ax2.hist(_c.data['year'],
+  bins=bins,
+  histtype='step',
+  linestyle='dashed',
+  linewidth=4,
+  color='0.1',
+  normed=True,
+  cumulative=True,
+  label="M > 5")
+
+ax2.set_ylabel("Normalized cumulative distribution")
 
 
-plt.xlim((min_year,max_year))
-ax2.legend(loc=2, bbox_to_anchor=(0, 0.7))
+plt.xlim((1850,max_year))
 
+m3_line = Line2D([], [], color='0.7', 
+                        linestyle='dashed',
+                        linewidth=4,
+                        marker='', 
+                        markersize=15, 
+                        label='M > 3')
+
+m4_line = Line2D([], [], color='0.4',  
+                        linestyle='dashed',
+                        linewidth=4,
+                        marker='', 
+                        markersize=15, 
+                        label='M > 4')
+
+m5_line = Line2D([], [], color='0.1',  
+                        linestyle='dashed',
+                        linewidth=4,
+                        marker='', 
+                        markersize=15, 
+                        label='M > 5')
+
+ax2.legend(handles=[m3_line, m4_line, m5_line],
+  loc=2, bbox_to_anchor=(0, 0.83))
+
+plt.ylim(0, 1)
 
 plt.show()
 

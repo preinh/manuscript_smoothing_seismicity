@@ -67,8 +67,8 @@
 % (If you are submitting to a journal other than jgrga,
 % substitute the initials of the journal for "jgrga" below.)
 
-\documentclass[draft, grl]{agutex}
-%\documentclass[grl]{agutex}
+% \documentclass[draft, grl]{agutex}
+\documentclass[grl]{agutex}
 
 % To create numbered lines:
 
@@ -209,8 +209,12 @@ University of São Paulo (USP), São Paulo, Brazil.}
 % Do NOT include any \begin...\end commands within the body of the abstract.
 
 \begin{abstract}
-
 Intraplate seismicity is a hard problem to solve in tectonics, mainly during the lack of observed seismicity in many areas where seismic hazard assessment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
+% Intraplate seismicity is a hard problem to solve in tectonics. In general, the earthquake occurrence is lower than others ``active'' regions. In the Brazilian case, there is a lack of observed seismicity due the short (in geological scale) observation timeframe. In addition, the populational density decreases towards to interior of the country and changes the reporting capabilities historicaly. 
+
+% This diffused intraplate seismicity pattern is often modeled as polygons representing different seismic zones or area sources for \gls{psha} purposes. Their geometries are defined by expert opinions.
+
+% Other possible approach to deal this is develop zoneless or smoothed  models for the seismicity, conside
 
 Three smoothing seismicity techniques are reviewed and their application to the Brazilian seismicity and a seismic hazard assessment are discussed.
 
@@ -218,14 +222,13 @@ All these smoothing methods are based on a \gls{kde}. The main difference betwee
 
 The method of \citet{frankel_1995} uses a \emph{fixed} bandwidth in space. \citet{woo_1996} suggests a bandwidth as function of the \emph{magnitude}. \citet{helmstetter_2012} propose a \emph{locally-adaptive} kernel bandwidths in space and time, chosen for each event.
 
-This last one was proposed initially to take care of the background seismicity rate in the context of long-term earthquake forecast and the time-independent assumption about the annual background seismic rate could be used
-(not indiscriminately REFERENCE PAGANI WEATHERILL) as a grid of points seismic sources.
+This last one was proposed initially to take care of the background seismicity rate in the context of long-term earthquake forecast which time-independence assumption able us to use this recurrence rate to define a grid of seismic point sources as the input source model to compute the hazard.
 
 The results shown that all methods clearly define some known seismic regions and could be used in the Brazilian seismicity. All methods improve the spatial resolution of the GSHAP model, the only previously available for the region.
 
-The last two methods was implemented and are available as a open source software on the Hazard Modeling Toolkit (HMTK) from Global Earthquake Model (GEM) Foundation.
+% The last two methods was implemented and are available as a open source software on the Hazard Modeling Toolkit (HMTK) from Global Earthquake Model (GEM) Foundation.
 
-All the hazard calculations was performed on OpenQuake \citep{pagani_2014} open source software also from GEM Foundation.
+All the hazard computations was performed on OpenQuake \citep{pagani_2014} open source software also from GEM Foundation.
 
 \end{abstract}
 
@@ -247,14 +250,15 @@ COMENTAR CAPITULO DO LIVRO
 
 Despite some studies of seismicity rates and attempts at defining the main seismic zones \citep{berrocal_1984, berrocal_1996, assumpcao_et_al_2014}, Brazil has no seismic hazard map at national scale.
 
-The Brazilian seismic hazard building code \citep{nbr_15421_2006} was based on the GSHAP \citep{giardini_1999} results for South America \citep{tanner_shepherd_1997, shedlock_tanner_1999}, which is the last published model for the whole region. However, some significant seismic areas (Porto dos Gaúchos \citep{barros_2009}), are not represented in the GPSHAP-based building codes.
+The Brazilian seismic hazard building code \citep{nbr_15421_2006} was based on the GSHAP \citep{giardini_1999} results for South America \citep{tanner_shepherd_1997, shedlock_tanner_1999}, which is the last published model for the whole region. However, some significant seismic areas (Porto dos Gaúchos \citep{barros_2009}), are not represented in the GSHAP-based building codes.
 
-A significant number of earthquakes has been recorded in the last decades \citep{bsb_2014} allowing a better definition of seismic zones. For this reason an updated hazard map is needed.
+A significant number of earthquakes has been recorded in the last decades \citep{bsb_2014} allowing a better empirical and updated definition of the seismicity and hazard levels.
 
+% definition of seismic zones. For this reason an updated hazard map is needed.
 
 \subsection{Smoothed seismicity}
 
-Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology could be used to assess seismic hazard using expert pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on \gls{kde} which results in a grid of smoothed seismicity without define any seismic zone polygon.
+Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology often used to assess seismic hazard is using expert opinions to pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on \gls{kde} which results in a grid of smoothed seismicity without define any seismic zone polygon.
 
 The seismicity \gls{kde} or the smoothed seismicity grid allow to define a grid of seismic point sources. The seismic rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods, but the other parameters, like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions, must be assigned in other ways.
 
