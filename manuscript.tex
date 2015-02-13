@@ -260,7 +260,7 @@ A significant number of earthquakes has been recorded in the last decades \citep
 
 Although the standard \citet{cornell_1968} and \citet{mcguire_1976} methodology often used to assess seismic hazard is using expert opinions to pre-defined seismic zones, the goal of this paper is to review a few smoothing seismicity methods based on \gls{kde} which results in a grid of smoothed seismicity without define any seismic zone polygon.
 
-The seismicity \gls{kde} or the smoothed seismicity grid allow to define a grid of seismic point sources. The seismic rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods, but the other parameters, like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions, must be assigned in other ways.
+The \gls{kde} (or smoothed) seismicity grid allow to define a grid of seismic point sources. The seismic rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods, but the other parameters, like \emph{b}-values, minimum and maximum magnitudes, rupture and depth distributions, must be assigned in other ways.
 
 To perform the \gls{kde}, both its shape and bandwidth needs to be defined. Most kernels are Gaussian or power-laws or one of their variants. The main distinction between the methods described here is the bandwidth selection process.
 
@@ -938,6 +938,62 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 \begin{figure}
 	\begin{center}
 	\begin{table}[H]
+		\begin{tabular}{ p{0.25\textwidth}
+						 p{0.25\textwidth}
+						 p{0.25\textwidth}
+						 p{0.25\textwidth} }
+		\footnotesize(a) &
+		\footnotesize(b) &
+		\footnotesize(c) &
+		\footnotesize(d)
+		\\
+		\includegraphics[height=4cm]{z_img_2dhist_assump_25}  &
+		\includegraphics[height=4cm]{z_img_f_assump_50_25} &
+		\includegraphics[height=4cm]{z_img_f_assump_150_025} &
+		\includegraphics[height=4cm]{z_img_woo_assump_25} 
+		\\
+		\footnotesize(e) &
+		\footnotesize(f) &
+		\footnotesize(g) &
+		\footnotesize(h)
+		\\
+		\includegraphics[height=4cm]{z_img_2dhist_stepp_25}  &
+		\includegraphics[height=4cm]{z_img_f_stepp_50_025} &
+		\includegraphics[height=4cm]{z_img_f_stepp_150_025} &
+		\includegraphics[height=4cm]{z_img_woo_stepp_25} 
+		\\
+		\footnotesize(i) &
+		\footnotesize(j) &
+		\footnotesize(l) &
+		\footnotesize(m)
+		\\
+		\includegraphics[height=4cm]{z_img_2dhist_assump_50}  &
+		\includegraphics[height=4cm]{z_img_f_assump_50_50} &
+		\includegraphics[height=4cm]{z_img_f_assump_150_050} &
+		\includegraphics[height=4cm]{z_img_woo_assump_50} 
+		\\
+		\footnotesize(n) &
+		\footnotesize(o) &
+		\footnotesize(p) &
+		\footnotesize(q)
+		\\
+		\includegraphics[height=4cm]{z_img_2dhist_stepp_50}  &
+		\includegraphics[height=4cm]{z_img_f_stepp_50_050} &
+		\includegraphics[height=4cm]{z_img_f_stepp_150_050} &
+		\includegraphics[height=4cm]{z_img_woo_stepp_50} 
+
+
+		\end{tabular}
+	\end{table}
+	\caption{Smoothed rates comparission: (a) shows \citet{frankel_1995} method smoothed rate results, (b) and (c) represent rates smoothed by \citet{woo_1996} and \citet{helmstetter_2012} methods respectly.}
+	\label{fig_rates2}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}
+	\begin{center}
+	\begin{table}[H]
 		\begin{tabular}{ p{0.33\textwidth}
 						 p{0.34\textwidth}
 						 p{0.33\textwidth} }
@@ -1017,7 +1073,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		$mb$ or $mR$
 		&$ M_W(m) = 1.121 m - 0.76 $
 		& 0.3 \\
-		Area felt $A_f$
+		Felt area$A_f$
 		&$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 0.00084\sqrt{A_f}$& 0.4 \\
 		Maximum intensity $I_0$
 		& $mb(I_0) = 1.21 + 0.45 I_0$ then $M_W(m)$

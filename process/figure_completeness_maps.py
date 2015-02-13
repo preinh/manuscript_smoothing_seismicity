@@ -113,8 +113,8 @@ catalogue_uh.purge_catalogue(cluster_flags_uh == 0)
 # cluster_flags == 0: mainshocks
 
 print 'Gardner-Knopoff/UhrhammerWindow\tbefore: ', 
-catalogue.get_number_events(), " after: ",
-catalogue_uh.get_number_events()
+  catalogue.get_number_events(), " after: ",
+  catalogue_uh.get_number_events()
 
 #completeness_table =
 
@@ -135,13 +135,14 @@ print completeness_table
 print config['fixed_completeness2']
 
 
-map_dpi = 300
+map_dpi = 150
 add_geology = False
 add_sourcemodel = False
 savefig=True
 
 #map_title = 'Brazilian Seismic Zones'
 map_title = 'Earthquake epicenters on the BSB2014.11 catalog'
+map_title = 'Completeness spatial implications [BSB 2014.11]  '
 #map_title = 'ISC-GEM Catalogue'
 #map_title = 'South-American Lithology'
 

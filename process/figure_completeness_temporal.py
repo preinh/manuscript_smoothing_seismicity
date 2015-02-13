@@ -47,7 +47,12 @@ config = {
     #'source_model': project_home + "/"+_model+"/raw/"+_model+"_bsb2014.11_geometries.xml",
     'map_config': {'min_lon': -80.0, 'max_lon': -30.0, 'min_lat': -37.0, 'max_lat': 13.0, 'resolution':'l'},
     # BR_Geral
-    'fixed_completeness1' : np.array([[2014., 3.16],
+    'fixed_completeness1' : np.array([
+                                      # [1980., 3.16],
+                                      # [1968., 4.28],
+                                      # [1962., 4.85],
+                                      # [1940., 6.0]]),
+                                      [2014., 3.16],
                                       [1980., 4.28],
                                       [1968., 4.85],
                                       [1962., 6.0],
@@ -135,9 +140,25 @@ print completeness_table
 print config['fixed_completeness2']
 
 
+# _w = CsvCatalogueWriter("hmtk_bsb2014.11_uniform_stepp.csv")
+# _w.write_file(catalogue=catalogue_uh, 
+#   magnitude_table=completeness_table_stepp)
+
+# _w = CsvCatalogueWriter("hmtk_bsb2014.11_uniform_assump.csv")
+# _w.write_file(catalogue=catalogue_uh, 
+#   magnitude_table=config['fixed_completeness1'])
+
+
+# writing uniform catalogs
+# _c = deepcopy(catalogue_uh)
+# _c.catalogue_mt_filter(completeness_table_stepp, reverse=False)
+#_c.write_catalogue("hmtk_bsb2014.11_uniform_stepp.csv")
+
 _c = deepcopy(catalogue_uh)
 # _c.catalogue_mt_filter(config['fixed_completeness2'], reverse=True)
 _c.catalogue_mt_filter(config['fixed_completeness1'], reverse=False)
+#_c.write_catalogue("hmtk_bsb2014.11_uniform_assump.csv")
+
 
 plot_magnitude_time_scatter(_c,
   # completeness_table=config['fixed_completeness2'],
