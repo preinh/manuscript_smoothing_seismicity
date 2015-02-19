@@ -67,8 +67,8 @@
 % (If you are submitting to a journal other than jgrga,
 % substitute the initials of the journal for "jgrga" below.)
 
-% \documentclass[draft, grl]{agutex}
-\documentclass[grl]{agutex}
+\documentclass[draft, grl]{agutex}
+% \documentclass[grl]{agutex}
 
 % To create numbered lines:
 
@@ -949,7 +949,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		\\
 		\includegraphics[height=4cm]{z_img_2dhist_assump_25}  &
 		\includegraphics[height=4cm]{z_img_f_assump_50_25} &
-		\includegraphics[height=4cm]{z_img_f_assump_150_025} &
+		\includegraphics[height=4cm]{z_img_f_assump_150_25} &
 		\includegraphics[height=4cm]{z_img_woo_assump_25} 
 		\\
 		\footnotesize(e) &
@@ -958,8 +958,8 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		\footnotesize(h)
 		\\
 		\includegraphics[height=4cm]{z_img_2dhist_stepp_25}  &
-		\includegraphics[height=4cm]{z_img_f_stepp_50_025} &
-		\includegraphics[height=4cm]{z_img_f_stepp_150_025} &
+		\includegraphics[height=4cm]{z_img_f_stepp_50_25} &
+		\includegraphics[height=4cm]{z_img_f_stepp_150_25} &
 		\includegraphics[height=4cm]{z_img_woo_stepp_25} 
 		\\
 		\footnotesize(i) &
@@ -969,7 +969,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		\\
 		\includegraphics[height=4cm]{z_img_2dhist_assump_50}  &
 		\includegraphics[height=4cm]{z_img_f_assump_50_50} &
-		\includegraphics[height=4cm]{z_img_f_assump_150_050} &
+		\includegraphics[height=4cm]{z_img_f_assump_150_50} &
 		\includegraphics[height=4cm]{z_img_woo_assump_50} 
 		\\
 		\footnotesize(n) &
@@ -978,8 +978,8 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		\footnotesize(q)
 		\\
 		\includegraphics[height=4cm]{z_img_2dhist_stepp_50}  &
-		\includegraphics[height=4cm]{z_img_f_stepp_50_050} &
-		\includegraphics[height=4cm]{z_img_f_stepp_150_050} &
+		\includegraphics[height=4cm]{z_img_f_stepp_50_50} &
+		\includegraphics[height=4cm]{z_img_f_stepp_150_50} &
 		\includegraphics[height=4cm]{z_img_woo_stepp_50} 
 
 
@@ -1088,26 +1088,40 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{table}[H]
-	\caption{Temporal completeness comparision. For each magnitude interval,
-	the completess was computed by the \citet{stepp_1972} method and the respective assigned value.}
-	\begin{tabular}{c c c}
+	\caption{Temporal completeness. For each magnitude interval, the completess was computed by the \citet{stepp_1972} method.}
+	\begin{tabular}{c c }
 		\hline
-	\textbf{magnitude} & \textbf{year (Stepp)} & \textbf{year (simplest)} \\
+	\textbf{magnitude} & \textbf{year (Stepp)} \\
 		\hline
-		2.0 & 1982 	& 1885 \\
-		2.5 & 1980 	& 1965 \\
-		3.0 & 1976 	&  \\
-		3.5 & 1969 	& 1960 \\
-		4.0 & 1955 	&  \\
-		4.5 &  		& 1935 \\
-		5.0 & 1952 	&  \\
-		5.5 & 1927 	&  \\
-		6.0 &  		&  \\
-		6.5 &  		&  \\
+		3.0 & 1970 \\
+		% 3.5 &  	   \\
+		4.0 & 1959 \\
+		4.5 & 1951 \\
+		% 5.0 &      \\
+		% 5.5 &  	   \\
+		6.0 & 1933 \\
+		\hline
+	\end{tabular}
+	\label{tab:completeness_stepp}
+\end{table}
+
+\begin{table}[H]
+	\caption{Temporal completeness. For each magnitude interval, the completess comes from \citet{assumpcao_et_al_2014} converted to $M_W$ from $m_b$ following table \ref{tab:guidelines}.}
+	\begin{tabular}{c c}
+		\hline
+	\textbf{magnitude} & \textbf{year (Assumpção)} \\
+		\hline
+		3.1 & 1980 \\
+		4.3 & 1968 \\
+		4.8 & 1962 \\
+		% 5.0 &      \\
+		% 5.5 &  	   \\
+		6.0 & 1940 \\
 		\hline
 	\end{tabular}
 	\label{tab:completeness}
 \end{table}
+
 
 \end{document}
 
