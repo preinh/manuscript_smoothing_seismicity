@@ -37,13 +37,13 @@ from hmtk.plotting.seismicity.catalogue_plots import (plot_depth_histogram,
 
 print 'Imports OK!'
 
-project_home = "/Users/pirchiner/dev/pshab_source_models"
+project_home = "/Users/pirchiner/dev/pshab"
 _model = "background"
 
 config = {
 #    'catalog': project_home + "/data/catalogs/hmtk_bsb2013.csv",
-    'catalog': project_home + "/data/catalogs/hmtk_bsb2014.11.csv",
-    'declustered_catalog': project_home + "/"+_model+"/catalogs/bsb2014.11_declustered_catalog.csv",
+    'catalog': project_home + "/data_input/hmtk_catalogue_bsb2014.11_MMDDHH.csv",
+    #'declustered_catalog': project_home + "/"+_model+"/catalogs/bsb2014.11_declustered_catalog.csv",
     #'source_model': project_home + "/"+_model+"/raw/"+_model+"_bsb2014.11_geometries.xml",
     'map_config': {'min_lon': -80.0, 'max_lon': -30.0, 'min_lat': -37.0, 'max_lat': 13.0, 'resolution':'l'},
     # BR_Geral
@@ -137,19 +137,18 @@ completeness_table = completeness_algorithm.completeness(catalogue_uh,
 
 completeness_table_stepp = completeness_table
 print completeness_table
-print config['fixed_completeness2']
+print config['fixed_completeness1']
 
-
+# # writing uniform catalogs
 # _w = CsvCatalogueWriter("hmtk_bsb2014.11_uniform_stepp.csv")
-# _w.write_file(catalogue=catalogue_uh, 
+# _w.write_file(catalogue=catalogue_uh,
 #   magnitude_table=completeness_table_stepp)
 
 # _w = CsvCatalogueWriter("hmtk_bsb2014.11_uniform_assump.csv")
-# _w.write_file(catalogue=catalogue_uh, 
+# _w.write_file(catalogue=catalogue_uh,
 #   magnitude_table=config['fixed_completeness1'])
 
 
-# writing uniform catalogs
 # _c = deepcopy(catalogue_uh)
 # _c.catalogue_mt_filter(completeness_table_stepp, reverse=False)
 #_c.write_catalogue("hmtk_bsb2014.11_uniform_stepp.csv")
@@ -329,14 +328,14 @@ plt.ylim(0, 1)
 
 plt.show()
 
-# create_stepp_plot(model=completeness_algorithm,
-#   # filename="../z_img_completeness_temporal_stepp.pdf", 
-#   show=True,
-#   title='Stepp plot [$\Delta_{mag}=0.5, \Delta_{time}=2$]',
-#   filetype='pdf', 
-#   # figsize=DEFAULT_SIZE, 
-#   dpi=300,
-#   legendoffset=(1.0, 1.0)
-#   )
+create_stepp_plot(model=completeness_algorithm,
+  # filename="../z_img_completeness_temporal_stepp.pdf", 
+  show=True,
+  title='Stepp plot [$\Delta_{mag}=0.5, \Delta_{time}=2$]',
+  filetype='pdf', 
+  # figsize=DEFAULT_SIZE, 
+  dpi=300,
+  legendoffset=(1.0, 1.0)
+  )
 
 plt.show()
