@@ -329,7 +329,7 @@ plt.ylim(0, 1)
 plt.show()
 
 create_stepp_plot(model=completeness_algorithm,
-  # filename="../z_img_completeness_temporal_stepp.pdf", 
+  filename="../z_img_completeness_temporal_stepp.pdf", 
   show=True,
   title='Stepp plot [$\Delta_{mag}=0.5, \Delta_{time}=2$]',
   filetype='pdf', 
