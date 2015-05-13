@@ -216,26 +216,28 @@ University of São Paulo (USP), São Paulo, Brazil.}
 % Do NOT include any \begin...\end commands within the body of the abstract.
 
 \begin{abstract}
-Intraplate seismicity is a hard problem to solve in tectonics, mainly during the lack of observed seismicity in many areas where seismic hazard assessment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
+Intraplate seismicity is a hard problem to solve in tectonics. Brazil, as others intraplate environments, mainly during the lack of observed seismicity the seismic hazard assessment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
 % Intraplate seismicity is a hard problem to solve in tectonics. In general, the earthquake occurrence is lower than others ``active'' regions. In the Brazilian case, there is a lack of observed seismicity due the short (in geological scale) observation timeframe. In addition, the populational density decreases towards to interior of the country and changes the reporting capabilities historicaly. 
 
 % This diffused intraplate seismicity pattern is often modeled as polygons representing different seismic zones or area sources for \gls{psha} purposes. Their geometries are defined by expert opinions.
 
 % Other possible approach to deal this is develop zoneless or smoothed  models for the seismicity, conside
+Three smoothed seismicity techniques are reviewed and their application on construct models of Brazilian seismicity and its applications on long-term seismic hazard assessment in Brazil are also discussed. All these smoothing methods are based on a \gls{kde}. The main difference between them is the bandwidth selection process.
 
-Three smoothing seismicity techniques are reviewed and their application to the Brazilian seismicity and a seismic hazard assessment are discussed.
+The method proposed by \citet{frankel_1995} uses a \emph{fixed} bandwidth in space. \citet{woo_1996} suggests a bandwidth as function of the \emph{magnitude}. \citet{helmstetter_2012} propose a \emph{locally-adaptive} kernel bandwidths in space and time, chosen for each event as background (time-independent) model on their forecast experiments.
 
-All these smoothing methods are based on a \gls{kde}. The main difference between them is the bandwidth selection process.
+All these methods compute the seismicity rate surface in a binned space, time and magnitude, which able us to use this occurrence rate to define a grid of seismogenic point sources as the input source model to the hazard computation.
 
-The method of \citet{frankel_1995} uses a \emph{fixed} bandwidth in space. \citet{woo_1996} suggests a bandwidth as function of the \emph{magnitude}. \citet{helmstetter_2012} propose a \emph{locally-adaptive} kernel bandwidths in space and time, chosen for each event.
+%The last two methods was implemented and are available as a open source software on the Hazard Modeling Toolkit (HMTK) from Global Earthquake Model (GEM) Foundation.
 
-This last one was proposed initially to take care of the background seismicity rate in the context of long-term earthquake forecast which time-independence assumption able us to use this recurrence rate to define a grid of seismic point sources as the input source model to compute the hazard.
+In addition, we used the information score and the error diagrams \citep{kagan_2009} to evaluate the models, optimize the smoothing distance on the \citet{frankel_1995} method, and finally give a weighted source models logic-tree to hazard computation.
 
-The results shown that all methods clearly define some known seismic regions and could be used in the Brazilian seismicity. All methods improve the spatial resolution of the GSHAP model, the only previously available for the region.
+All the hazard computations was performed on \gls{oq} \citep{pagani_2014} open source software from \acrfull{gem} Foundation. Until the present moment, no focal mechanism information has been included or considered on these smoothed seismicity models. All hazard computations has been done using a single \gls{GMPE}. A more detailed study on \glspl{GMPE} selection should be developed further and is out of this paper scope.
 
-% The last two methods was implemented and are available as a open source software on the Hazard Modeling Toolkit (HMTK) from Global Earthquake Model (GEM) Foundation.
+The results shown that all methods clearly most of the well known seismogenic regions and could be used in the Brazilian seismicity modeling. All methods improve the spatial resolution of the GSHAP hazard model, the only previously available for the region. These results should be considered on future reviews of Brazilian design building codes and procedures.
+%Tectonic connections between these seismicity models and stress release could be developed in the future.
 
-All the hazard computations was performed on OpenQuake \citep{pagani_2014} open source software also from GEM Foundation.
+
 
 \end{abstract}
 
