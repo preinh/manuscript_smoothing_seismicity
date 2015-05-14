@@ -216,9 +216,9 @@ University of São Paulo (USP), São Paulo, Brazil.}
 % Do NOT include any \begin...\end commands within the body of the abstract.
 
 \begin{abstract}
-Intraplate seismicity is a hard problem to solve in tectonics. Brazil, as others intraplate environments, mainly during the lack of observed seismicity the seismic hazard assessment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
+Intraplate seismicity is a hard problem to solve in tectonics. In Brazil, as other intraplate tectonic settings, mainly during the lack of observed seismicity, the seismic hazard assessment are also difficult and the methods applied are often close correlated to the geometries defined by the experts with valuable criteria.
 
-Three smoothed seismicity techniques are reviewed and their application on construct models of Brazilian seismicity and its applications on long-term seismic hazard assessment in Brazil are also discussed. All these smoothing methods are based on a \gls{kde}. The main difference between them is the bandwidth selection process.
+Three smoothed seismicity techniques are reviewed and their application on construct models of Brazilian seismicity and its applications to long-term seismic hazard assessment in Brazil are also discussed. All these smoothing methods are based on a \gls{kde}. The main difference between them is the bandwidth selection process.
 
 The method proposed by \citet{frankel_1995} uses a \emph{fixed} bandwidth in space. \citet{woo_1996} suggests a bandwidth as function of the \emph{magnitude}. \citet{helmstetter_2012} propose a \emph{locally-adaptive} kernel bandwidths in space and time, chosen for each event as background (time-independent) model on their forecast experiments.
 
@@ -246,12 +246,12 @@ The results shown that all methods clearly most of the well known seismogenic re
 
 \subsection{Intraplate seismicity and previous studies in Brazil}
 
-Brazil occupies a large stable continental region with seismicity rate lower than Central and Eastern North America, Australia, India or Northern Europe \citep{giardini_1999,johnston_1996a}. Spanning most of the central region of the South American plate, Brazil has earthquakes above magnitude 6 mb with a return period of 50 years or so. Historical records are very short with almost no data before the XX century. Historical evidence of magnitude a 7 has been reported in the Amazon \citep{berrocal_1984,veloso_2014}. However, as in other intraplate settings, seismic hazard is not negligible due to the low seismic attenuation in the cold and thick lithosphere (magnitude 5 mb can be felt up to ~500 km away \citep{assumpcao_et_al_2014}) and special seismic hazard studies have been required for critical facilities such as nuclear power plants \citep{almeida_etal_2013}.
+Brazil occupies a large stable continental region with seismicity rate lower than Central and Eastern North America, Australia, India or Northern Europe \citep{giardini_1999,johnston_1996a}. Spanning most of the central region of the South American plate, Brazil has earthquakes above magnitude 6 mb with a return period of 50 years or so. Historical records are very short with almost no data before the XX century. Historical evidence of magnitude a 7 has been reported in the Amazon \citep{berrocal_1984,veloso_2014}. However, as in other intraplate settings, seismic hazard is not negligible due to the low attenuation in the cold and thick lithosphere (magnitude 5 mb can be felt up to ~500 km away \citep{assumpcao_et_al_2014}) and special seismic hazard studies have been required for critical facilities such as nuclear power plants \citep{almeida_etal_2013}.
 
-Very few studies related to seismic hazard, such as \citet{berrocal_1996} for SE Brazil, have been carried out so far and the first Brazilian seismic building code \citep{nbr_15421_2006} was based on the GSHAP \citep{giardini_1999} results for South America \citep{tanner_shepherd_1997, shedlock_tanner_1999}. Brazilian seismicity is concentrated in several seismic zones \citep{berrocal_1984, assumpcao_et_al_2014}. Except for a peak of activity in Northeast Brazil, both the GSHAP model and the ABNT zoning have not taken into proper account some of the other highly active seismic zones, such as the Porto dos Gaúchos, Mato Grosso state, with recurrent activity since the occurrence of the largest recorded Brazilian event with magnitude 6.2 mb in 1955 \citep{barros_2009}, or the Central Amazon region where concentration of events in the last 50 years is consistent with the location of the possible historical earthquake of magnitude 7 \citep{veloso_2014}. For this reason, it is important to review and update the hazard estimates for Brazil, especially since the increase in the number of recordings of Brazilian earthquakes in the last three decades. 
+Few studies related to seismic hazard, such as \citet{berrocal_1996,santos_2010} for SE and NE Brazil, have been carried out so far and the first Brazilian seismic building code \citep{nbr_15421_2006,santos_lima_2008} was based on the GSHAP \citep{giardini_1999} results for South America \citep{tanner_shepherd_1997, shedlock_tanner_1999}. Brazilian seismicity is concentrated in several seismic zones \citep{berrocal_1984, assumpcao_et_al_2014}. Except for a peak of activity in Northeast Brazil, both the GSHAP model and the \citet{nbr_15421_2006} zoning (even when the Brazilian recommended levels are in line with those of other nations with higher occurrence of earthquakes \citep{santos_2013}) have not taken into proper account some of the other highly active seismic zones, such as the Porto dos Gaúchos, Mato Grosso state, with recurrent activity since the occurrence of the largest recorded Brazilian event with magnitude 6.2 mb in 1955 \citep{barros_2009}, or the Central Amazon region where concentration of events in the last 50 years is consistent with the location of the possible historical earthquake of magnitude 7 \citep{veloso_2014}. For this reason, it is important to review and update the hazard estimates for Brazil, especially since the number of Brazilian earthquake records has been increased in the last three decades. %the increasing number of Brazilian earthquake records in the last three decades. 
 %In addition, the results presented here are part of the \acrfull{gem} supported SARA project (South America Risk Assessment).
 
-Despite attempts to explain the origin of some of the seismic zones, such as stress concentrations from lithospheric thinning \citep{assumpcao_2004, azevedo_2015} or flexural effects \citep{zoback_1996, assumpcao_sacek_2013}, most of them have ill-defined boundaries. Attempts to produce seismic hazard maps \citep{dourado_2014} based on seismogenic zones are heavily dependent on subjective expert opinion, even more so in low seismic areas such as Brazil. As a contribution to the new seismic hazard model for Brazil, here we briefly review recent methods of smoothing seismicity rates with application to Brazilian earthquakes.
+Despite attempts to explain the origin of some of the seismic zones, such as stress concentrations from lithospheric thinning \citep{assumpcao_2004, assumpcao_et_al_2014, azevedo_2015} or flexural effects \citep{zoback_1996, assumpcao_sacek_2013}, most of them have ill-defined boundaries. Attempts to produce seismic hazard maps \citep{dourado_2014} based on seismogenic zones are heavily dependent on subjective expert opinion, even more so in low seismic areas such as Brazil. Like a contribution to some new seismic hazard model for Brazil, here we briefly review recent methods of smoothing seismicity rates with application to Brazilian earthquakes.
 
 %Despite some studies of seismicity rates and attempts at defining the main seismic zones \citep{berrocal_1984, berrocal_1996, assumpcao_et_al_2014}, Brazil has no seismic hazard map at national scale.
 
@@ -263,55 +263,57 @@ Despite attempts to explain the origin of some of the seismic zones, such as str
 
 \subsection{Smoothed seismicity models}
 
-Although the standard \citet{cornell_1968}-\citet{mcguire_1976} methodology often used to assess seismic hazard makes use of expert opinions to pre-defined seismogenic zones, one goal of this paper is to review a few smoothed seismicity methods based on \gls{kde} which results in a grid or a smoothed seismicity surface without define any seismic zone polygon (also known as \textit{zoneless} approaches).
+Although the standard \citet{cornell_1968}-\citet{mcguire_1976} methodology often used to assess seismic hazard makes use of expert opinions to predefined seismogenic zones, one goal of this paper is to review a few smoothed seismicity methods based on \gls{kde} which results in a grid or a smoothed seismicity surface without define any seismic zone polygon (also known as \textit{zoneless} approaches).
 
-The (smoothed) seismicity \gls{kde} techniques allow us to define another grid of seismic point sources. The seismicity rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods.
+The (smoothed) seismicity \gls{kde} techniques allow us to define another grid of seismic point sources given an earthquake catalog. The seismicity rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods.
 
 To perform the \gls{kde}, both its shape and bandwidth needs to be defined. Most kernels are Gaussian, power-laws or one of their variants like Fisher kernels. The main distinction between the methods described here is the bandwidth selection process.
 
-\citet{frankel_1995} smoothing method applies a Gaussian \citet{nadaraya_1964}-\citet{watson_1964} kernel smooth technique with a \emph{fixed smoothing-distance} bandwidth to estimate the seismicity rate by smoothing the 2D histogram from earthquakes counting. The actual version of the algorithm is already implemented on the \gls{hmtk} \citep{weatherill_2012, weatherill_2014_1} with a simple variant of Frankel's method discussed by \citet{zechar_jordan_2010} which sum the contribution of each earthquake kernel on given cell. 
+\citet{frankel_1995} smoothing method applies a Gaussian \citet{nadaraya_1964}-\citet{watson_1964} kernel smooth technique with a \emph{fixed smoothing-distance} bandwidth to estimate the seismicity rate by smoothing the 2D histogram from earthquakes counting. The actual version of the algorithm is already implemented on the \gls{hmtk} \citep{weatherill_2012, weatherill_2014_1} with a simple variant of Frankel's method discussed by \citet{zechar_jordan_2010} which adds the contribution of each earthquake kernel on given cell. 
 
-\citet{woo_1996} proposes a \emph{magnitude-dependent} kernel bandwidth based on the nearest neighbor mean distance in magnitude bins.
+\citet{woo_1996} proposed a \emph{magnitude-dependent} kernel bandwidth based on the regression for nearest neighbor mean distance between earthquakes binned by magnitude.
 
-\citet{helmstetter_2012} proposes a \emph{locally-adaptive} bandwidth on both space and time dimensions for the background (time-independent) seismicity rate on their long-term forecasts experiments.
+\citet{helmstetter_2012} proposed a \emph{locally-adaptive} bandwidth on both space and time dimensions for the background (time-independent) seismicity rate on their long-term forecasts experiments.
 
 Using the long-term background seismic rate computed for forecast and assuming its time-independence, the same \gls{psha} assumption, it is possible, preserving their purposes differences \citep{marzocchi_2011}, to use these background seismicity rate values on seismic sources characterization \citep{weatherill_pagani_2014}.
 
 
-\subsection{Information scores and \gls{ed}}
+\subsection{Information scores and \glspl{ed}}
 
-From these three smoothing methods, only \cite{helmstetter_2012} since its formalization use optimizations to define their model parameters. All the other methods are concept to use the whole catalog and some fixed parameter (e.g. Frankel's smoothing distance).
+From these three smoothing methods, only \cite{helmstetter_2012} since its formalization cross-validate their model parameters. All the other methods are concept to use the whole catalog and some fixed parameter (e.g. Frankel's smoothing distance).
 
-To compare the performance of these three models, the information scores and \gls{ed} \citep{molchan_1992, kagan_2007, kagan_2009} where computed as alternative to the tests suggested to the \gls{relm} forecasts experiments by \citet{schorlemmer_2007}.
+To compare the performance of these three models, the information scores and error diagrams (\glspl{ed}) \citep{molchan_1992, kagan_2007, kagan_2009} were computed as alternative to the tests suggested to the \gls{relm} forecasts experiments \citep{schorlemmer_2007}.
 
 On the evaluation phase all models learned from earthquakes into 1970-2004 observation time and were tested against the target realizations occurred between 2004 and 2014-01-01.
 
-Scores from some Frankel-based models (from different smoothing distances) was computed and the best scores should give us an reasonable choice for this parameter.
+Scores from some Frankel-based models (from different smoothing distances) was computed and the best scores gave us an reasonable choice for this parameter.
 
 HYBRID DECISION APPROACH BIRD/JORDAN[2013?]
 
 \subsection{Hazard computation}
 
-To perform the hazard computation, the \acrfull{oq} suite \citep{pagani_2014} was chosen. The modeling tool was the \gls{hmtk} also open available by \gls{gem} scientific board. The Frankel method was already implemented on the toolkit and two others was implemented in the context of this paper and they are free available on a public repository.
 
-The other parameters, like \emph{b}-values, minimum and maximum magnitudes for the frequency-magnitude distributions, strike, dip and rate probabilities to the rupture plane, its top and bottom limits on the subsurface, magnitude-area scale relationships and also the depth distributions must be assigned in other ways to proceed the hazard computation and take advantages of the new developed \glspl{gmpe}.
+To perform the hazard computation, the \acrfull{oq} suite \citep{pagani_2014} was chosen. The modeling tool was the \gls{hmtk} also open available by \gls{gem} scientific board. The Frankel method was already implemented on the toolkit and two others was rewritten in the context of this paper based on sources given by the authors and their papers. % and should be opened on a public repository.
 
-In this work, to keep our focus on seismicity models as smoothed seismic sources, we perform hazard defining a single \gls{gmpe}  [EXPOSE WHICH ONE]  for a stable continental crust tectonic environment.
+The other seismic source parameters, like \emph{b}-values, minimum and maximum magnitudes for the frequency-magnitude distributions, strike, dip and rate probabilities to the rupture planes on each source, its top and bottom limits on the subsurface, magnitude-area scale relationships and also the depth distributions must be assigned in other ways to proceed the hazard computation and take advantages of the latest generation \glspl{gmpe}.
 
-The earthquake catalog data comes from the Brazilian seismological research authorities.
+In this work, to keep our focus on compute the hazard given a grid of punctual seismic sources computed from smoothed seismicity models, we compute the hazard probabilities using a single \gls{gmpe} [EXPOSE WHICH ONE] for a stable continental crust tectonic environment.
 
+The earthquake catalog data comes from the Brazilian seismological research authorities \citep{bsb_2014}.
 
 \subsection{Specific purposes}
 
 The specific purposes of this paper are: 
+(i) to present the \citet{bsb_2014} earthquake catalog,
+(ii) review three distinct smoothing (zoneless) methods to spatially model the seismic rate,
+(iii) evaluate each model by its information scores and error diagrams,
+(iv) add and share into the \gls{hmtk} two more smoothing methods to be used by the hazard modeling community,
+(iii) use the \gls{gem}-\glsdesc{oq} tools to perform hazard calculation and
+(v) update the hazard studies at national scale by proposing a simple hazard map based on these smoothed seismicity models.
 
-(i) review three distinct smoothing (zoneless) methods to spatially model the seismic rate,
-(ii) update the seismic hazard studies at national scale by proposing a new simple hazard model,
-(iii) use the \gls{gem}-\glsdesc{oq} tools to perform hazard calculation and 
-(iv) add and share with the community two more new smoothing methods into the \gls{hmtk}.
+Is not on our purposes at this time: (i) make an exhaustive evaluation of completeness magnitude in dependence of space and time, (ii) go deep on the \gls{gmpe} selection methodology and neither (iii) create the definitive Brazilian hazard map which we handle as a continuous process.
 
-To aim this, the Brazilian seismicity data is presented including some overview plots. Next the method's theory is given by the specific decisions and optimizations performed on each  method. And last, the results, conclusions and further considerations are discussed.
-
+To aim this, the Brazilian seismicity data is presented and some preprocessing steps are described. Next the theory behind this smoothed seismicity methodologies are presented as the results are discussed in terms of its scores. Then the hazard is computed from these source models in a logic-tree and presented to allow us take some lessons, try to conclude or even suggest something.
 
 %------------------------------------------------
 %
