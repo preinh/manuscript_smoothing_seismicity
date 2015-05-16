@@ -263,7 +263,7 @@ Despite attempts to explain the origin of some of the seismic zones, such as str
 
 \subsection{Smoothed seismicity models}
 
-Although the standard \citet{cornell_1968}-\citet{mcguire_1976} methodology often used to assess seismic hazard makes use of expert opinions to predefined seismogenic zones, one goal of this paper is to review a few smoothed seismicity methods based on \gls{kde} which results in a grid or a smoothed seismicity surface without define any seismic zone polygon (also known as \textit{zoneless} approaches).
+Although the standard \citet{cornell_1968}-\citet{mcguire_1976} methodology often used to assess seismic hazard makes use of expert opinions to predefined seismogenic zones, one goal of this paper is to review a few smoothed seismicity methods \citep{riznichenko_1959} based on \gls{kde} which results in a grid or a smoothed seismicity surface without define any seismic zone polygon (also known as \textit{zoneless} approaches).
 
 The (smoothed) seismicity \gls{kde} techniques allow us to define another grid of seismic point sources given an earthquake catalog. The seismicity rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods.
 
@@ -365,13 +365,6 @@ In the case of Brazilian catalog the methods did not present large differences a
 The map of figure \ref{fig_decluster}b locates all clusters in the catalog. It is an \emph{a-priori} evidence of regions in Brazil where  earthquake sequences tend to occur more frequently.
 
 
-
-\subsection{Frequency-magnitude distribution}
-
-Figure \ref{fig_occurrence} presents the catalog \gls{mfd}. For the minimum magnitude the threshold was 2.9. The blue x and red crosses are the incremental and cumulative recurrence distributions binned by 0.2 magnitude unity. Stepp completeness table and \citet{bsb_2014} declustered catalogue was used. Also a fixed b-value (b=1) incremental distribution is shown in blue continuous line, and the fitted by maximum-likelihood method (magenta, $b=0.91\pm0.07$), \citet{weichert_1980} (green, $b=0.88\pm0.04$) and \citet{kijko_2012} (orange, $0.76\pm0.04$) are shown as continuous lines. The respective a-values was $3.7$, $3.8\pm0.2$, $3.5\pm0.2$, $3.2\pm0.1$. The minimum magnitude on that completeness table was 2.9.
-
-COMMENT
-
 \subsection{Catalog completeness}
 
 The completeness of Brazilian seismicity data has evident time and space dependence.
@@ -381,6 +374,20 @@ There are many methodologies to assessment of the temporal and spatial completen
 
 Figure \ref{fig_completeness}b shows the magnitude by time distribution in a scatter plot as well the cumulative number of events which is important to perform the \gls{tcef} \citep{nasir_2013}. The linear behavior of cumulative rate on the recent years, gives an idea about the constant record trend. For magnitudes greater than 3, this threshold occurs about 1970. For the magnitudes greater than 4 and 5, these limits could be extrapolated to 1950 and 1940, respective and roughly. Figure \ref{fig_completeness}b also show the completeness tables from the \citet{stepp_1972} test using $\Delta_{mag}=0.5$ and $\Delta_{time}=2$ as magnitude and time bins, and from the literature \citep{assumpcao_et_al_2014}. Tables \ref{tab:completeness_stepp} and \ref{tab:completeness} show each one of these completeness tables.
 
+
+\subsection{Frequency-magnitude distribution}
+
+Figure \ref{fig_occurrence} presents the catalog \gls{mfd}. For the minimum magnitude threshold was 2.9. The blue exes and red crosses are the incremental and cumulative recurrence distributions binned by 0.2 magnitude unity. Stepp completeness (table \ref{tab:completeness_stepp}) and \citet{bsb_2014} declustered catalogue was used. 
+
+Simple \citet{gutenberg_richter_1944} incremental \glspl{mfd},
+\begin{equation}
+\log{N}(m|a,b) = a - b \times m,
+\end{equation}
+were fitted using a fixed $b$-value (b=1), showed as the blue continuous line (fig. \ref{fig_occurrence}), by the maximum-likelihood method (magenta, $b=0.91\pm0.07$), \citet{weichert_1980} (green, $b=0.88\pm0.04$) and \citet{kijko_2012} methods (orange, $b=0.76\pm0.04$) are shown as continuous lines. The respective $a$-values was $3.7$, $3.8\pm0.2$, $3.5\pm0.2$, $3.2\pm0.1$.
+
+From these distributions over the incremental catalog data, its possible to note just few records with magnitudes greater than 5, even considering different magnitude completeness on time, due probably the small observation time (few than 100 years) on Brazil stable crustal set.
+
+Other important feature extracted from figure \ref{fig_occurrence}, is the low values of the $b$-values relative to the unity. Incremental b=1 \gls{mfd} underestimate the earthquake occurrences, specially under great magnitudes. From now on, we will assume the $b$-value of 0.9 as better representative for the whole region. On the future more investigations on the spatial $b$-value variations should be undertaken.
 
 %------------------------------------------------
 %
