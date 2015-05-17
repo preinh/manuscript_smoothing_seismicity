@@ -261,26 +261,29 @@ Despite attempts to explain the origin of some of the seismic zones, such as str
 
 % definition of seismic zones. For this reason an updated hazard map is needed.
 
+
 \subsection{Smoothed seismicity models}
 
-Although the standard \citet{cornell_1968}-\citet{mcguire_1976} methodology often used to assess seismic hazard makes use of expert opinions to predefined seismogenic zones, one goal of this paper is to review a few smoothed seismicity methods \citep{riznichenko_1959} based on \gls{kde} which results in a grid or a smoothed seismicity surface without define any seismic zone polygon (also known as \textit{zoneless} approaches).
+Although the standard \citet{cornell_1968}--\citet{mcguire_1976} methodology often used to assess seismic hazard makes use of expert opinions to predefined seismogenic zones, one goal of this paper is to review a few smoothed seismicity methods \citep{riznichenko_1959} based on \gls{kde} which results in a grid or a smoothed seismicity surface without define any seismic zone polygon (also known as \textit{zoneless} approaches).
 
 The (smoothed) seismicity \gls{kde} techniques allow us to define another grid of seismic point sources given an earthquake catalog. The seismicity rate (\emph{a}-value) associated to each source is defined by the smoothed seismicity methods.
 
 To perform the \gls{kde}, both its shape and bandwidth needs to be defined. Most kernels are Gaussian, power-laws or one of their variants like Fisher kernels. The main distinction between the methods described here is the bandwidth selection process.
 
-\citet{frankel_1995} smoothing method applies a Gaussian \citet{nadaraya_1964}-\citet{watson_1964} kernel smooth technique with a \emph{fixed smoothing-distance} bandwidth to estimate the seismicity rate by smoothing the 2D histogram from earthquakes counting. The actual version of the algorithm is already implemented on the \gls{hmtk} \citep{weatherill_2012, weatherill_2014_1} with a simple variant of Frankel's method discussed by \citet{zechar_jordan_2010} which adds the contribution of each earthquake kernel on given cell. 
+\citet{frankel_1995} smoothing method applies a Gaussian \citet{nadaraya_1964}-\citet{watson_1964} kernel smooth technique with a \emph{fixed smoothing-distance} bandwidth to estimate the seismicity rate by smoothing the 2D histogram from earthquakes counting. This algorithm is already available on the \gls{hmtk} \citep{weatherill_2012, weatherill_2014_1}. 
+%\citet{zechar_jordan_2010} integrate the contribution of each earthquake kernel on given cell grid and then evaluate each cell.
+%The actual version of the algorithm is already implemented on the \gls{hmtk} \citep{weatherill_2012, weatherill_2014_1} with a simple variant of Frankel's method discussed by \citet{zechar_jordan_2010} which integrates the contribution of each earthquake kernel on given cell grid and then evaluate each cell instead smooth the counts \citep{frankel_1995}.
 
-\citet{woo_1996} proposed a \emph{magnitude-dependent} kernel bandwidth based on the regression for nearest neighbor mean distance between earthquakes binned by magnitude.
+\citet{woo_1996} proposed a \emph{magnitude-dependent} kernel bandwidth function based on the regression for nearest neighbor mean distance between earthquakes binned by magnitude.
 
 \citet{helmstetter_2012} proposed a \emph{locally-adaptive} bandwidth on both space and time dimensions for the background (time-independent) seismicity rate on their long-term forecasts experiments.
 
-Using the long-term background seismic rate computed for forecast and assuming its time-independence, the same \gls{psha} assumption, it is possible, preserving their purposes differences \citep{marzocchi_2011}, to use these background seismicity rate values on seismic sources characterization \citep{weatherill_pagani_2014}.
+Is possible to use the long-term background seismic rate computed for forecast by its time-independence, the same \gls{psha}, assumption, even we preserve their different purposes \citep{marzocchi_2011}, and to apply this background seismicity models on seismogenic sources characterization \citep{weatherill_pagani_2014}.
 
 
 \subsection{Information scores and \glspl{ed}}
 
-From these three smoothing methods, only \cite{helmstetter_2012} since its formalization cross-validate their model parameters. All the other methods are concept to use the whole catalog and some fixed parameter (e.g. Frankel's smoothing distance).
+From these three smoothing methods, only \cite{helmstetter_2012}, since its formalization, cross-validate their model parameters. All the other methods are concept to use the whole catalog and some fixed parameter (e.g. Frankel's smoothing distance).
 
 To compare the performance of these three models, the information scores and error diagrams (\glspl{ed}) \citep{molchan_1992, kagan_2007, kagan_2009} were computed as alternative to the tests suggested to the \gls{relm} forecasts experiments \citep{schorlemmer_2007}.
 
@@ -290,8 +293,8 @@ Scores from some Frankel-based models (from different smoothing distances) was c
 
 HYBRID DECISION APPROACH BIRD/JORDAN[2013?]
 
-\subsection{Hazard computation}
 
+\subsection{Hazard computation}
 
 To perform the hazard computation, the \acrfull{oq} suite \citep{pagani_2014} was chosen. The modeling tool was the \gls{hmtk} also open available by \gls{gem} scientific board. The Frankel method was already implemented on the toolkit and two others was rewritten in the context of this paper based on sources given by the authors and their papers. % and should be opened on a public repository.
 
@@ -301,19 +304,20 @@ In this work, to keep our focus on compute the hazard given a grid of punctual s
 
 The earthquake catalog data comes from the Brazilian seismological research authorities \citep{bsb_2014}.
 
+
 \subsection{Specific purposes}
 
 The specific purposes of this paper are: 
 (i) to present the \citet{bsb_2014} earthquake catalog,
 (ii) review three distinct smoothing (zoneless) methods to spatially model the seismic rate,
 (iii) evaluate each model by its information scores and error diagrams,
-(iv) add and share into the \gls{hmtk} two more smoothing methods to be used by the hazard modeling community,
-(iii) use the \gls{gem}-\glsdesc{oq} tools to perform hazard calculation and
+(iv) add into and share through \gls{hmtk} two more smooth methods to be used by the hazard modeling community,
+(iii) use the open source \gls{gem}-\glsdesc{oq} tools to perform hazard calculations and
 (v) update the hazard studies at national scale by proposing a simple hazard map based on these smoothed seismicity models.
 
 Is not on our purposes at this time: (i) make an exhaustive evaluation of completeness magnitude in dependence of space and time, (ii) go deep on the \gls{gmpe} selection methodology and neither (iii) create the definitive Brazilian hazard map which we handle as a continuous process.
 
-To aim this, the Brazilian seismicity data is presented and some preprocessing steps are described. Next the theory behind this smoothed seismicity methodologies are presented as the results are discussed in terms of its scores. Then the hazard is computed from these source models in a logic-tree and presented to allow us take some lessons, try to conclude or even suggest something.
+To go there, the Brazilian seismicity data will be presented and some preprocessing steps described. Next we will present the theory behind these smoothed seismicity methodologies. Its results will discussed in terms of its information scores. Then we will present the hazard computation formulating a the logic-tree as input for these source models. All this should allow us to take some lessons, trying to conclude or even suggest something which could still be developed in the future.
 
 %------------------------------------------------
 %
@@ -323,33 +327,30 @@ To aim this, the Brazilian seismicity data is presented and some preprocessing s
 
 \section{Brazilian seismicity data}
 
-Data on intraplate seismicity in Brazil is currently the Brazilian Seismic Bulletin maintained mainly by the Seismological Center of the University of São Paulo. This catalog is a joint compilation from different sources \citep{bsb_2014}.
+Data on crustal intraplate seismicity in Brazil is currently the Brazilian Seismic Bulletin maintained mainly by the Seismological Center of the University of São Paulo. This catalog is a joint compilation from different sources \citep{bsb_2014}.
 
 
-\subsection{Hypocenters}
+\subsection{Epicenters and magnitudes}
 
-For events up to 1981, the catalog corresponds to \citet{berrocal_1984} which is a comprehensive compilation of historic and instrumental data with participation from Universidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from the annual bulletins published by Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by USP under the same cooperation network in addition to Universidade Estadual Paulista (UNESP). Earlier versions of this catalog were used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs.
+For events up to 1981, epicenters in the catalog corresponds to \citet{berrocal_1984} which is a comprehensive compilation of historic and instrumental data with the participation from Universidade de São Paulo (USP), Universidade de Brasilia (UnB), Universidade Federal do Rio Grande do Norte (UFRN), Observatório Nacional (ON) and Instituto de Pesquisas Tecnológicas do Estado de São Paulo (IPT). From 1982 to 1995 the information comes from the annual bulletins published by Revista Brasileira de Geofísica. Since 1995, the Bulletin is maintained mainly by USP under the same cooperation network in addition to Universidade Estadual Paulista (UNESP) to compute the epicenters. Earlier versions of this catalog were used to compose the well-known \citet{ceresis_1985, ceresis_1995} catalogs.
 
 Today the catalog is distributed in two ways. One, which could be called \emph{raw}, contains all compiled information, such as: events outside the country which were felt in Brazil, errors in previous versions and also non-seismic events (known quarry blasts, sonic boom, etc). The other way could be called \emph{clean}, where all non-seismic and low quality events were removed. This last one was used in this paper. There is 1941 earthquakes recorded from 1724 to the end of 2013.
 
 This catalog only cover crustal events. Andean subduction earthquakes deeper than 50 km in the Brazil-Peru border was discarded as well earthquakes from the Mid-Atlantic ridge. Epicenters into the catalog are shown in figure \ref{fig_seismicity}.
 
 
+Most magnitudes were computed as $mb$ type for teleseismic distances or the equivalent $mR$ \citep{assumpcao_1983} regional magnitude for short (300 to 1200 km) distances. For historical events magnitudes were estimated from macroseismic data (\glsdesc{sym:Af}, \gls{sym:Af} and \glsdesc{sym:I0}, \gls{sym:I0}) \citep{berrocal_1984}. 
 
-\subsection{Magnitudes}
+Since most \glspl{gmpe} are based on $M_W$ moment magnitude scale, in this present study, we converted all $mb$ magnitudes to $M_W$ values following the guidelines on table \ref{tab:guidelines}. REFERENCIA PARA STEPHANE/ASSUMPCAO WORK IN PROGRESS. (Johnston)
 
-Most magnitudes were computed as $mb$ type or the equivalent $mR$ \citep{assumpcao_1983} regional magnitude. For historical events magnitudes were estimated from macroseismic data (\glsdesc{sym:Af}, \gls{sym:Af} and \glsdesc{sym:I0}, \gls{sym:I0}) \citep{berrocal_1984}. 
-
-Since most \glspl{gmpe} are based on $M_W$ moment scale magnitude, in this present study, we converted all $mb$ magnitudes to $M_W$ values following the guidelines on table \ref{tab:guidelines}. REFERENCIA PARA STEPHANE/ASSUMPCAO WORK IN PROGRESS. (Johnston)
-
-Other proxies for intraplate regions like \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst most magnitudes on \citet{bsb_2014} catalog had values lower than this.
+Other proxies for intraplate regions like \citet{scordilis_2006} was discarded by its magnitude range definition, over than 6, whilst most magnitudes in \citet{bsb_2014} catalog had values lower than this.
 
 
 \subsection{Catalog checking}
 
-Figure \ref{fig_overview} shows the distribution of depths, day of the week and origin hour following \citet{gulia_2012}. Most events have no depth determination and the well determined depths (from $pP$ phases or local networks) are mostly less than 10km.
+Figure \ref{fig_overview} shows the distribution of depths, day-of-the-week and origin hour \citep{gulia_2012}. Most events have no depth determination and the well determined depths (from $pP$ phases or local networks) are mostly less than 10 km.
 
-Figures \ref{fig_overview}b and \ref{fig_overview}c show an almost uniform distribution of day of the week, and a slightly trend to record earthquakes during the night hours. This could suggest some influence of daily noise level on the station records.
+Figures \ref{fig_overview}b and \ref{fig_overview}c show an almost uniform distribution of day-of-the-week, and a slightly trend to record earthquakes during the night hours. This could suggest some influence of daily noise level on the station records.
 
 The annual number of earthquakes since 1900 (figure \ref{fig_records}) shows a steady increase since 1960 and two peaks in 1986 and 1998 derived from two large seismic sequences: João Câmara \citep{takeya_1989} and Porto dos Gaúchos \citep{barros_2009}. The increasing number of records after 1960 is due to the operation of global, regional and local stations.
 
@@ -357,22 +358,28 @@ The annual number of earthquakes since 1900 (figure \ref{fig_records}) shows a s
 
 \subsection{Declustering procedures}
 
-To preserve the Poissonian assumption about the independence of the events, several declustering algorithms were tried and the results as shown in figure \ref{fig_decluster}a. The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uenthal \citep{van_stiphout_2012}.
-In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uenthal distance window.
+To preserve the Poisson assumption about the independence between distinct events, several decluster algorithms were tried and the results are shown in the figure \ref{fig_decluster}a. The window-method \citep{gardner_1974} was tested with three different windows: \citet{gardner_1974}, \citet{uhrhammer_1986} and Gr\"uenthal \citep{van_stiphout_2012}.
+In addition the algorithm (AFTERAN) proposed by \citet{musson_1999} was also tested using Gr\"uenthal distance window. All this decluster methods are available in the \gls{hmtk}.
 
 In the case of Brazilian catalog the methods did not present large differences at the final number of earthquakes (fig. \ref{fig_decluster}a) and the Gardner-Knopoff/Uhrhammer combination was chosen to preserve the maximum number of events.
 
-The map of figure \ref{fig_decluster}b locates all clusters in the catalog. It is an \emph{a-priori} evidence of regions in Brazil where  earthquake sequences tend to occur more frequently.
+The map on figure \ref{fig_decluster}b locates all clusters in the catalog. It is an \emph{a-priori} evidence of regions in Brazil where earthquake sequences tend to occur more frequently.
 
 
 \subsection{Catalog completeness}
 
-The completeness of Brazilian seismicity data has evident time and space dependence.
+The completeness of Brazilian seismicity data has evident space and time dependence.
 
-Brazil just recently installed its permanent seismographic network \citep{pirchiner_2011}. The number and quality of stations increased over time. The population density, previously concentrated along the coast increased also on other regions changing the historical network coverage. %Trace back this history is a huge work with the current available station metadata, mainly from the analog stations.
-There are many methodologies to assessment of the temporal and spatial completeness \citep{stepp_1972, mignan_woessner_2012, ogata_1993, wiemer_wyss_2000, cao_gao_2002, stucchi_2004, woessner_2005, mignan_2011, mignan_2012, vorobieva_2013, mignan_2013, nasir_2013, mignan_2014}, or explaining how to compute the real \gls{pde} from the waveform records \citep{schorlemmer_2008}, but the time and efforts to proceed this exhaustive study of the \glsdesc{sym:Mc}, despite its relevance is beyond the scope of this work. The waveforms from earliest years was not in digital form. The histories of most regional (temporary) stations are not easy available. In addition, the low number of earthquakes in the catalog also difficult some high resolution statistical methods. All of this hinders the direct application of most that methodologies. For this reason, the spatial completeness was not considered and just simple temporal \gls{sym:Mc} parameters for the whole country was defined by an easy cumulative rate criteria using historical information about the records evolution and the \citet{stepp_1972} plot (fig. \ref{fig_completeness}a). 
+The number and quality of stations increased over time. The population density, previously concentrated along the coast increased also on other regions changing the historical instruments coverage. Brazil just recently installed its permanent seismographic network \citep{pirchiner_2011}.
+%Trace back this history is a huge work with the current available station metadata, mainly from the analog stations.
 
-Figure \ref{fig_completeness}b shows the magnitude by time distribution in a scatter plot as well the cumulative number of events which is important to perform the \gls{tcef} \citep{nasir_2013}. The linear behavior of cumulative rate on the recent years, gives an idea about the constant record trend. For magnitudes greater than 3, this threshold occurs about 1970. For the magnitudes greater than 4 and 5, these limits could be extrapolated to 1950 and 1940, respective and roughly. Figure \ref{fig_completeness}b also show the completeness tables from the \citet{stepp_1972} test using $\Delta_{mag}=0.5$ and $\Delta_{time}=2$ as magnitude and time bins, and from the literature \citep{assumpcao_et_al_2014}. Tables \ref{tab:completeness_stepp} and \ref{tab:completeness} show each one of these completeness tables.
+There are many methodologies to assessment of the spatial and temporal completeness \citep{mignan_2014, vorobieva_2013, nasir_2013, mignan_2013, mignan_2012,  mignan_woessner_2012, mignan_2011, woessner_2005, stucchi_2004, cao_gao_2002, wiemer_wyss_2000, ogata_1993, stepp_1972}, or explaining how to compute the real \gls{pde} from the waveform records \citep{schorlemmer_2008}, but the time and efforts to proceed this exhaustive study of the \glsdesc{sym:Mc}, \gls{sym:Mc}, despite its relevance, is beyond the scope of this work. The waveforms from earliest years was not in digital form. The histories of most regional (temporary) stations are not easy available. In addition, the low number of earthquakes in the catalog also difficult some high resolution statistical methods. All of this hinders the direct application of most that methodologies. For this reason, the spatial completeness was not considered in this present work. 
+
+On the temporal dimension, for the whole country, two simple \gls{sym:Mc} methods were applied: the more subjective cumulative rate criteria or \gls{tcef} \citep{nasir_2013} which uses historical information about the records evolution and by the \citet{stepp_1972} method, an analytical approach, which uses the same kind information.
+
+For the Stepp algorithm we use 0.5 and 2 as magnitude and time bins. The plot can be seen on the figure \ref{fig_completeness}a. The Stepp plot shows how each complete interval was set up by the point where, going back on time for each magnitude bin  --- increasing the number of samples, $T$ times 1 year samples --- the earthquakes by year ratio, $\lambda$ (expected to be time-independent, and always the same value), the standard error instead decrease as $1/\sqrt{T}$ samples, diverges. We also enforce the condition whilst greater magnitudes should have bigger observation times.
+
+Figure \ref{fig_completeness}b shows the magnitude by time distribution in a scatter plot as well the cumulative number of events which is important to perform the \gls{tcef}. A linear behavior of cumulative rate on the recent years, gives an idea about the constant record trend. For magnitudes greater than 3, this threshold occurs about 1970. For the magnitudes greater than 4 and 5, these limits could be extrapolated to 1950 and 1940, respective and roughly. Figure \ref{fig_completeness}b also show the completeness tables from the \citet{stepp_1972} test and from the literature \citep{assumpcao_et_al_2014}. Tables \ref{tab:completeness_stepp} and \ref{tab:completeness} show each one of these completeness tables.
 
 
 \subsection{Frequency-magnitude distribution}
@@ -806,7 +813,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 \begin{figure}
 	\includegraphics[width=0.99\linewidth]{z_img_seismicity}
-	\caption{Brazilian seismicity from 1767 to 2014-01-01. Source: \citep{bsb_2014}.}
+	\caption{Brazilian seismicity from 1767 to 2014-01-01. Source: \citep{bsb_2014}. The lack of information about the earthquakes' depths on this figure is due to almost none precise computation for them. When there is, the depths are around 10-15 km or shallower.}
 	\label{fig_seismicity}
 \end{figure}
 
@@ -826,7 +833,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		\includegraphics[height=5cm]{z_img_hmtk_bsb2014_11_hour}
 		\end{tabular}
 	\end{table}
-	\caption{Catalogue overview. The histogram (a) shows the depth distribution. The histograms (b) and (c) represent the distributions of weekday and hour which earthquakes occur respectly. Dashed lines represent the mean value.}
+	\caption{Catalog overview. The histogram (a) shows the depth distribution. Histograms (b) and (c) represent respectively the distributions of day-of-the-week and day hour which earthquakes occur. Dashed lines represent the mean value.}
 	\label{fig_overview}
 	\end{center}
 \end{figure}
@@ -844,7 +851,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 		& \includegraphics[width=0.90\textwidth]{z_img_time_mag_count_br_1960}
 		\end{tabular}
 	\end{table}
-	\caption{Earthquakes by year (a) and discriminated by magnitude (b).}
+	\caption{Earthquakes by year (a) and discriminated by magnitude (b). The minimum magnitude is 2.8. The time bin is 1 year for (a) and 2 years for (b). The magnitude bin on (b) is 0.5 unity. CHECK MAGNITUDE 6 MISSED EVENTS ON (b). }
 	\label{fig_records}
 	\end{center}
 \end{figure}
@@ -862,7 +869,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
         & \includegraphics[width=0.60\textwidth]{z_img_hmtk_bsb2014_11_clusters}
 		\end{tabular}
 	\end{table}
-	\caption{Decluster evaluation (a) using distinct algorithms and windows. There is no significant differences between final results. The map (b) of clusters from selected method shows places where earthquake sequences tends to occur.}
+	\caption{Declustering evaluation (a) using distinct algorithms and windows. There is no significant differences between final results. The map (b) of clusters from selected method shows places where earthquake sequences tends to occur.}
 	\label{fig_decluster}
 	\end{center}
 \end{figure}
@@ -1098,24 +1105,24 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 % TABLES
 
 \begin{table}[H]
-	\caption{BSB 2014.11 $M_W$ proxies \emph{ad-hoc} guidelines.}
+	\caption{BSB 2014.11 $M_W$ proxies \emph{ad-hoc} guidelines, sorted by priority. \gls{sym:Af} is the \glsdesc{sym:Af}, \gls{sym:I0} is the \glsdesc{sym:I0} in \gls{mmi} \citep{wood_1931}.}
 	\begin{tabular}{l l l}
 		\hline
 		\textbf{magnitude source} & \textbf{rule} & \textbf{uncertainty}\\
 		\hline
+		$mb$ and $A_f$
+		& $M_W(m, A_f) = 0.7 M_W(m) + 0.3 M_W(A_f)$
+		& 0.33 \\
 		% mb or equival & $$ M_W = 1.21m - 0.76 $$  & 0.3 \\
 		% 		% magnitude from $A_f$  & $$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 8.4\times10^{-4}A_f^{1/2}& 0.4 \\
 		$mb$ or $mR$
 		&$ M_W(m) = 1.121 m - 0.76 $
 		& 0.3 \\
-		Felt area$A_f$
+		Felt area $A_f$
 		&$ M_W(A_f) = 0.81 $$    + 0.639\log(A_f) + 0.00084\sqrt{A_f}$& 0.4 \\
 		Maximum intensity $I_0$
 		& $mb(I_0) = 1.21 + 0.45 I_0$ then $M_W(m)$
 		& 0.6 \\
-		$mb$ and $A_f$
-		& $M_W(m, A_f) = 0.7 M_W(m) + 0.3 M_W(A_f)$
-		& 0.33 \\
 		\hline
 	\end{tabular}
 	\label{tab:guidelines}
@@ -1123,7 +1130,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 
 
 \begin{table}[H]
-	\caption{Temporal completeness. For each magnitude interval, the completess was computed by the \citet{stepp_1972} method.}
+	\caption{Temporal completeness. For each magnitude interval, the completeness was computed by the \citet{stepp_1972} method with time-step of 2 years and magnitude bin of 0.5 unity.}
 	\begin{tabular}{c c }
 		\hline
 	\textbf{magnitude} & \textbf{year (Stepp)} \\
@@ -1141,7 +1148,7 @@ all IAG-USP seismological team. It is also grateful to Stéphane Drouet and Vinc
 \end{table}
 
 \begin{table}[H]
-	\caption{Temporal completeness. For each magnitude interval, the completess comes from \citet{assumpcao_et_al_2014} converted to $M_W$ from $m_b$ following table \ref{tab:guidelines}.}
+	\caption{Temporal completeness. For each magnitude interval, the completeness comes from \citet{assumpcao_et_al_2014} converted to $M_W$ from $mb$ following table \ref{tab:guidelines}.}
 	\begin{tabular}{c c}
 		\hline
 	\textbf{magnitude} & \textbf{year (Assumpção)} \\
